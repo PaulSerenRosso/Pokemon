@@ -68,6 +68,4 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveRight.canceled -= CancelMove;
         playerInputs.Player.MoveDown.canceled -= CancelMove;
     }
-
- 
 }
