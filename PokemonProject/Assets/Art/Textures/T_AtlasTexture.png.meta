@@ -2377,6 +2377,90 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: T_AtlasTexture_108
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec6af9f0413fb2418f6318c2566323b
+      internalID: 2072790399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T_AtlasTexture_109
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be5039e3eac21e4198c397800b462f5
+      internalID: 214784918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T_AtlasTexture_110
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 770d462407c83a744a50028f80e0b094
+      internalID: 1350120023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: T_AtlasTexture_111
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfd67c8f75921764facf427448d74633
+      internalID: 1818656321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -2399,7 +2483,11 @@ TextureImporter:
       T_AtlasTexture_105: 2033384870
       T_AtlasTexture_106: -144053878
       T_AtlasTexture_107: -1956619080
+      T_AtlasTexture_108: 2072790399
+      T_AtlasTexture_109: 214784918
       T_AtlasTexture_11: 800099224
+      T_AtlasTexture_110: 1350120023
+      T_AtlasTexture_111: 1818656321
       T_AtlasTexture_12: 1510716
       T_AtlasTexture_13: -243300606
       T_AtlasTexture_14: -389903659
