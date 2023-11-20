@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour
@@ -7,28 +8,33 @@ public class PlayerCharacter : MonoBehaviour
     private Vector2 destination;
     private Vector2 startPosition;
     private float timer;
-    private Vector2 moveDirection;
+    private List<Vector2> moveDirections = new();
 
-    public void SetMoveDirection(Vector2 direction)
+    public void AddDirection(Vector2 direction)
     {
-        moveDirection = direction;
+        if(moveDirections.Contains(direction)) return;
+        moveDirections.Add(direction);
       
+    }
+    
+    public void RemoveDirection(Vector2 direction)
+    {
+        moveDirections.Remove(direction);
     }
 
     private void Update()
     {
-        
         if (isMoving)
         {
             Move();
         }
         else
         {
-            if (moveDirection != Vector2.zero)
+            if ( moveDirections.Count != 0)
             {
                 isMoving = true;
                 startPosition = transform.position;
-                destination = startPosition + moveDirection;
+                destination = startPosition + moveDirections[0];
             }
         }
     }

@@ -22,38 +22,54 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveRight.performed += MoveRight;
         playerInputs.Player.MoveUp.performed += MoveUp;
         playerInputs.Player.MoveDown.performed += MoveDown;
-        playerInputs.Player.MoveUp.canceled += CancelMove;
-        playerInputs.Player.MoveLeft.canceled += CancelMove;
-        playerInputs.Player.MoveRight.canceled += CancelMove;
-        playerInputs.Player.MoveDown.canceled += CancelMove;
+        playerInputs.Player.MoveUp.canceled += CancelMoveUp;
+        playerInputs.Player.MoveLeft.canceled += CancelMoveLeft;
+        playerInputs.Player.MoveRight.canceled += CancelMoveRight;
+        playerInputs.Player.MoveDown.canceled += CancelMoveDown;
     }
 
-    private void CancelMove(InputAction.CallbackContext obj)
+    private void CancelMoveUp(InputAction.CallbackContext obj)
     {
-        playerCharacter.SetMoveDirection(Vector2.zero);
+        playerCharacter.RemoveDirection(Vector2.up);
+    }
+    
+    private void CancelMoveDown(InputAction.CallbackContext obj)
+    {
+        playerCharacter.RemoveDirection(Vector2.down);
+    }
+    
+    private void CancelMoveLeft(InputAction.CallbackContext obj)
+    {
+        playerCharacter.RemoveDirection(Vector2.left);
+    }
+    
+    
+    private void CancelMoveRight(InputAction.CallbackContext obj)
+    {
+        playerCharacter.RemoveDirection(Vector2.right);
     }
 
     private void MoveDown(InputAction.CallbackContext obj)
     {
-        playerCharacter.SetMoveDirection(Vector2.down);
+        playerCharacter.AddDirection(Vector2.down);
     }
 
     private void MoveUp(InputAction.CallbackContext obj)
     {
        
-        playerCharacter.SetMoveDirection(Vector2.up);
+        playerCharacter.AddDirection(Vector2.up);
     }
 
     private void MoveRight(InputAction.CallbackContext obj)
     {
        
-        playerCharacter.SetMoveDirection(Vector2.right);
+        playerCharacter.AddDirection(Vector2.right);
     }
 
     private void MoveLeft(InputAction.CallbackContext obj)
     {
       
-        playerCharacter.SetMoveDirection(Vector2.left);
+        playerCharacter.AddDirection(Vector2.left);
     }
 
     private void OnDisable()
@@ -63,9 +79,9 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveRight.performed -= MoveRight;
         playerInputs.Player.MoveUp.performed -= MoveUp;
         playerInputs.Player.MoveDown.performed -= MoveDown;
-        playerInputs.Player.MoveUp.canceled -= CancelMove;
-        playerInputs.Player.MoveLeft.canceled -= CancelMove;
-        playerInputs.Player.MoveRight.canceled -= CancelMove;
-        playerInputs.Player.MoveDown.canceled -= CancelMove;
+        playerInputs.Player.MoveUp.canceled -= CancelMoveUp;
+        playerInputs.Player.MoveLeft.canceled -= CancelMoveLeft;
+        playerInputs.Player.MoveRight.canceled -= CancelMoveRight;
+        playerInputs.Player.MoveDown.canceled -= CancelMoveDown;
     }
 }
