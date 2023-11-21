@@ -19,7 +19,7 @@ public class Mover : MonoBehaviour
     
     private void OnEnable()
     {
-        Rotate(currentDirection);
+        StartCoroutine(Rotate(currentDirection));
     }
 
     public void AddDirection(Vector2 direction)
@@ -72,7 +72,7 @@ public class Mover : MonoBehaviour
             else
             {
                 SetAnimationMovement(Vector2.zero);
-                Rotate(currentDirection);
+                StartCoroutine(Rotate(currentDirection));
             }
         }
     }
@@ -100,8 +100,9 @@ public class Mover : MonoBehaviour
     }
 
 
-    public void  Rotate(Vector2 forward)
+    public IEnumerator  Rotate(Vector2 forward)
     {
+        yield return new WaitForEndOfFrame();
         animator.enabled = false;
         spriteRenderer.sprite = allSprites[forward];
     }
