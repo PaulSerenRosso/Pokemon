@@ -17,6 +17,9 @@ public class WorldManager : MonoBehaviour
         currentSpace.SetActive(true);
     }
 
+    public GameObject CurrentSpace => currentSpace;
+    
+
     public void ChangeSpace(GameObject space)
     {
         currentSpace.SetActive(false);
