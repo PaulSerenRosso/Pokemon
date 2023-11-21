@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 743f93eb66884464287a64fccd4a0c86, type: 3}
+  m_Name: TestTextInteraction
+  m_EditorClassIdentifier: 
+  fromName: CHEN
+  textToDraw:
+  - "Bien le bonjour! \nBienvenue dans le monde incroyable des POKEMON!"
+  - Mon nom est CHEN!
+  - "Les gens m'appellent comme \xE7a amicalement le PROF. POKEMON!"
+  - Ce monde...
+  - "...est peupl\xE9 de cr\xE9atures appel\xE9es POK\xE9MON!"
+  - "Pour certains, les POK\xE9MON sont des animaux domestiques, pour d'autres, ils
+    sont un moyen de combattre. "
+  - Pour ma part...
+  - "L'\xE9tude des POKEMON est ma profession."
+  fromGender: 0
