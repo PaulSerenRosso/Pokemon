@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,19 +11,26 @@ public class Mover : MonoBehaviour
     private float timer;
     private List<Vector2> moveDirections = new();
     public event Action<Mover> endMoveEvent;
-    
+    [SerializeField] private Vector2 currentDirection;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SerializableDictionary<Vector2, Sprite> allSprites;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    private void OnEnable()
+    {
+        Rotate(currentDirection);
+    }
+
     public void AddDirection(Vector2 direction)
     {
         if(moveDirections.Contains(direction)) return;
         moveDirections.Add(direction);
     }
     
-    public void StopMove()
+    public bool CheckMoverLookAtPosition(Vector2 position)
     {
-        transform.position = Vector2.Lerp(startPosition, destination,1);
-        moveDirections.Clear();
-        isMoving = false;
-        timer = 0;
+        var tempDirection = (position - (Vector2)transform.position).normalized;
+        return tempDirection == currentDirection; 
     }
     
     public void RemoveDirection(Vector2 direction)
@@ -43,11 +49,13 @@ public class Mover : MonoBehaviour
             if ( moveDirections.Count != 0)
             {
                 isMoving = true;
+                currentDirection = moveDirections[0];
                 startPosition = transform.position;
-                destination = startPosition + moveDirections[0];
-                Rotate(moveDirections[0]);
+                destination = startPosition + currentDirection;
+                SetAnimationMovement(currentDirection);
             }
         }
+     
     }
 
     private void Move()
@@ -60,11 +68,59 @@ public class Mover : MonoBehaviour
             transform.position = Vector2.Lerp(startPosition, destination,timer/timeMovement);
             timer = 0;
             endMoveEvent?.Invoke(this);
+            if ( moveDirections.Count != 0)
+            {
+                isMoving = true;
+                currentDirection = moveDirections[0];
+                startPosition = transform.position;
+                destination = startPosition + currentDirection;
+                SetAnimationMovement(currentDirection);
+            }
+            else
+            {
+                SetAnimationMovement(Vector2.zero);
+                Rotate(currentDirection);
+            }
         }
     }
-
     public void Rotate(Vector2 forward)
     {
-        transform.right = forward;
+        spriteRenderer.sprite = allSprites[forward];
     }
+    
+    public void SetAnimationMovement(Vector2 forward)
+    {
+        switch (forward)
+        {
+            case Vector2 v when v.Equals(Vector2.up):
+            {
+                animator.Play("MoveUp"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.down):
+            {
+                animator.Play("MoveDown"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.left):
+            {
+                animator.Play("MoveLeft"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.right):
+            {
+                animator.Play("MoveRight"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.zero):
+            {
+                animator.Play("Idle"); 
+                break;
+            }
+            
+        }
+      
+    }
+    
+    
 }
