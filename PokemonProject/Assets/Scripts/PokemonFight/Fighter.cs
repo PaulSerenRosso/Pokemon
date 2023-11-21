@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fighter : MonoBehaviour
@@ -8,6 +5,7 @@ public class Fighter : MonoBehaviour
     [SerializeField] protected Pokemon[] pokemons;
     private Fighter enemyFighter;
     private bool hasLost;
+    [SerializeField] 
     public virtual void Init(Fighter enemyFighter)
     {
         this.enemyFighter = enemyFighter;
@@ -37,6 +35,8 @@ public class Fighter : MonoBehaviour
         }
         return areAllDead;
     }
+    
+    
 
   
 }
