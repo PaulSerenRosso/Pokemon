@@ -1,7 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FightManager : MonoBehaviour
 {
@@ -10,22 +10,36 @@ public class FightManager : MonoBehaviour
     private bool isPlayerTurn;
     private GameObject previousSpace;
     [SerializeField] private GameObject fightSpace;
+    // UI 
+    [SerializeField] private TextMeshProUGUI playerPokemonTextName;
+    [SerializeField] private TextMeshProUGUI enemyPokemonTextName;
+    [SerializeField] private Slider playerPokemonSlider;
+    [SerializeField] private Slider enemyPokemonSlider;
     
     private void Start()
     {
-        playerFighterController.endTurnEvent = ChangeTurn;
-        enemyFighterController.endTurnEvent = ChangeTurn;
+        playerFighterController.fighter.chooseActionEvent = ResolveFight;
+        playerFighterController.fighter.endTurnEvent = ChangeTurn;
     }
 
     public void InitFight(Fighter enemyFighter)
     {
+        GetComponent<Camera>().gameObject.SetActive(true);
         previousSpace = WorldManager.instance.CurrentSpace;
         WorldManager.instance.ChangeSpace(fightSpace);
         enemyFighterController.fighter = enemyFighter;
+        enemyFighterController.fighter.chooseActionEvent =ResolveFight;
+        enemyFighterController.fighter.endTurnEvent = ChangeTurn;
         playerFighterController.fighter.Init(enemyFighter);
         enemyFighterController.fighter.Init(playerFighterController.fighter);
         isPlayerTurn = true;
         ChangeTurn();
+    }
+
+    void ResolveFight()
+    {
+        playerFighterController.Deactivate();
+        enemyFighterController.Deactivate();
     }
 
     public void ChangeTurn()
@@ -44,18 +58,17 @@ public class FightManager : MonoBehaviour
         if (isPlayerTurn)
         {
             playerFighterController.Activate();
-            enemyFighterController.Deactivate();
+        
         }
         else
         {
-            playerFighterController.Deactivate();
             enemyFighterController.Activate();
         }
     }
     
-    
     void EndFight()
     {
+       
         WorldManager.instance.ChangeSpace(previousSpace);
     }
 }

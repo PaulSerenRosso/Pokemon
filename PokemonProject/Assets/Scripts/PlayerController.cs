@@ -7,10 +7,15 @@ public class PlayerController : MonoBehaviour
     private PlayerInputs playerInputs = null;
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PopUpManager popUpManager;
-  
+    [SerializeField] private Camera characterCamera;
     private void Awake()
     {
         playerInputs = new PlayerInputs();
+    }
+
+    public void SetCameraActive(bool value)
+    {
+        characterCamera.gameObject.SetActive(value);
     }
 
     private void OnEnable()

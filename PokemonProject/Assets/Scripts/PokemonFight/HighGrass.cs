@@ -1,21 +1,39 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HighGrass : MonoBehaviour
 {
     [SerializeField] private EnemyFighter enemyFighter;
+    [SerializeField] private PokemonSO[] allPokemonSo;
+    [SerializeField] private float probabilityToEngageFight;
+    private PlayerCharacter playerCharacter;
+    private PlayerManager playerManager;
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
         var mover = other.GetComponent<PlayerCharacter>();
+        playerManager = other.GetComponent<PlayerManager>();
+        mover = playerCharacter;
         mover.endMoveEvent += TryTriggerFight;
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (playerCharacter == other.GetComponent<PlayerCharacter>())
+        {
+            playerCharacter.endMoveEvent -= TryTriggerFight;
+        }
     }
 
     private void TryTriggerFight(Mover mover)
     {
-        mover.GetComponent<PlayerManager>().fightManager.InitFight(enemyFighter);
-    }
-
-    private void TryTriggerFight(PlayerManager playerManager)
-    {
-      
+        float engageFightDraw = Random.Range(0.0f, 1.0f);
+        if (engageFightDraw <= probabilityToEngageFight)
+        {
+            int randomPokemonIndex = Random.Range(0, allPokemonSo.Length);
+            enemyFighter.pokemons[0] = allPokemonSo[randomPokemonIndex].CreatePokemon();
+            mover.GetComponent<PlayerManager>().fightManager.InitFight(enemyFighter);
+        }
     }
 }

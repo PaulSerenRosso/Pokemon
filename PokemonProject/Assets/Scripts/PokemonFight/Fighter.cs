@@ -1,16 +1,35 @@
+using System;
 using UnityEngine;
 
 public class Fighter : MonoBehaviour
 {
-    [SerializeField] protected Pokemon[] pokemons;
+    public Pokemon[] pokemons;
     private Fighter enemyFighter;
     private bool hasLost;
+    public Action endTurnEvent;
+    public Action chooseActionEvent;
+    public int currentPokemonIndex;
+    public Action initEvent;
+    public Action disableEvent;
+    
+    protected virtual void Start()
+    {
+        pokemons = new Pokemon[6];
+    }
+
     [SerializeField] 
     public virtual void Init(Fighter enemyFighter)
     {
         this.enemyFighter = enemyFighter;
-        hasLost = false; 
-        
+        hasLost = false;
+        currentPokemonIndex = 0;
+        initEvent?.Invoke();
+
+    }
+
+    public virtual void Disable()
+    {
+        disableEvent?.Invoke();
     }
 
     public virtual bool CheckLose()

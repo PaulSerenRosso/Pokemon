@@ -8,5 +8,10 @@ public class PokemonSO : ScriptableObject
     public int maxHp;
     public PokemonTypeSO pokemonTypeSo;
 
+    public Pokemon CreatePokemon()
+    {
+        return new Pokemon(this);
+    }
+
   
 }
