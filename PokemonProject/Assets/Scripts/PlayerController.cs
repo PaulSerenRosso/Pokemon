@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputs playerInputs = null;
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private PopUpManager popUpManager;
-
+  
     private void Awake()
     {
         playerInputs = new PlayerInputs();

@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 4951237843017957059}
   - component: {fileID: 5934101904931358420}
   - component: {fileID: 9168057097883897903}
+  - component: {fileID: 5074693112277877130}
   m_Layer: 7
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -186,6 +187,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeMovement: 0.2
+  currentDirection: {x: 1, y: 0}
+  animator: {fileID: 5074693112277877130}
+  allSprites:
+    list:
+    - Key: {x: 1, y: 0}
+      Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - Key: {x: -1, y: 0}
+      Value: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - Key: {x: 0, y: 1}
+      Value: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    - Key: {x: 0, y: -1}
+      Value: {fileID: 1818656321, guid: 159a5a5dd2d9be340b3b81d3357e255f, type: 3}
+  spriteRenderer: {fileID: 410400167119276991}
 --- !u!50 &5934101904931358420
 Rigidbody2D:
   serializedVersion: 4
@@ -258,6 +272,27 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &5074693112277877130
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277488965403212765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f78a73fa1874b54c9172da19d7d54c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5363683552543846660
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 4951237843017957059}
+  popUpManager: {fileID: 0}
 --- !u!1001 &1775598308777330312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -499,8 +535,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d3a75d84f731ce49aed7be2632dcaff, type: 3}
---- !u!4 &8015423703569125762 stripped
-Transform:
+--- !u!224 &8015423703569125762 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 8617831560287016714, guid: 9d3a75d84f731ce49aed7be2632dcaff, type: 3}
   m_PrefabInstance: {fileID: 1775598308777330312}
   m_PrefabAsset: {fileID: 0}
