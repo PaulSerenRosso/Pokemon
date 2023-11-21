@@ -400,7 +400,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3193417294538750258, guid: 94d2ae9d42d9a384f97998b16946ad69, type: 3}
       propertyPath: m_Name
-      value: BuildingStairs
+      value: BuildingEntry
       objectReference: {fileID: 0}
     - target: {fileID: 5034229728724009988, guid: 94d2ae9d42d9a384f97998b16946ad69, type: 3}
       propertyPath: m_LocalPosition.x

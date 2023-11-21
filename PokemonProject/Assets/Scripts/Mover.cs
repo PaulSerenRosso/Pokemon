@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class Mover : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SerializableDictionary<Vector2, Sprite> allSprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
-
+    
     private void OnEnable()
     {
         Rotate(currentDirection);
@@ -47,12 +48,8 @@ public class Mover : MonoBehaviour
         else
         {
             if ( moveDirections.Count != 0)
-            {
-                isMoving = true;
-                currentDirection = moveDirections[0];
-                startPosition = transform.position;
-                destination = startPosition + currentDirection;
-                SetAnimationMovement(currentDirection);
+            { 
+                StartMove();
             }
         }
      
@@ -70,11 +67,7 @@ public class Mover : MonoBehaviour
             endMoveEvent?.Invoke(this);
             if ( moveDirections.Count != 0)
             {
-                isMoving = true;
-                currentDirection = moveDirections[0];
-                startPosition = transform.position;
-                destination = startPosition + currentDirection;
-                SetAnimationMovement(currentDirection);
+                StartMove();
             }
             else
             {
@@ -83,13 +76,39 @@ public class Mover : MonoBehaviour
             }
         }
     }
-    public void Rotate(Vector2 forward)
+
+    private void StartMove()
     {
+        currentDirection = moveDirections[0];
+        startPosition = transform.position; 
+        destination = startPosition + currentDirection;
+        if(!Physics2D.Raycast(startPosition, currentDirection, 1f, LayerMask.GetMask("Environment")))
+        {
+            isMoving = true;
+            SetAnimationMovement(currentDirection);
+        }
+    }
+
+    private GameObject GetObjectForward()
+    {
+        var hit = Physics2D.Raycast(transform.position, currentDirection, 1f, LayerMask.GetMask("CollideWithPlayer"));
+        if (hit.collider == null)
+        {
+            return null;
+        }
+        return hit.collider.gameObject;
+    }
+
+
+    public void  Rotate(Vector2 forward)
+    {
+        animator.enabled = false;
         spriteRenderer.sprite = allSprites[forward];
     }
     
     public void SetAnimationMovement(Vector2 forward)
     {
+        animator.enabled = true;
         switch (forward)
         {
             case Vector2 v when v.Equals(Vector2.up):
