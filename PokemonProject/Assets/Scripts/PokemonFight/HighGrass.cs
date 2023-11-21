@@ -1,18 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HighGrass : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private EnemyFighter enemyFighter;
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        var mover = other.GetComponent<PlayerCharacter>();
+        mover.endMoveEvent += TryTriggerFight;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void TryTriggerFight(Mover mover)
     {
-        
+        mover.GetComponent<PlayerManager>().fightManager.InitFight(enemyFighter);
+    }
+
+    private void TryTriggerFight(PlayerManager playerManager)
+    {
+      
     }
 }
