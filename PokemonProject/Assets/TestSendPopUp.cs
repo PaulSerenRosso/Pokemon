@@ -10,3 +10,4 @@ public class TestSendPopUp : MonoBehaviour
     private bool isInteractable = true;
     public bool IsInteractable => isInteractable;
 }
+ 
