@@ -5,5 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TextInteraction", menuName = "ScriptableObjects/TextInteraction", order = 0)]
 public class TextInteractionSO : InteractionSO
 {
+    public string fromName;
     [TextArea] public string textToDraw;
+    public Gender fromGender;
 }

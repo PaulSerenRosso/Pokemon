@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerInputs playerInputs = null;
     [SerializeField] private PlayerCharacter playerCharacter;
+    [SerializeField] private PopUpManager popUpManager;
 
     private void Awake()
     {
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveLeft.canceled += CancelMoveLeft;
         playerInputs.Player.MoveRight.canceled += CancelMoveRight;
         playerInputs.Player.MoveDown.canceled += CancelMoveDown;
+        playerInputs.Player.Interact.started += OnInteract;
+        playerInputs.Player.Interact.canceled += OnReleaseInteract;
     }
 
     private void CancelMoveUp(InputAction.CallbackContext obj)
@@ -70,6 +73,16 @@ public class PlayerController : MonoBehaviour
     {
       
         playerCharacter.AddDirection(Vector2.left);
+    }
+
+    private void OnInteract(InputAction.CallbackContext ctx)
+    {
+        popUpManager.OnClick();
+    }
+
+    private void OnReleaseInteract(InputAction.CallbackContext ctx)
+    {
+        popUpManager.OnReleaseClick();
     }
 
     private void OnDisable()
