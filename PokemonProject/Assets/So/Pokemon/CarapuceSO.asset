@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf0520e848b3f5a4c9625465e0c82038, type: 3}
+  m_Name: CarapuceSO
+  m_EditorClassIdentifier: 
+  name: Carapuce
+  startLevel: 1
+  pokemonCapacitySO:
+  - {fileID: 11400000, guid: ed733a112dadd654bbbd16e1594a51d7, type: 2}
+  - {fileID: 11400000, guid: 0efdfb495cf5f8547a15d060f4654c58, type: 2}
+  - {fileID: 11400000, guid: 62d9020121bd69a4ba9e8166344fd95c, type: 2}
+  maxHp: 10
+  pokemonTypeSo: {fileID: 11400000, guid: d1833769e923ca8479d84ff5d3a31930, type: 2}

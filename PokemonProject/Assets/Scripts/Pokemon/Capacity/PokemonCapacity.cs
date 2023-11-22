@@ -1,9 +1,12 @@
 using System;
+using UnityEngine;
+
 [Serializable]
 public abstract class PokemonCapacity
 {
-    private PokemonCapacitySO so;
+    protected PokemonCapacitySO so;
     private int currentStamina;
+    public Action useCapacityFeedbackFinished;
     
     public virtual void Init(PokemonCapacitySO pokemonCapacitySo)
     {
@@ -12,16 +15,24 @@ public abstract class PokemonCapacity
     }
     
     public float Stamina => currentStamina; 
-    public virtual bool TryUseCapacity()
+    public virtual bool TryUseCapacityFeedback(SpriteRenderer pokemon, SpriteRenderer enemyPokemon)
     {
         if (currentStamina == 0)
         {
             return false;
         }
-
+       
+        useCapacityFeedbackFinished?.Invoke();
+        return true;
+    }
+    
+    public virtual bool TryUseCapacity(Pokemon pokemon, Pokemon enemyPokemon)
+    {
         currentStamina--;
         return true;
     }
+    
+    
 
    
 

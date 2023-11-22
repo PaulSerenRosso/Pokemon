@@ -7,6 +7,7 @@ public class PokemonSO : ScriptableObject
     public PokemonCapacitySO[] pokemonCapacitySO;
     public int maxHp;
     public PokemonTypeSO pokemonTypeSo;
+    public Sprite sprite; 
 
     public Pokemon CreatePokemon()
     {

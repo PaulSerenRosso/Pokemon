@@ -5,13 +5,19 @@ using UnityEngine;
 [Serializable]
 public class DamageCapacity : PokemonCapacity
 {
+    private DamageCapacitySO damageCapacitySo;
    public override void Init(PokemonCapacitySO pokemonCapacitySo)
    {
       base.Init(pokemonCapacitySo);
+      damageCapacitySo =(DamageCapacitySO) so;
    }
 
-   public override bool TryUseCapacity()
+   public override bool TryUseCapacity(Pokemon pokemon, Pokemon enemyPokemon)
    {
-      return base.TryUseCapacity();
+       if (base.TryUseCapacity(pokemon, enemyPokemon))
+       {
+           enemyPokemon.DecreaseHp(damageCapacitySo.damage);
+       }
+       return false;
    }
 }

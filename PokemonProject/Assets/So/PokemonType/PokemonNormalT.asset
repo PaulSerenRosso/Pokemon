@@ -9,6 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf0520e848b3f5a4c9625465e0c82038, type: 3}
-  m_Name: FirstPokemonSO
+  m_Script: {fileID: 11500000, guid: 1b3798c6434dc4940ba5de3e6da21946, type: 3}
+  m_Name: PokemonNormalT
   m_EditorClassIdentifier: 
+  name: Normal

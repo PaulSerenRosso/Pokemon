@@ -12,7 +12,7 @@ public class Pokemon
     private int maxHp;
     private int level;
     private bool isDied = false; 
-    private PokemonCapacity[] capacities;
+    public PokemonCapacity[] capacities;
     
     public Pokemon(PokemonSO pokemonSo)
     {

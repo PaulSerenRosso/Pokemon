@@ -12,9 +12,5 @@ public class PlayerFighter : Fighter
        pokemons[0] = defaultPokemonSO.CreatePokemon();
    }
 
-   public override void Init(Fighter enemyFighter)
-   {
-       base.Init(enemyFighter);
-     
-   }
+   
 }
