@@ -43,9 +43,21 @@ public class MenuManager : MonoBehaviour
         startMenu.SetActive(false);
         pokemonPanel.SetActive(true);
     }
+    
+    public void DeactivatePokemonPanel()
+    {
+        menuHelper.SetActive(true);
+        startMenu.SetActive(true);
+        pokemonPanel.SetActive(false);
+    }
 
-   
+    public void CloseMenuHelper()
+    {
+        menuHelper.SetActive(false);
+    }
 
-
-
+    public void CloseApplication()
+    {
+        Application.Quit();
+    }
 }
