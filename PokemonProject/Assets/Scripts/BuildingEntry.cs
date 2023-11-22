@@ -12,7 +12,7 @@ public class BuildingEntry : MonoBehaviour
 
     private void TeleportPlayer(Mover mover)
     {
-       WorldManager.instance.ChangeSpace(spaceToActivate);
+        WorldManager.instance.ChangeSpace(spaceToActivate);
         mover.transform.position = teleportPoint.position;
         mover.endMoveEvent -= TeleportPlayer;
     }
