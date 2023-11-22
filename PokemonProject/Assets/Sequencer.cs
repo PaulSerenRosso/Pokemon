@@ -20,7 +20,8 @@ namespace SequencerNS
         [SerializeField] private List<InteractionSO> stack = new();
         [SerializeField] private bool isPlayingSequence;
         [SerializeField] private InteractionSO testInteraction;
-        [SerializeField] private SequenceType currentSequenceType = SequenceType.None; 
+        [SerializeField] private SequenceType currentSequenceType = SequenceType.None;
+        public SequenceType CurrentSequenceType => currentSequenceType;
         
         // Dialogues
         //private string[] tempsDialogues;
@@ -106,11 +107,6 @@ namespace SequencerNS
         #region Input
         public void OnClick()
         {
-            if (currentSequenceType == SequenceType.None)
-            {
-                var go = Physics2D.Raycast(transform.position, transform.forward);
-            }
-            
             if (currentSequenceType == SequenceType.Dialogue)
             {
                 if (!dialogueManager.IsReading)

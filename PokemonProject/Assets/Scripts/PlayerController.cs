@@ -36,9 +36,9 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveRight.canceled += CancelMoveRight;
         playerInputs.Player.MoveDown.canceled += CancelMoveDown;
         
-        playerInputs.Player.Interact.started += OnInteract;
-        playerInputs.Player.Interact.canceled += OnReleaseInteract;
-        playerInputs.Player.Interact.performed += OnPerformedInteract;
+        // playerInputs.Player.Interact.started += OnInteract;
+        // playerInputs.Player.Interact.canceled += OnReleaseInteract;
+        // playerInputs.Player.Interact.performed += OnPerformedInteract;
     }
 
     private void CancelMoveUp(InputAction.CallbackContext obj)
@@ -64,42 +64,28 @@ public class PlayerController : MonoBehaviour
 
     private void MoveDown(InputAction.CallbackContext obj)
     {
-        playerCharacter.AddDirection(Vector2.down);
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.down);
     }
 
     private void MoveUp(InputAction.CallbackContext obj)
     {
-       
-        playerCharacter.AddDirection(Vector2.up);
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.up);
     }
 
     private void MoveRight(InputAction.CallbackContext obj)
     {
-       
-        playerCharacter.AddDirection(Vector2.right);
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.right);
     }
 
     private void MoveLeft(InputAction.CallbackContext obj)
     {
-      
-        playerCharacter.AddDirection(Vector2.left);
-    }
-
-    private void OnInteract(InputAction.CallbackContext ctx)
-    {
-        sequencer.OnClick();
-    }
-
-    private void OnReleaseInteract(InputAction.CallbackContext ctx)
-    {
-        sequencer.OnReleaseClick();
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.left);
     }
     
-    private void OnPerformedInteract(InputAction.CallbackContext ctx)
-    {
-        sequencer.OnPerformedClick();
-    }
-
     private void OnDisable()
     {
         playerInputs.Disable();

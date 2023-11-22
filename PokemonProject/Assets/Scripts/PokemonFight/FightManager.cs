@@ -15,6 +15,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyPokemonTextName;
     [SerializeField] private Slider playerPokemonSlider;
     [SerializeField] private Slider enemyPokemonSlider;
+    public bool isInFight;
     
     private void Start()
     {
@@ -33,6 +34,7 @@ public class FightManager : MonoBehaviour
         playerFighterController.fighter.Init(enemyFighter);
         enemyFighterController.fighter.Init(playerFighterController.fighter);
         isPlayerTurn = true;
+        isInFight = true;
         ChangeTurn();
     }
 
@@ -68,7 +70,7 @@ public class FightManager : MonoBehaviour
     
     void EndFight()
     {
-       
+        isInFight = false;
         WorldManager.instance.ChangeSpace(previousSpace);
     }
 }
