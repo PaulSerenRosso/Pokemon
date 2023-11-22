@@ -9,7 +9,7 @@ public class PlayerFighter : Fighter
    protected override void Start()
    {
        base.Start();
-       pokemons[0] = defaultPokemonSO.CreatePokemon();
+       pokemons.Add(defaultPokemonSO.CreatePokemon()); 
    }
 
    

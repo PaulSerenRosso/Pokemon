@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -15,15 +16,20 @@ public abstract class PokemonCapacity
     }
     
     public float Stamina => currentStamina; 
-    public virtual bool TryUseCapacityFeedback(SpriteRenderer pokemon, SpriteRenderer enemyPokemon)
+    public virtual bool TryUseCapacityFeedback(SpriteRenderer pokemon, SpriteRenderer enemyPokemon, MonoBehaviour coroutineHandler)
     {
         if (currentStamina == 0)
         {
             return false;
         }
-       
-        useCapacityFeedbackFinished?.Invoke();
+        coroutineHandler.StartCoroutine(WaitForEndFeedback());
         return true;
+    }
+
+    IEnumerator WaitForEndFeedback()
+    {
+        yield return new WaitForSeconds(1f);
+        useCapacityFeedbackFinished?.Invoke();
     }
     
     public virtual bool TryUseCapacity(Pokemon pokemon, Pokemon enemyPokemon)

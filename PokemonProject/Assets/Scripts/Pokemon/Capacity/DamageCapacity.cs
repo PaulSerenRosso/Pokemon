@@ -12,6 +12,7 @@ public class DamageCapacity : PokemonCapacity
       damageCapacitySo =(DamageCapacitySO) so;
    }
 
+   
    public override bool TryUseCapacity(Pokemon pokemon, Pokemon enemyPokemon)
    {
        if (base.TryUseCapacity(pokemon, enemyPokemon))

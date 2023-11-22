@@ -44,6 +44,7 @@ public class FightManager : MonoBehaviour
 
     public void ChangeTurn()
     {
+     
         enemyFighterController.fighter.RefreshRenderer();
         playerFighterController.fighter.RefreshRenderer();
         
@@ -72,6 +73,9 @@ public class FightManager : MonoBehaviour
     void EndFight()
     {
         camera.gameObject.SetActive(false);
+        enemyFighterController.fighter.Disable();
+        playerFighterController.fighter.Disable();
         WorldManager.instance.ChangeSpace(previousSpace);
+        
     }
 }

@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Bulle d'eau
   maxStamina: 10
   pokemonTypeSo: {fileID: 11400000, guid: d1833769e923ca8479d84ff5d3a31930, type: 2}
-  damage: 5
+  damage: 2

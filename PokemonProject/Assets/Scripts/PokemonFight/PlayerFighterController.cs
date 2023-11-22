@@ -21,7 +21,6 @@ public class PlayerFighterController : FighterController
         var pokemonCapacities = fighter.pokemons[fighter.currentPokemonIndex].so.pokemonCapacitySO;
         for (var index = 0; index < pokemonCapacities.Length; index++)
         {
-       
             var capacityText = allCapacitiesText[index];
             capacityText.gameObject.SetActive(true);
             capacityText.text = pokemonCapacities[index].name;
@@ -42,6 +41,7 @@ public class PlayerFighterController : FighterController
 
     public override void Deactivate()
     {
+
         choiceCapacityPanel.SetActive(false);
         choiceActionPanel.SetActive(false);
         capacityInfoPanel.SetActive(false);
@@ -49,6 +49,6 @@ public class PlayerFighterController : FighterController
 
     public void UseCapacity(int index)
     {
-        fighter.UseCapacityFeedback(index);
+        fighter.UseCapacityFeedback(index, this);
     }
 }

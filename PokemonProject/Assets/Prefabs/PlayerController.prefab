@@ -203,6 +203,9 @@ MonoBehaviour:
     - Key: {x: 0, y: -1}
       Value: {fileID: 1818656321, guid: 159a5a5dd2d9be340b3b81d3357e255f, type: 3}
   spriteRenderer: {fileID: 410400167119276991}
+  rayCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 320
   fightManager: {fileID: 0}
   sequencer: {fileID: 2606093532475508496}
 --- !u!50 &5934101904931358420

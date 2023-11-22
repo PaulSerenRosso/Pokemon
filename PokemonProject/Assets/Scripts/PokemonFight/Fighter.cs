@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Fighter : MonoBehaviour
 {
-    public Pokemon[] pokemons;
+    public List<Pokemon> pokemons = new List<Pokemon>();
     private Fighter enemyFighter;
     private bool hasLost;
     public Action endTurnEvent;
@@ -19,7 +20,7 @@ public class Fighter : MonoBehaviour
     private Slider hpSlider;
     protected virtual void Start()
     {
-        pokemons = new Pokemon[6];
+      
     }
     
     public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText )
@@ -53,23 +54,27 @@ public class Fighter : MonoBehaviour
     private bool CheckPokemonsAreAllDead()
     {
         bool areAllDead = true;
-        foreach (var pokemon in pokemons)
+        for (var index = 0; index < pokemons.Count; index++)
         {
+            var pokemon = pokemons[index];
             if (!pokemon.IsDied)
             {
                 areAllDead = false;
                 break;
             }
         }
+
         return areAllDead;
     }
 
-    public void UseCapacityFeedback(int index)
+    public void UseCapacityFeedback(int index, MonoBehaviour coroutineHandler)
     {
+  
+        pokemons[currentPokemonIndex].capacities[index].useCapacityFeedbackFinished = () => UseCapacity(index);
         if (pokemons[currentPokemonIndex].capacities[index]
-            .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer))
+            .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer, coroutineHandler))
         {
-            pokemons[currentPokemonIndex].capacities[index].useCapacityFeedbackFinished = () => UseCapacity(index);
+          
             chooseActionEvent?.Invoke();
         };
     }

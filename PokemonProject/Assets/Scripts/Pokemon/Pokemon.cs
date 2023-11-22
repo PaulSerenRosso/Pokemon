@@ -1,8 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Object = System.Object;
+
 
 [Serializable]
 public class Pokemon
@@ -26,7 +23,6 @@ public class Pokemon
             var capacitySo = so.pokemonCapacitySO[index];
             capacities[index] =(PokemonCapacity) Activator.CreateInstance(capacitySo.GetType());
             capacities[index].Init(so.pokemonCapacitySO[index]);
-
         }
     }
 
@@ -34,10 +30,23 @@ public class Pokemon
     public int MaxHp => maxHp;
     public int Level => level;
     public bool IsDied => isDied;
-    
+
+    public int GetActiveCapacityCount()
+    {
+        int currentCount = 0;
+        for (int i = 0; i < capacities.Length; i++)
+        {
+            if (capacities[i] != null)
+            {
+                currentCount++;
+            }
+        }
+
+        return currentCount;
+    }
     public void DecreaseHp(int amount)
     {
-        if ((hp-amount) < maxHp)
+        if ((hp-amount) <= 0)
         {
             SetHp(0);
             Die();

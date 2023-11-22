@@ -15,4 +15,4 @@ MonoBehaviour:
   name: Charge
   maxStamina: 10
   pokemonTypeSo: {fileID: 11400000, guid: 6f7256221e99fb844b2247cb86116d15, type: 2}
-  damage: 10
+  damage: 2

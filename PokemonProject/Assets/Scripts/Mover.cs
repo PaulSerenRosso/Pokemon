@@ -16,7 +16,7 @@ public class Mover : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SerializableDictionary<Vector2, Sprite> allSprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
-
+    [SerializeField] private LayerMask rayCollisionLayerMask;
     public bool IsMoving => isMoving;
 
     private void OnEnable()
@@ -39,6 +39,11 @@ public class Mover : MonoBehaviour
     public void RemoveDirection(Vector2 direction)
     {
         moveDirections.Remove(direction);
+        if (moveDirections.Count == 0 && !isMoving)
+        {
+            SetAnimationMovement(Vector2.zero);
+            StartCoroutine(Rotate(currentDirection));
+        }
     }
 
     private void Update()
@@ -83,7 +88,8 @@ public class Mover : MonoBehaviour
         currentDirection = moveDirections[0];
         startPosition = transform.position;
         destination = startPosition + currentDirection;
-        if (!Physics2D.Raycast(startPosition, currentDirection, 1f, LayerMask.GetMask("Environment")))
+        Physics2D.queriesHitTriggers = false;
+        if (!Physics2D.Raycast(startPosition, currentDirection, 1f, rayCollisionLayerMask ))
         {
             isMoving = true;
             SetAnimationMovement(currentDirection);
