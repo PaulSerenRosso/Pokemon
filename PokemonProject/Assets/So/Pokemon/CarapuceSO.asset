@@ -20,3 +20,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62d9020121bd69a4ba9e8166344fd95c, type: 2}
   maxHp: 10
   pokemonTypeSo: {fileID: 11400000, guid: d1833769e923ca8479d84ff5d3a31930, type: 2}
+  sprite: {fileID: 834486840, guid: de9e3320a2855a74c9450f753b45fd3d, type: 3}

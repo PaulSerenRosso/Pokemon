@@ -700,6 +700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FightPokemonGroup
       objectReference: {fileID: 0}
+    - target: {fileID: 2972724737474762122, guid: 4530f59147463bc4aa26961784aa9a68, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
