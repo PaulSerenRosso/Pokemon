@@ -12,19 +12,28 @@ public class Mover : MonoBehaviour
     private float timer;
     private List<Vector2> moveDirections = new();
     public event Action<Mover> endMoveEvent;
+    [SerializeField] private Vector2 currentDirection;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SerializableDictionary<Vector2, Sprite> allSprites;
+    [SerializeField] private SpriteRenderer spriteRenderer;
+
+    public bool IsMoving => isMoving;
     
+    private void OnEnable()
+    {
+        StartCoroutine(Rotate(currentDirection));
+    }
+
     public void AddDirection(Vector2 direction)
     {
         if(moveDirections.Contains(direction)) return;
         moveDirections.Add(direction);
     }
     
-    public void StopMove()
+    public bool CheckMoverLookAtPosition(Vector2 position)
     {
-        transform.position = Vector2.Lerp(startPosition, destination,1);
-        moveDirections.Clear();
-        isMoving = false;
-        timer = 0;
+        var tempDirection = (position - (Vector2)transform.position).normalized;
+        return tempDirection == currentDirection; 
     }
     
     public void RemoveDirection(Vector2 direction)
@@ -41,13 +50,11 @@ public class Mover : MonoBehaviour
         else
         {
             if ( moveDirections.Count != 0)
-            {
-                isMoving = true;
-                startPosition = transform.position;
-                destination = startPosition + moveDirections[0];
-                Rotate(moveDirections[0]);
+            { 
+                StartMove();
             }
         }
+     
     }
 
     private void Move()
@@ -60,11 +67,84 @@ public class Mover : MonoBehaviour
             transform.position = Vector2.Lerp(startPosition, destination,timer/timeMovement);
             timer = 0;
             endMoveEvent?.Invoke(this);
+            if ( moveDirections.Count != 0)
+            {
+                StartMove();
+            }
+            else
+            {
+                SetAnimationMovement(Vector2.zero);
+                StartCoroutine(Rotate(currentDirection));
+            }
         }
     }
 
-    public void Rotate(Vector2 forward)
+    private void StartMove()
     {
-        transform.right = forward;
+        currentDirection = moveDirections[0];
+        startPosition = transform.position; 
+        destination = startPosition + currentDirection;
+        if(!Physics2D.Raycast(startPosition, currentDirection, 1f, LayerMask.GetMask("Environment")))
+        {
+            isMoving = true;
+            SetAnimationMovement(currentDirection);
+        }
     }
+    
+    
+
+    public GameObject GetObjectForward()
+    {
+        var hit = Physics2D.Raycast(transform.position, currentDirection, 1f, LayerMask.GetMask("CollideWithPlayer"));
+        if (hit.collider == null)
+        {
+            return null;
+        }
+        return hit.collider.gameObject;
+    }
+
+
+    public IEnumerator  Rotate(Vector2 forward)
+    {
+        yield return new WaitForEndOfFrame();
+        animator.enabled = false;
+        spriteRenderer.sprite = allSprites[forward];
+    }
+    
+    public void SetAnimationMovement(Vector2 forward)
+    {
+        animator.enabled = true;
+        switch (forward)
+        {
+            case Vector2 v when v.Equals(Vector2.up):
+            {
+                animator.Play("MoveUp"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.down):
+            {
+                animator.Play("MoveDown"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.left):
+            {
+                animator.Play("MoveLeft"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.right):
+            {
+                animator.Play("MoveRight"); 
+                break;
+            }
+            case Vector2 v when v.Equals(Vector2.zero):
+            {
+                animator.Play("Idle"); 
+                break;
+            }
+            
+        }
+      
+    }
+    
+    
 }

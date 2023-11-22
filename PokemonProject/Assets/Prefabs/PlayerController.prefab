@@ -97,6 +97,9 @@ GameObject:
   - component: {fileID: 4951237843017957059}
   - component: {fileID: 5934101904931358420}
   - component: {fileID: 9168057097883897903}
+  - component: {fileID: 5074693112277877130}
+  - component: {fileID: 11178364549230019}
+  - component: {fileID: 8882157915829877562}
   m_Layer: 7
   m_Name: PlayerCharacter
   m_TagString: Untagged
@@ -161,7 +164,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -186,6 +189,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeMovement: 0.2
+  currentDirection: {x: 1, y: 0}
+  animator: {fileID: 5074693112277877130}
+  allSprites:
+    list:
+    - Key: {x: 1, y: 0}
+      Value: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+    - Key: {x: -1, y: 0}
+      Value: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+    - Key: {x: 0, y: 1}
+      Value: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+    - Key: {x: 0, y: -1}
+      Value: {fileID: 1818656321, guid: 159a5a5dd2d9be340b3b81d3357e255f, type: 3}
+  spriteRenderer: {fileID: 410400167119276991}
+  fightManager: {fileID: 0}
 --- !u!50 &5934101904931358420
 Rigidbody2D:
   serializedVersion: 4
@@ -258,6 +275,57 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &5074693112277877130
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277488965403212765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8f78a73fa1874b54c9172da19d7d54c4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &11178364549230019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277488965403212765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08f38d7644da3604c8bb10ea47efc548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerFighter: {fileID: 8882157915829877562}
+  fightManager: {fileID: 0}
+  playerController: {fileID: 0}
+--- !u!114 &8882157915829877562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3277488965403212765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98bd6bc6af366e74f94335348fe7ee14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemons: []
+  currentPokemonIndex: 0
+  defaultPokemonSO: {fileID: 0}
 --- !u!1 &5363683552543846660
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,6 +338,7 @@ GameObject:
   - component: {fileID: 692745659141542823}
   - component: {fileID: 6358966798723600752}
   - component: {fileID: 6383280540915976458}
+  - component: {fileID: 8800905976732652256}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -327,7 +396,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 6.0625
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -395,6 +464,30 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &8800905976732652256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5363683552543846660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c88f5cead0c0b2a4eb05b5900433f8d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_AssetsPPU: 16
+  m_RefResolutionX: 240
+  m_RefResolutionY: 160
+  m_CropFrame: 0
+  m_GridSnapping: 0
+  m_FilterMode: 0
+  m_UpscaleRT: 0
+  m_PixelSnapping: 0
+  m_CropFrameX: 0
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!1 &7504289290865413734
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +535,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCharacter: {fileID: 4951237843017957059}
+  popUpManager: {fileID: 0}
+  characterCamera: {fileID: 0}
 --- !u!1001 &1775598308777330312
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -499,8 +594,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d3a75d84f731ce49aed7be2632dcaff, type: 3}
---- !u!4 &8015423703569125762 stripped
-Transform:
+--- !u!224 &8015423703569125762 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 8617831560287016714, guid: 9d3a75d84f731ce49aed7be2632dcaff, type: 3}
   m_PrefabInstance: {fileID: 1775598308777330312}
   m_PrefabAsset: {fileID: 0}
