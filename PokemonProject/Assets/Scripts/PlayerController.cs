@@ -1,13 +1,19 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using SequencerNS;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 
 public class PlayerController : MonoBehaviour
 {
     private PlayerInputs playerInputs = null;
     [SerializeField] private PlayerCharacter playerCharacter;
-    [SerializeField] private PopUpManager popUpManager;
+    [SerializeField] private Sequencer sequencer;
     [SerializeField] private Camera characterCamera;
+	
     private void Awake()
     {
         playerInputs = new PlayerInputs();
@@ -29,8 +35,10 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveLeft.canceled += CancelMoveLeft;
         playerInputs.Player.MoveRight.canceled += CancelMoveRight;
         playerInputs.Player.MoveDown.canceled += CancelMoveDown;
-        playerInputs.Player.Interact.started += OnInteract;
-        playerInputs.Player.Interact.canceled += OnReleaseInteract;
+        
+        // playerInputs.Player.Interact.started += OnInteract;
+        // playerInputs.Player.Interact.canceled += OnReleaseInteract;
+        // playerInputs.Player.Interact.performed += OnPerformedInteract;
     }
 
     private void CancelMoveUp(InputAction.CallbackContext obj)
@@ -56,37 +64,28 @@ public class PlayerController : MonoBehaviour
 
     private void MoveDown(InputAction.CallbackContext obj)
     {
-        playerCharacter.AddDirection(Vector2.down);
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.down);
     }
 
     private void MoveUp(InputAction.CallbackContext obj)
     {
-       
-        playerCharacter.AddDirection(Vector2.up);
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.up);
     }
 
     private void MoveRight(InputAction.CallbackContext obj)
     {
-       
-        playerCharacter.AddDirection(Vector2.right);
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.right);
     }
 
     private void MoveLeft(InputAction.CallbackContext obj)
     {
-      
-        playerCharacter.AddDirection(Vector2.left);
+        if (sequencer.CurrentSequenceType == SequenceType.None)
+            playerCharacter.AddDirection(Vector2.left);
     }
-
-    private void OnInteract(InputAction.CallbackContext ctx)
-    {
-        popUpManager.OnClick();
-    }
-
-    private void OnReleaseInteract(InputAction.CallbackContext ctx)
-    {
-        popUpManager.OnReleaseClick();
-    }
-
+    
     private void OnDisable()
     {
         playerInputs.Disable();

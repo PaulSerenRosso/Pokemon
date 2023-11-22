@@ -18,7 +18,7 @@ public class Mover : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
 
     public bool IsMoving => isMoving;
-    
+
     private void OnEnable()
     {
         StartCoroutine(Rotate(currentDirection));
@@ -26,16 +26,16 @@ public class Mover : MonoBehaviour
 
     public void AddDirection(Vector2 direction)
     {
-        if(moveDirections.Contains(direction)) return;
+        if (moveDirections.Contains(direction)) return;
         moveDirections.Add(direction);
     }
-    
+
     public bool CheckMoverLookAtPosition(Vector2 position)
     {
         var tempDirection = (position - (Vector2)transform.position).normalized;
-        return tempDirection == currentDirection; 
+        return tempDirection == currentDirection;
     }
-    
+
     public void RemoveDirection(Vector2 direction)
     {
         moveDirections.Remove(direction);
@@ -49,25 +49,24 @@ public class Mover : MonoBehaviour
         }
         else
         {
-            if ( moveDirections.Count != 0)
-            { 
+            if (moveDirections.Count != 0)
+            {
                 StartMove();
             }
         }
-     
     }
 
     private void Move()
     {
         timer += Time.deltaTime;
-        transform.position = Vector2.Lerp(startPosition, destination, timer/timeMovement);
+        transform.position = Vector2.Lerp(startPosition, destination, timer / timeMovement);
         if (timer >= timeMovement)
         {
             isMoving = false;
-            transform.position = Vector2.Lerp(startPosition, destination,timer/timeMovement);
+            transform.position = Vector2.Lerp(startPosition, destination, timer / timeMovement);
             timer = 0;
             endMoveEvent?.Invoke(this);
-            if ( moveDirections.Count != 0)
+            if (moveDirections.Count != 0)
             {
                 StartMove();
             }
@@ -82,16 +81,15 @@ public class Mover : MonoBehaviour
     private void StartMove()
     {
         currentDirection = moveDirections[0];
-        startPosition = transform.position; 
+        startPosition = transform.position;
         destination = startPosition + currentDirection;
-        if(!Physics2D.Raycast(startPosition, currentDirection, 1f, LayerMask.GetMask("Environment")))
+        if (!Physics2D.Raycast(startPosition, currentDirection, 1f, LayerMask.GetMask("Environment")))
         {
             isMoving = true;
             SetAnimationMovement(currentDirection);
         }
     }
-    
-    
+
 
     public GameObject GetObjectForward()
     {
@@ -100,17 +98,18 @@ public class Mover : MonoBehaviour
         {
             return null;
         }
+
         return hit.collider.gameObject;
     }
 
 
-    public IEnumerator  Rotate(Vector2 forward)
+    public IEnumerator Rotate(Vector2 forward)
     {
         yield return new WaitForEndOfFrame();
         animator.enabled = false;
         spriteRenderer.sprite = allSprites[forward];
     }
-    
+
     public void SetAnimationMovement(Vector2 forward)
     {
         animator.enabled = true;
@@ -118,33 +117,60 @@ public class Mover : MonoBehaviour
         {
             case Vector2 v when v.Equals(Vector2.up):
             {
-                animator.Play("MoveUp"); 
+                animator.Play("MoveUp");
                 break;
             }
             case Vector2 v when v.Equals(Vector2.down):
             {
-                animator.Play("MoveDown"); 
+                animator.Play("MoveDown");
                 break;
             }
             case Vector2 v when v.Equals(Vector2.left):
             {
-                animator.Play("MoveLeft"); 
+                animator.Play("MoveLeft");
                 break;
             }
             case Vector2 v when v.Equals(Vector2.right):
             {
-                animator.Play("MoveRight"); 
+                animator.Play("MoveRight");
                 break;
             }
             case Vector2 v when v.Equals(Vector2.zero):
             {
-                animator.Play("Idle"); 
+                animator.Play("Idle");
                 break;
             }
-            
         }
-      
     }
-    
-    
+
+    public static Direction LookDirection(Vector3 myPos, Vector3 otherPos)
+    {
+        if (myPos.x == otherPos.x)
+        {
+            if (myPos.y > otherPos.y) 
+            {
+                return Direction.North; // -> My pos est en haut
+            }
+            else
+            {
+                return Direction.South; // -> My pos est en haut
+            }
+        }
+        else
+        {
+            if (myPos.x > otherPos.x) // Meme x 
+            {
+                return Direction.East;
+            }
+            else
+            {
+                return Direction.West;
+            }
+        }
+    }
+}
+
+public enum Direction
+{
+    East, West, North, South
 }
