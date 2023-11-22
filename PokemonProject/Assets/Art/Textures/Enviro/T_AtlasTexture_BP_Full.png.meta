@@ -4666,6 +4666,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: T_AtlasTexture_BP_Full_217
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35302cf0e7e8f4a40ab2571acbe28107
+      internalID: -448662227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -4809,6 +4830,7 @@ TextureImporter:
       T_AtlasTexture_BP_Full_214: -377394118
       T_AtlasTexture_BP_Full_215: -238018028
       T_AtlasTexture_BP_Full_216: -823870991
+      T_AtlasTexture_BP_Full_217: -448662227
       T_AtlasTexture_BP_Full_22: -1243290496
       T_AtlasTexture_BP_Full_23: -451747101
       T_AtlasTexture_BP_Full_24: 1009203687
