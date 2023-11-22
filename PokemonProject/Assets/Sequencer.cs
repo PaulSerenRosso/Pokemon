@@ -147,6 +147,6 @@ public enum SequenceType
 {
     Dialogue,
     Choice,
-    Movmement,
+    Movement,
     None
 }

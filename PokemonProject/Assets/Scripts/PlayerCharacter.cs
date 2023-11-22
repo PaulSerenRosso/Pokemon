@@ -11,8 +11,7 @@ public class PlayerCharacter : Mover
     // onIteract dialogue
     
     // si je suis en interaction je lance le raycast et je lance une fonction sur le sequencer
-
-
+    
     #region Interact
     public void InteractInput(InputAction.CallbackContext ctx)
     {
@@ -30,7 +29,6 @@ public class PlayerCharacter : Mover
             {
                 sequencer.OnClick();
             }
-            
         }
 
         if (ctx.performed)
@@ -43,8 +41,5 @@ public class PlayerCharacter : Mover
             sequencer.OnReleaseClick();
         }
     }
-    
-    
-
     #endregion
 }
