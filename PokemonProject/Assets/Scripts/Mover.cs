@@ -16,6 +16,8 @@ public class Mover : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private SerializableDictionary<Vector2, Sprite> allSprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
+
+    public bool IsMoving => isMoving;
     
     private void OnEnable()
     {
@@ -88,8 +90,10 @@ public class Mover : MonoBehaviour
             SetAnimationMovement(currentDirection);
         }
     }
+    
+    
 
-    private GameObject GetObjectForward()
+    public GameObject GetObjectForward()
     {
         var hit = Physics2D.Raycast(transform.position, currentDirection, 1f, LayerMask.GetMask("CollideWithPlayer"));
         if (hit.collider == null)
