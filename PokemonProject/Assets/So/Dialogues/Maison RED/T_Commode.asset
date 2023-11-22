@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 743f93eb66884464287a64fccd4a0c86, type: 3}
-  m_Name: D_NPC_PB_DEHORS_Full
+  m_Name: T_Commode
   m_EditorClassIdentifier: 
   interactionType: 0
   textToDraw:
-  - "J\u2019\xE9leves des pokemon moi aussi!"
-  - "Une fois plus forts. Ils pourront me prot\xE9ger."
-  fromGender: 1
+  - "C\u2019est une belle commode.\r\nOn peut y ranger plein de trucs.\r"
+  fromGender: 0

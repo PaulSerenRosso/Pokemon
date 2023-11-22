@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 743f93eb66884464287a64fccd4a0c86, type: 3}
-  m_Name: D_NPC_PB_DEHORS_Full
+  m_Name: T_Mom
   m_EditorClassIdentifier: 
   interactionType: 0
   textToDraw:
-  - "J\u2019\xE9leves des pokemon moi aussi!"
-  - "Une fois plus forts. Ils pourront me prot\xE9ger."
+  - "MAMAN : Bon\u2026"
+  - "Tous les gar\xE7ons quittent la jour la maison. C\u2019est la vie ! "
+  - Le PROF. CHEN te cherche. Il est dans la maison voisine.
   fromGender: 1

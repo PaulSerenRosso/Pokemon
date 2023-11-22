@@ -23,8 +23,6 @@ namespace SequencerNS
         [SerializeField] private SequenceType currentSequenceType = SequenceType.None;
         public SequenceType CurrentSequenceType => currentSequenceType;
         
-        // Dialogues
-        //private string[] tempsDialogues;
         private int currentTextIndex;
         
         private void Awake()
@@ -74,7 +72,7 @@ namespace SequencerNS
         {
             currentSequenceType = SequenceType.Dialogue;
             currentTextIndex = 0;
-            DisplayNextSentence();
+            DisplayNextSentence();  
         }
 
         public async void AddPopInteraction(InteractionSO interactionSO)

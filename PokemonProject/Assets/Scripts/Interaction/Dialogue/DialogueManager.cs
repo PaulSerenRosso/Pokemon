@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,6 +21,7 @@ namespace SequencerNS
         [SerializeField] float timer;
 
         [SerializeField] Color[] textColorByGender;
+        [SerializeField] Sprite[] dialoguesBoxSprites;
         
         [SerializeField] bool isReading;
         public bool IsReading => isReading;
@@ -28,6 +30,12 @@ namespace SequencerNS
         {
             currentIntervalBetweenLetterDisplay = baseintervalBetweenLetterDisplay;
             if (backgroundImage.gameObject.activeSelf == false) backgroundImage.gameObject.SetActive(true);
+
+            switch (gender)
+            {
+                case Gender.Annoucement: backgroundImage.sprite = dialoguesBoxSprites[1]; break;
+                default: backgroundImage.sprite = dialoguesBoxSprites[0]; break;
+            }
             
             isReading = true;
             timer = 0;
@@ -36,6 +44,7 @@ namespace SequencerNS
             fullTempText = text;
             indexLetter = 0;
             isReading = true;
+            textZone.text = tempText;
 
             textZone.color = textColorByGender[(int)gender];
 
