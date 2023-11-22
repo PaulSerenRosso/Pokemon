@@ -732,14 +732,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Bourg_Palette_Layers
       objectReference: {fileID: 0}
-    - target: {fileID: 2602060140763133990, guid: 2167302d321764b4ba59a8f8aae47ecf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2602060140763133990, guid: 2167302d321764b4ba59a8f8aae47ecf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.875
-      objectReference: {fileID: 0}
     - target: {fileID: 5145054866851998833, guid: 2167302d321764b4ba59a8f8aae47ecf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -784,14 +776,6 @@ PrefabInstance:
       propertyPath: spaceToActivate
       value: 
       objectReference: {fileID: 738256601}
-    - target: {fileID: 6009022182557489954, guid: 2167302d321764b4ba59a8f8aae47ecf, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6009022182557489954, guid: 2167302d321764b4ba59a8f8aae47ecf, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
