@@ -9,19 +9,22 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerInputs playerInputs = null;
+    public PlayerInputs playerInputs = null;
     [SerializeField] private PlayerCharacter playerCharacter;
     [SerializeField] private Sequencer sequencer;
     [SerializeField] private Camera characterCamera;
-	
+    [SerializeField] private MenuManager _menuManager;
     private void Awake()
     {
         playerInputs = new PlayerInputs();
+        playerInputs.Enable();
+        _menuManager.EnableInput();
     }
 
     public void SetCameraActive(bool value)
     {
         characterCamera.gameObject.SetActive(value);
+        
     }
 
     private void OnEnable()
@@ -35,7 +38,7 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveLeft.canceled += CancelMoveLeft;
         playerInputs.Player.MoveRight.canceled += CancelMoveRight;
         playerInputs.Player.MoveDown.canceled += CancelMoveDown;
-        
+       
         // playerInputs.Player.Interact.started += OnInteract;
         // playerInputs.Player.Interact.canceled += OnReleaseInteract;
         // playerInputs.Player.Interact.performed += OnPerformedInteract;
