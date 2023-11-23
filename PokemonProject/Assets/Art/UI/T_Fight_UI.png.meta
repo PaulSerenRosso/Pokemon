@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 26303031407f22641b431e1ed9bc36ac
+guid: b5791106d9976184589e667d2770fb22
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,85 +110,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: T_Background_Battle_0
+      name: T_Fight_UI_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 144
-        width: 240
-        height: 112
+        y: 96
+        width: 99
+        height: 29
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6cb606853704d6458a7430b5b19bece
-      internalID: 1339531845
+      spriteID: 3bb8290288c64e0438d688e7e63170ac
+      internalID: 629670718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: T_Background_Battle_1
+      name: T_Fight_UI_1
       rect:
         serializedVersion: 2
-        x: 242
-        y: 144
-        width: 240
-        height: 112
+        x: 103
+        y: 96
+        width: 4
+        height: 5
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 26f7aab2982923346b979d01f0d8e7f8
-      internalID: -608772382
+      spriteID: 0953486ae35fb17409434c3ef539e313
+      internalID: 1084550929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: T_Background_Battle_2
+      name: T_Fight_UI_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 30
-        width: 240
-        height: 112
+        x: 112
+        y: 91
+        width: 104
+        height: 37
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e76696ae7684ee4c948be73501769a9
-      internalID: 1991521542
+      spriteID: b7c0fadd0ed7bda4689c1cfd8f555778
+      internalID: -1826246487
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: T_Background_Battle_3
+      name: T_Fight_UI_3
       rect:
         serializedVersion: 2
-        x: 242
-        y: 30
-        width: 240
-        height: 112
+        x: 224
+        y: 96
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 6, y: 5, z: 6, w: 5}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b8d84148d6031c4db6237b125a946a0
-      internalID: 396200697
+      spriteID: f45613fce3b7e7c45a97bd3247c09ef7
+      internalID: -409508872
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      T_Background_Battle_0: 1339531845
-      T_Background_Battle_1: -608772382
-      T_Background_Battle_2: 1991521542
-      T_Background_Battle_3: 396200697
+      T_Fight_UI_0: 629670718
+      T_Fight_UI_1: 1084550929
+      T_Fight_UI_2: -1826246487
+      T_Fight_UI_3: -409508872
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

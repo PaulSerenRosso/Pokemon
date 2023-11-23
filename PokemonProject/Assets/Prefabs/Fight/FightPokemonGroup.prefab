@@ -105,6 +105,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PokemonCircle
       objectReference: {fileID: 0}
+    - target: {fileID: 9027479939762781620, guid: df4c8e4b22e5a1e4c9d2a94fe86534ea, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
