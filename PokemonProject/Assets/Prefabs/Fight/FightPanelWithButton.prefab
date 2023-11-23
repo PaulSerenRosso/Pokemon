@@ -56,6 +56,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1448080880556985109, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1448080880556985109, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2686141914161257971, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -79,6 +87,22 @@ PrefabInstance:
     - target: {fileID: 2686141914161257971, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3332835005309939542, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3332835005309939542, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553409040036708040, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553409040036708040, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3681952090029850151, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
       propertyPath: m_Pivot.x
@@ -184,6 +208,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5002819393369791290, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 5002819393369791290, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 6189862429297833342, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -210,7 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7861450562306970671, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
       propertyPath: m_Name
-      value: ChoiceActionPanel Variant
+      value: FightPanelWithButton
       objectReference: {fileID: 0}
     - target: {fileID: 8052094398408380733, guid: 26e3ec141bce4ab469d9bab6f1e4a30f, type: 3}
       propertyPath: m_AnchorMax.y
