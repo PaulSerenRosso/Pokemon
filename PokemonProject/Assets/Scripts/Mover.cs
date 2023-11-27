@@ -21,7 +21,7 @@ public class Mover : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(Rotate(currentDirection));
+        if (animator) StartCoroutine(Rotate(currentDirection));
     }
 
     public void AddDirection(Vector2 direction)
@@ -112,7 +112,7 @@ public class Mover : MonoBehaviour
     public IEnumerator Rotate(Vector2 forward)
     {
         yield return new WaitForEndOfFrame();
-        animator.enabled = false;
+        if (animator) animator.enabled = false;
         spriteRenderer.sprite = allSprites[forward];
     }
 
@@ -151,7 +151,7 @@ public class Mover : MonoBehaviour
 
     public static Direction LookDirection(Vector3 myPos, Vector3 otherPos)
     {
-        if (myPos.x == otherPos.x)
+        if (Math.Abs(myPos.x - otherPos.x) < 0.1f)
         {
             if (myPos.y > otherPos.y) 
             {

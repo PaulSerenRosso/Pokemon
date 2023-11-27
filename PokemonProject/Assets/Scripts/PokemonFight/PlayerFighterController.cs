@@ -41,7 +41,6 @@ public class PlayerFighterController : FighterController
 
     public override void Deactivate()
     {
-
         choiceCapacityPanel.SetActive(false);
         choiceActionPanel.SetActive(false);
         capacityInfoPanel.SetActive(false);

@@ -150,12 +150,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f60508350e86f2469816fb8a1157cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeMovement: 0
+  currentDirection: {x: 0, y: 0}
+  animator: {fileID: 0}
+  allSprites:
+    list: []
+  spriteRenderer: {fileID: 0}
+  rayCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   objectType: 0
   interactionsToSend:
   - {fileID: 11400000, guid: 285d41a6f3fad314f96cedb5830ac645, type: 2}
   interactionsOneShot: []
-  sR: {fileID: 0}
-  pngSprites: []
 --- !u!61 &187762927
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -223,12 +230,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f60508350e86f2469816fb8a1157cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeMovement: 0
+  currentDirection: {x: 0, y: 0}
+  animator: {fileID: 0}
+  allSprites:
+    list: []
+  spriteRenderer: {fileID: 0}
+  rayCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   objectType: 0
   interactionsToSend:
   - {fileID: 11400000, guid: f3ead9713d542de4cbec2fdde07da7b5, type: 2}
   interactionsOneShot: []
-  sR: {fileID: 0}
-  pngSprites: []
 --- !u!61 &301065213
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -291,12 +305,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f60508350e86f2469816fb8a1157cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeMovement: 0
+  currentDirection: {x: 0, y: 0}
+  animator: {fileID: 0}
+  allSprites:
+    list: []
+  spriteRenderer: {fileID: 0}
+  rayCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   objectType: 0
   interactionsToSend:
   - {fileID: 11400000, guid: 77cafa8f5fd367245a0aeddeec6218a1, type: 2}
   interactionsOneShot: []
-  sR: {fileID: 0}
-  pngSprites: []
 --- !u!61 &473839568
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -603,6 +624,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 294142597575617149, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1206825681, guid: 963bfa4324c1fe8469ce052fd671710e, type: 3}
     - target: {fileID: 311378373190802366, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1155,6 +1180,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 105.7
       objectReference: {fileID: 0}
+    - target: {fileID: 7507916958474166061, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: allSprites.list.Array.data[0].Key.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507916958474166061, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: allSprites.list.Array.data[1].Key.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507916958474166061, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: allSprites.list.Array.data[2].Key.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507916958474166061, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: allSprites.list.Array.data[3].Key.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7646304421247664631, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 315
@@ -1525,11 +1566,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[1].second.m_AnimationSpeed
-      value: 3.0000002
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[2].second.m_AnimationSpeed
-      value: 3.0000002
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[3].second.m_AnimationSpeed
@@ -1537,7 +1578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[4].second.m_AnimationSpeed
-      value: 3
+      value: 3.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[5].second.m_AnimationSpeed
@@ -1549,7 +1590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[7].second.m_AnimationSpeed
-      value: 3.0000002
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[8].second.m_AnimationSpeed
@@ -1830,12 +1871,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f60508350e86f2469816fb8a1157cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeMovement: 0
+  currentDirection: {x: 0, y: 0}
+  animator: {fileID: 0}
+  allSprites:
+    list: []
+  spriteRenderer: {fileID: 0}
+  rayCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   objectType: 0
   interactionsToSend:
   - {fileID: 11400000, guid: b7664987d96e63645b6d1b4fc927f343, type: 2}
   interactionsOneShot: []
-  sR: {fileID: 0}
-  pngSprites: []
 --- !u!61 &1326232480
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1991,12 +2039,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f60508350e86f2469816fb8a1157cb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeMovement: 0
+  currentDirection: {x: 0, y: 0}
+  animator: {fileID: 0}
+  allSprites:
+    list: []
+  spriteRenderer: {fileID: 0}
+  rayCollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   objectType: 0
   interactionsToSend:
   - {fileID: 11400000, guid: 44d9b7cf8295f824597f9f0ca71d9079, type: 2}
   interactionsOneShot: []
-  sR: {fileID: 0}
-  pngSprites: []
 --- !u!61 &1796408964
 BoxCollider2D:
   m_ObjectHideFlags: 0

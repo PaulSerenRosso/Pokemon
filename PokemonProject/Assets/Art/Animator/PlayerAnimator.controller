@@ -11,16 +11,16 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3732788146646470488}
-    m_Position: {x: -170, y: -20, z: 0}
+    m_Position: {x: -220, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3597341090592237602}
-    m_Position: {x: 30, y: 190, z: 0}
+    m_Position: {x: 40, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4062226881320958978}
-    m_Position: {x: 300, y: 0, z: 0}
+    m_Position: {x: 250, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -965802900464201943}
-    m_Position: {x: 40, y: -60, z: 0}
+    m_Position: {x: 40, y: -50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2454721562601379661}
     m_Position: {x: 30, y: 60, z: 0}
@@ -176,13 +176,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: moveY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

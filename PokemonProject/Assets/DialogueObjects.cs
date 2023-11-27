@@ -1,20 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using SequencerNS;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class DialogueObjects : MonoBehaviour, IInteractable
+public class DialogueObjects : Mover, IInteractable
 {
+    [Space(3)]
+    [Header("DialogueObjects Section")]
     public ObjectType objectType;
     public List<InteractionSO> interactionsToSend = new(); 
     public List<InteractionSO> interactionsOneShot = new();
-
     
-    [Header("IF PNG")]
-    public SpriteRenderer sR;
-    public List<Sprite> pngSprites = new(); // 1 - Side, North, South
     
     private bool isInteractable = true;
     public bool IsInteractable => isInteractable;
@@ -41,16 +36,16 @@ public class DialogueObjects : MonoBehaviour, IInteractable
         }
     }
 
-    public void SetGoodDirSprite()
+    private void SetGoodDirSprite()
     {
-        var dir = Mover.LookDirection(PlayerManager.Instance.transform.position, transform.position);
+        var dir = LookDirection(PlayerManager.Instance.transform.position, transform.position);
         Debug.Log(dir.ToString());
         switch (dir)
         {
-            case Direction.East: sR.sprite = pngSprites[0]; sR.flipX = true; break;
-            case Direction.West: sR.sprite = pngSprites[0]; sR.flipX = false; break;
-            case Direction.North: sR.flipX = false; sR.sprite = pngSprites[1]; break;
-            case Direction.South: sR.flipX = false; sR.sprite = pngSprites[2]; break;
+            case Direction.East: StartCoroutine(Rotate(new Vector2(1, 0))); break;
+            case Direction.West: StartCoroutine(Rotate(new Vector2(-1, 0))); break;
+            case Direction.North: StartCoroutine(Rotate(new Vector2(0, 1))); break;
+            case Direction.South: StartCoroutine(Rotate(new Vector2(0, -1))); break;
         }
     }
 }

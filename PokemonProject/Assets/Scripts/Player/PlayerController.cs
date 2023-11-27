@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using SequencerNS;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
-
 
 public class PlayerController : MonoBehaviour
 {
@@ -24,7 +20,6 @@ public class PlayerController : MonoBehaviour
     public void SetCameraActive(bool value)
     {
         characterCamera.gameObject.SetActive(value);
-        
     }
 
     private void OnEnable()
@@ -38,12 +33,15 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveLeft.canceled += CancelMoveLeft;
         playerInputs.Player.MoveRight.canceled += CancelMoveRight;
         playerInputs.Player.MoveDown.canceled += CancelMoveDown;
-       
-        // playerInputs.Player.Interact.started += OnInteract;
-        // playerInputs.Player.Interact.canceled += OnReleaseInteract;
-        // playerInputs.Player.Interact.performed += OnPerformedInteract;
+        
+        playerInputs.Player.Interact.started += OnWorldInteract;
+        playerInputs.Player.Interact.performed += OnDialogueInteractPerformed;
+        playerInputs.Player.Interact.canceled += OnDialogueInteractCanceled;
+
+        playerInputs.Player.Interact.started -= InFightInteract;
     }
 
+    
     private void CancelMoveUp(InputAction.CallbackContext obj)
     {
         playerCharacter.RemoveDirection(Vector2.up);
@@ -88,10 +86,43 @@ public class PlayerController : MonoBehaviour
         if (sequencer.CurrentSequenceType == SequenceType.None)
             playerCharacter.AddDirection(Vector2.left);
     }
+
+    private void OnWorldInteract(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("OnWorldInteract");
+        
+        if (sequencer.CurrentSequenceType == SequenceType.None && !playerCharacter.IsMoving) // Raycast pour savoir y'a quoi
+        {
+            var go = playerCharacter.GetObjectForward();
+            go?.GetComponent<IInteractable>()?.Interact();
+            Debug.Log("TryGetForwardObjForDialogue");
+        }
+        else
+        {
+            sequencer.OnClick();
+        }
+    }
+    
+    private void InFightInteract(InputAction.CallbackContext ctx)
+    {
+        Debug.Log("InFightInteract");
+        sequencer.OnClick();
+    }
+    
+    private void OnDialogueInteractPerformed(InputAction.CallbackContext ctx)
+    {
+        sequencer.OnPerformedClick();
+    }
+    
+    private void OnDialogueInteractCanceled(InputAction.CallbackContext ctx)
+    {
+        sequencer.OnReleaseClick();
+    }
+
     
     private void OnDisable()
     {
-        playerInputs.Disable();
+        //playerInputs.Disable();
         playerInputs.Player.MoveLeft.performed -= MoveLeft;
         playerInputs.Player.MoveRight.performed -= MoveRight;
         playerInputs.Player.MoveUp.performed -= MoveUp;
@@ -100,5 +131,8 @@ public class PlayerController : MonoBehaviour
         playerInputs.Player.MoveLeft.canceled -= CancelMoveLeft;
         playerInputs.Player.MoveRight.canceled -= CancelMoveRight;
         playerInputs.Player.MoveDown.canceled -= CancelMoveDown;
+        
+        playerInputs.Player.Interact.started -= OnWorldInteract;
+        playerInputs.Player.Interact.started += InFightInteract;
     }
 }
