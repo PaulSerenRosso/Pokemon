@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3581dd2981b48eb41ad4774f358c49e1, type: 3}
+  m_Name: Soft Sand
+  m_EditorClassIdentifier: 
+  itemName: SOFT SAND
+  description: An Item to be held by a POKEMON. A seed imbued with life that boost
+    the power of GRASS-type moves.
+  sprite: {fileID: 927957433, guid: fceb3811025c4c945b04fb8353d82876, type: 3}
+  itemType: 0
+  numberOfItems: 1
