@@ -28,9 +28,19 @@ public class BagMenuManager : MonoBehaviour
     public List<ItemSO> keyItems = new List<ItemSO>();
     public List<ItemSO>  pokeballItems = new List<ItemSO>();
     
+    [Header("Look base On Character")]
+    public Image bagImage;
+    public Image backgroundBagMenu;
+    public List<Sprite> bacgroundSprites = new List<Sprite>();
+    public List<Sprite> bagSprites = new List<Sprite>();
+    [Range(0,1)]
+    [Tooltip("0 is for Man and 1 is for Woman")]
+    public int characterIndex = 0;
+    
     void Start()
     {
         EmptyTextList(bagItemsText);
+        SwitchBackgroundBaseOnCharacter(characterIndex);
     }
 
     void Update()
@@ -59,6 +69,9 @@ public class BagMenuManager : MonoBehaviour
 
         //Handles Cursor Selector
         DisplayArrow();
+        
+        //Switch Between Bag Directions
+        SwitchBagBaseOnDirection(characterIndex);
     }
 
     
@@ -314,5 +327,35 @@ public class BagMenuManager : MonoBehaviour
             PokeballItemSO pokeballItem => pokeballItem.numberOfItems.ToString(),
             _ => "N/A"
         };
+    }
+
+    private void SwitchBackgroundBaseOnCharacter(int index)
+    {
+        if (index == 0)
+        {
+            bagImage.sprite = bagSprites[0];
+            backgroundBagMenu.sprite = bacgroundSprites[0];
+        }
+        else
+        {
+            bagImage.sprite = bagSprites[1];
+            backgroundBagMenu.sprite = bacgroundSprites[1];
+        }
+    }
+
+    private void SwitchBagBaseOnDirection(int index)
+    {
+        switch (currentBagSectionIndex)
+        {
+            case 0:
+                bagImage.sprite = bagSprites[1 + index * 3];
+                break;
+            case 1:
+                bagImage.sprite = bagSprites[2 + index * 3];
+                break;
+            case 2:
+                bagImage.sprite = bagSprites[3 + index * 3];
+                break;
+        }
     }
 }

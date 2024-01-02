@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,7 +116,7 @@ TextureImporter:
         x: 3
         y: 196
         width: 42
-        height: 57
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,7 +137,7 @@ TextureImporter:
         x: 50
         y: 196
         width: 44
-        height: 57
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,10 +155,10 @@ TextureImporter:
       name: T_Sac_UI_Full_2
       rect:
         serializedVersion: 2
-        x: 97
-        y: 201
+        x: 95
+        y: 196
         width: 47
-        height: 54
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -176,10 +176,10 @@ TextureImporter:
       name: T_Sac_UI_Full_3
       rect:
         serializedVersion: 2
-        x: 145
-        y: 201
+        x: 144
+        y: 196
         width: 49
-        height: 54
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -242,7 +242,7 @@ TextureImporter:
         x: 50
         y: 132
         width: 44
-        height: 57
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -260,10 +260,10 @@ TextureImporter:
       name: T_Sac_UI_Full_7
       rect:
         serializedVersion: 2
-        x: 97
-        y: 134
+        x: 95
+        y: 132
         width: 47
-        height: 58
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -281,10 +281,10 @@ TextureImporter:
       name: T_Sac_UI_Full_8
       rect:
         serializedVersion: 2
-        x: 145
-        y: 134
+        x: 143
+        y: 132
         width: 48
-        height: 54
+        height: 60
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
