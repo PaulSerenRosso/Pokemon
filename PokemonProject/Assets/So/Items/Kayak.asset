@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb8f5ba43c580144ca90c7d23c2c3850, type: 3}
-  m_Name: Default Pokeball
+  m_Script: {fileID: 11500000, guid: 1bd1f6a7881bb024492d83590298bc8f, type: 3}
+  m_Name: Kayak
   m_EditorClassIdentifier: 
-  itemName: MASTER BALL
-  description: It's a default Pokeball
-  sprite: {fileID: -1147378170, guid: fceb3811025c4c945b04fb8353d82876, type: 3}
-  itemType: 2
-  numberOfItems: 999
+  itemName: Bicycle
+  description: It's a Bicycle for going fast
+  sprite: {fileID: 738745140, guid: c454298f6b206694182caf7ec653ba74, type: 3}
+  itemType: 1

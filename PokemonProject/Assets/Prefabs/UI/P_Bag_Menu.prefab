@@ -519,6 +519,17 @@ MonoBehaviour:
   - {fileID: 7655587577626253692}
   bagItemsImage: {fileID: 2679399960766707171}
   bagItemsDescriptionText: {fileID: 3100123407178405303}
+  arrowIndexCommonItem: 0
+  arrowIndexKeyItem: 0
+  arrowIndexPokeball: 0
+  arrowImage: {fileID: 1412131327, guid: 6f42ce1e43bf63f468fc9f7a85f6e102, type: 3}
+  arrowsSelectorPosition:
+  - {fileID: 1617888745820109103}
+  - {fileID: 944791923896567150}
+  - {fileID: 3793188372548682845}
+  - {fileID: 3347731561644886692}
+  - {fileID: 1340776483867390601}
+  - {fileID: 3383620459227329382}
   itemSODebug: {fileID: 11400000, guid: ab038a7e0952de14486366ae2e5952f1, type: 2}
   itemsCommons:
   - {fileID: 11400000, guid: ab038a7e0952de14486366ae2e5952f1, type: 2}
@@ -529,6 +540,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4a0848a271216a488bb23ba2cfe45f0, type: 2}
   - {fileID: 11400000, guid: b4a0848a271216a488bb23ba2cfe45f0, type: 2}
   - {fileID: 11400000, guid: b4a0848a271216a488bb23ba2cfe45f0, type: 2}
+  - {fileID: 11400000, guid: bccbc25ad2681f740a9b64840b36a598, type: 2}
+  - {fileID: 11400000, guid: bccbc25ad2681f740a9b64840b36a598, type: 2}
+  - {fileID: 11400000, guid: bccbc25ad2681f740a9b64840b36a598, type: 2}
+  - {fileID: 11400000, guid: bccbc25ad2681f740a9b64840b36a598, type: 2}
+  - {fileID: 11400000, guid: bccbc25ad2681f740a9b64840b36a598, type: 2}
+  - {fileID: 11400000, guid: bccbc25ad2681f740a9b64840b36a598, type: 2}
   pokeballItems:
   - {fileID: 11400000, guid: e0be3a11d992d4d4286c5d8d7a70cf91, type: 2}
 --- !u!1 &4526956245538977585
@@ -646,7 +663,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -230, y: 2.0000305}
+  m_AnchoredPosition: {x: -230, y: 2}
   m_SizeDelta: {x: -1819.9999, y: -96.000084}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4214283300802955432
@@ -670,10 +687,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 10
+    m_Left: 13
     m_Right: 0
     m_Top: 40
-    m_Bottom: 0
+    m_Bottom: 13
   m_ChildAlignment: 1
   m_Spacing: 50
   m_ChildForceExpandWidth: 1
@@ -874,7 +891,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 40
+    m_Top: 44
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 0
