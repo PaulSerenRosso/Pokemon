@@ -26,7 +26,7 @@ public class BagMenuManager : MonoBehaviour
     public ItemSO itemSODebug;
     public List<ItemSO> itemsCommons = new List<ItemSO>();
     public List<ItemSO> keyItems = new List<ItemSO>();
-    public List<ItemSO>  pokeballItems = new List<ItemSO>();
+    public List<ItemSO> pokeballItems = new List<ItemSO>();
     
     [Header("Look base On Character")]
     public Image bagImage;
