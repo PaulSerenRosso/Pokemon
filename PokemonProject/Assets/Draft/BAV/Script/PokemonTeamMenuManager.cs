@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -15,6 +16,12 @@ public class PokemonTeamManager : MonoBehaviour
     public List<Image> backgroundPokemonImagesSelected = new List<Image>();
     public List<Image> swapPokeballCancelButton = new List<Image>();
     
+    [Header("Pokemon Option Menu")]
+    public GameObject pokemonOptionMenu;
+    public List<Image> arrowPositionsPokemonOptionMenu = new List<Image>();
+    private int currentArrowPositionPokemonOptionMenu = 0;
+    private bool isPokemonOptionMenuActive = false;
+    
     [Header("Pokemon Rendering Part")]
     public List<TMP_Text> pokemonNameTexts = new List<TMP_Text>();
     public List<TMP_Text> pokemonLevels = new List<TMP_Text>();
@@ -23,6 +30,7 @@ public class PokemonTeamManager : MonoBehaviour
     public List<Image> pokemonImages = new List<Image>();
     public List<Image> pokemonSexImages= new List<Image>();
     public TMP_Text pokemonDescriptionActionText;
+    public string[] pokemonDescriptionActionTexts = new []{"Choose a POKEMON", "Do what with this PKMN ?"};
     
     [Header("Pokemon Sex")]
     public List<Sprite> pokemonSexSprites = new List<Sprite>();
@@ -38,11 +46,16 @@ public class PokemonTeamManager : MonoBehaviour
         //Enable Pokemon that are in the Team
         EnablePokemonDisplaysAndUpdateUI();
     }
+    
+    
 
     void Update()
     {
-        HandleArrowInput();
+        HandlePokemonSelected();
+        HandleButtonAInput();
         UpdateBackgroundImagesSelection();
+        UpdateSwapPokeballCancelButton();
+        EnablePokemonDisplaysAndUpdateUI();
     }
     
     void UpdateUIForCurrentPokemon()
@@ -101,23 +114,92 @@ public class PokemonTeamManager : MonoBehaviour
     
     
     
-    private void HandleArrowInput()
+    private void HandlePokemonSelected()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            currentPokemonIndex++;
-            if(currentPokemonIndex > 6)
+            if (!isPokemonOptionMenuActive)
             {
-                currentPokemonIndex = 0;
+                currentPokemonIndex++;
+                if(currentPokemonIndex > GetPokemonTeamCount())
+                {
+                    currentPokemonIndex = 0;
+                }    
+            }
+            else
+            {
+                currentArrowPositionPokemonOptionMenu++;
+                if(currentArrowPositionPokemonOptionMenu > GetOptionMenuCount())
+                {
+                    currentArrowPositionPokemonOptionMenu = 0;
+                }
+                UpdateArrowPositionPokemonOptionMenu();
+            }
+            
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            if (!isPokemonOptionMenuActive)
+            {
+                currentPokemonIndex--;
+                if(currentPokemonIndex < 0)
+                {
+                    currentPokemonIndex = GetPokemonTeamCount();
+                }
+            }
+            else
+            {
+                currentArrowPositionPokemonOptionMenu--;
+                if(currentArrowPositionPokemonOptionMenu < 0)
+                {
+                    currentArrowPositionPokemonOptionMenu = GetOptionMenuCount() - 1;
+                }
+                UpdateArrowPositionPokemonOptionMenu();
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+    }
+    
+    void HandleButtonAInput()
+    {
+        if (!Input.GetKeyDown(KeyCode.A)) return;
+        if (isPokemonOptionMenuActive)
         {
-            currentPokemonIndex--;
-            if(currentPokemonIndex < 0)
+            HandleArrowIndex();
+        }
+        else
+        {
+            if (currentPokemonIndex != GetPokemonTeamCount())
             {
-                currentPokemonIndex = 6;
+                DisplayPokemonOptionMenu();
             }
+            else
+            {
+                HandleCancelButton();
+            }
+        }
+
+        ChangeTextDescriptionAction(isPokemonOptionMenuActive
+            ? pokemonDescriptionActionTexts[1]
+            : pokemonDescriptionActionTexts[0]);
+    }
+
+
+    void HandleArrowIndex()
+    {
+        switch (currentArrowPositionPokemonOptionMenu)
+        {
+            case 0:
+                Debug.Log("Summary Menu");
+                break;
+            case 1:
+                Debug.Log("Switch Pokemon");
+                break;
+            case 2:
+                Debug.Log("Give Item To Pokemon");
+                break;
+            case 3:
+                HandleCancelButtonPokemonOptionMenu();
+                break;
         }
     }
     
@@ -133,7 +215,43 @@ public class PokemonTeamManager : MonoBehaviour
         {
             image.gameObject.SetActive(false);
         }
-        backgroundPokemonImagesSelected[currentPokemonIndex].gameObject.SetActive(true);
+
+        if (currentPokemonIndex < GetPokemonTeamCount())
+        {
+            backgroundPokemonImagesSelected[currentPokemonIndex].gameObject.SetActive(true);
+        }
+        else
+        {
+            backgroundPokemonImagesSelected[6].gameObject.SetActive(true);
+        }
+    }
+    
+    private void UpdateSwapPokeballCancelButton()
+    {
+        if (currentPokemonIndex < GetPokemonTeamCount())
+        {
+            SetSwapPokeballCancelButtonActiveState(true, false);
+        }
+        else
+        {
+            SetSwapPokeballCancelButtonActiveState(false, true);
+        }
+    }
+
+    private void SetSwapPokeballCancelButtonActiveState(bool index0Active, bool index1Active)
+    {
+        swapPokeballCancelButton[0].gameObject.SetActive(index0Active);
+        swapPokeballCancelButton[1].gameObject.SetActive(index1Active);
+    }
+    
+    private int GetPokemonTeamCount()
+    {
+        return pokemonTeam.Count;
+    }
+    
+    private int GetOptionMenuCount()
+    {
+        return arrowPositionsPokemonOptionMenu.Count - 1;
     }
     
     public void DisableListOfGO(List<GameObject> gos)
@@ -151,4 +269,50 @@ public class PokemonTeamManager : MonoBehaviour
             go.gameObject.SetActive(state);
         }
     }
+    
+    public void ChangeTextDescriptionAction(string text)
+    {
+        pokemonDescriptionActionText.text = text;
+    }
+    
+    public void DisplayPokemonOptionMenu()
+    {
+        pokemonOptionMenu.SetActive(true);
+        isPokemonOptionMenuActive = true;
+        currentArrowPositionPokemonOptionMenu = 0;
+        UpdateArrowPositionPokemonOptionMenu();
+    }
+
+    private void UpdateArrowPositionPokemonOptionMenu()
+    {
+        foreach (Image arrowPosition in arrowPositionsPokemonOptionMenu)
+        {
+            // Set alpha to 0 for all arrow positions
+            Color color = arrowPosition.color;
+            color.a = 0f;
+            arrowPosition.color = color;
+        }
+
+        // Set alpha to 1 for the current arrow position
+        Color currentArrowColor = arrowPositionsPokemonOptionMenu[currentArrowPositionPokemonOptionMenu].color;
+        currentArrowColor.a = 1f;
+        arrowPositionsPokemonOptionMenu[currentArrowPositionPokemonOptionMenu].color = currentArrowColor;
+    }
+
+    public void HandleCancelButtonPokemonOptionMenu()
+    {
+        pokemonOptionMenu.SetActive(false);
+        isPokemonOptionMenuActive = false;
+    }
+
+    public void HandleCancelButton()
+    {
+        ToggleOffThePokemonTeamMenu();
+    }
+    
+    public void ToggleOffThePokemonTeamMenu()
+    {
+        gameObject.SetActive(false);
+    }
+    
 }

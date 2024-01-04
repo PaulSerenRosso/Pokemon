@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BagMenuManager : MonoBehaviour
@@ -31,7 +32,7 @@ public class BagMenuManager : MonoBehaviour
     [Header("Look base On Character")]
     public Image bagImage;
     public Image backgroundBagMenu;
-    public List<Sprite> bacgroundSprites = new List<Sprite>();
+    public List<Sprite> backgroundSprites = new List<Sprite>();
     public List<Sprite> bagSprites = new List<Sprite>();
     [Range(0,1)]
     [Tooltip("0 is for Man and 1 is for Woman")]
@@ -334,12 +335,12 @@ public class BagMenuManager : MonoBehaviour
         if (index == 0)
         {
             bagImage.sprite = bagSprites[0];
-            backgroundBagMenu.sprite = bacgroundSprites[0];
+            backgroundBagMenu.sprite = backgroundSprites[0];
         }
         else
         {
             bagImage.sprite = bagSprites[1];
-            backgroundBagMenu.sprite = bacgroundSprites[1];
+            backgroundBagMenu.sprite = backgroundSprites[1];
         }
     }
 
