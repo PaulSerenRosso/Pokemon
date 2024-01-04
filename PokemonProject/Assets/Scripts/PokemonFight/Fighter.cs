@@ -34,7 +34,7 @@ public class Fighter : MonoBehaviour
         this.hpSlider = hpSlider;
         this.nameText = nameText;
         nameText.text = pokemons[currentPokemonIndex].so.name;
-        this.fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.sprite;
+        this.fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.battleSprite;
     }
 
     public virtual void Disable()
