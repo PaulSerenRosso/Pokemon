@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class CardPlayerManager : MonoBehaviour
+public class CardPlayerMenuManager : MonoBehaviour
 {
     [Header("Player Informations")]
     public List<TMP_Text> playerInformations;

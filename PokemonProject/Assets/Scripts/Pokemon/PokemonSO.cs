@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.Serialization;
+
 [CreateAssetMenu(fileName = "PokemonSO", menuName = "Pokemon/PokemonSO", order = 0)]
 public class PokemonSO : ScriptableObject
 {
@@ -7,12 +9,12 @@ public class PokemonSO : ScriptableObject
     public PokemonCapacitySO[] pokemonCapacitySO;
     public int maxHp;
     public PokemonTypeSO pokemonTypeSo;
-    public Sprite sprite; 
+    public int pokemonSex;
+    public Sprite battleSprite; 
+    public Sprite teamSprite; 
 
     public Pokemon CreatePokemon()
     {
         return new Pokemon(this);
     }
-
-  
 }
