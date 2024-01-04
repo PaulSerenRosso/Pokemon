@@ -161,28 +161,32 @@ public class PokemonTeamManager : MonoBehaviour
     
     void HandleButtonAInput()
     {
-        if (!Input.GetKeyDown(KeyCode.A)) return;
-        if (isPokemonOptionMenuActive)
+        if (Input.GetKeyDown(KeyCode.A))
         {
-            HandleArrowIndex();
-        }
-        else
-        {
-            if (currentPokemonIndex != GetPokemonTeamCount())
+            if (isPokemonOptionMenuActive)
             {
-                DisplayPokemonOptionMenu();
+                // Handle arrow index only if the option menu is active
+                HandleArrowIndex();
             }
             else
             {
-                HandleCancelButton();
+                // Rest of your existing logic when the A button is pressed for the first time
+                if (currentPokemonIndex != GetPokemonTeamCount())
+                {
+                    DisplayPokemonOptionMenu();
+                }
+                else
+                {
+                    HandleCancelButton();
+                }
             }
+
+            // Update text description regardless of the option menu state
+            ChangeTextDescriptionAction(isPokemonOptionMenuActive
+                ? pokemonDescriptionActionTexts[1]
+                : pokemonDescriptionActionTexts[0]);
         }
-
-        ChangeTextDescriptionAction(isPokemonOptionMenuActive
-            ? pokemonDescriptionActionTexts[1]
-            : pokemonDescriptionActionTexts[0]);
     }
-
 
     void HandleArrowIndex()
     {
@@ -192,10 +196,10 @@ public class PokemonTeamManager : MonoBehaviour
                 Debug.Log("Summary Menu");
                 break;
             case 1:
-                Debug.Log("Switch Pokemon");
+                HandleSwitchPokemon();
                 break;
             case 2:
-                Debug.Log("Give Item To Pokemon");
+                Debug.Log("Inventory Menu");
                 break;
             case 3:
                 HandleCancelButtonPokemonOptionMenu();
@@ -298,11 +302,51 @@ public class PokemonTeamManager : MonoBehaviour
         currentArrowColor.a = 1f;
         arrowPositionsPokemonOptionMenu[currentArrowPositionPokemonOptionMenu].color = currentArrowColor;
     }
+    
+    public void SwitchPokemon(int index1, int index2)
+    {
+        if (index1 < 0 || index1 >= pokemonTeam.Count || index2 < 0 || index2 >= pokemonTeam.Count)
+        {
+            Debug.LogError("Invalid indices for switching Pokemon.");
+            return;
+        }
 
-    public void HandleCancelButtonPokemonOptionMenu()
+        // Swap Pokemon at index1 and index2
+        (pokemonTeam[index1], pokemonTeam[index2]) = (pokemonTeam[index2], pokemonTeam[index1]);
+
+        // Update UI for the switched Pokemon
+        UpdateUIForPokemonAtIndex(index1);
+        UpdateUIForPokemonAtIndex(index2);
+    }
+    
+    void HandleSwitchPokemon()
+    {
+        if (GetPokemonTeamCount() >= 2)
+        {
+            int nextPokemonIndex = (currentPokemonIndex + 1) % GetPokemonTeamCount();
+            SwitchPokemon(currentPokemonIndex, nextPokemonIndex);
+
+            UpdateUIForPokemonAtIndex(currentPokemonIndex);
+            UpdateUIForPokemonAtIndex(nextPokemonIndex);
+
+            currentPokemonIndex = nextPokemonIndex;
+        }
+        else
+        {
+            // Handle the case when there are not enough Pokemon in the team
+            Debug.Log("Not enough Pokemon to switch.");
+        }
+    }
+
+    void HandleCancelButtonPokemonOptionMenu()
     {
         pokemonOptionMenu.SetActive(false);
         isPokemonOptionMenuActive = false;
+
+        if (currentArrowPositionPokemonOptionMenu == 1)
+        {
+            currentPokemonIndex = (currentPokemonIndex + 1) % GetPokemonTeamCount();
+        }
     }
 
     public void HandleCancelButton()
