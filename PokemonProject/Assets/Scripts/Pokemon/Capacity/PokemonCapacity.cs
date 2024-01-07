@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
 
 [Serializable]
 public abstract class PokemonCapacity
@@ -8,9 +10,11 @@ public abstract class PokemonCapacity
     protected PokemonCapacitySO so;
     private int currentStamina;
     public Action useCapacityFeedbackFinished;
+    public PokemonStatusType pokemonStatusType;
     
     public virtual void Init(PokemonCapacitySO pokemonCapacitySo)
     {
+        pokemonStatusType = so.pokemonStatusType;
         so = pokemonCapacitySo;
         currentStamina = so.maxStamina;
     }
@@ -36,6 +40,15 @@ public abstract class PokemonCapacity
     {
         currentStamina--;
         return true;
+    }
+
+    public bool TryUseStatus()
+    {
+        if (Random.Range(0, 100) <= so.probabilityOfInflictStatus)
+        {
+            return true;
+        }
+        return false;
     }
     
     

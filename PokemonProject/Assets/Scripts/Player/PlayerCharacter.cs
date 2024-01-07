@@ -6,7 +6,7 @@ public class PlayerCharacter : Mover
 {
     [SerializeField] private FightManager fightManager;
     [SerializeField] private Sequencer sequencer;
-
+    
     
     //is not moving, launch raycast interagit
     // onIteract dialogue
