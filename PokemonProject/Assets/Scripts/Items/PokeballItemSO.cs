@@ -11,8 +11,19 @@ public class PokeballItemSO : ItemSO
         numberOfItems++;
     }
 
+    public void UsePokeball()
+    {
+        
+    }
+
+    public void UsePokeballFeedback()
+    {
+        
+    }
+
     public void DecrementItemCount()
     {
         numberOfItems = Mathf.Max(0, numberOfItems - 1);
     }
+    
 }

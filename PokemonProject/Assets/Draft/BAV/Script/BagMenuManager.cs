@@ -565,6 +565,15 @@ public class BagMenuManager : MonoBehaviour
         else if(currentBagSectionIndex == 2)
         {
             selectedIndex = arrowIndexPokeball;
+            if (fightManager.isInFight)
+            {
+                var pokeball = (PokeballItemSO) pokeballItems[selectedIndex];
+                
+            }
+            void UsePokeball()
+            {
+                
+            }
         }
         gameObject.SetActive(false);
     }
