@@ -23,7 +23,10 @@ public class BagMenuManager : MonoBehaviour
     public Sprite arrowImage;
     public List<Image> arrowsSelectorPosition;
 
-    [Header("Items Store")]
+    [Header("Use Item")] 
+    public GameObject actionItemPannel;
+    
+    [Header("Items Data Store")]
     public ItemSO itemSODebug;
     public List<ItemSO> itemsCommons = new List<ItemSO>();
     public List<ItemSO> keyItems = new List<ItemSO>();
