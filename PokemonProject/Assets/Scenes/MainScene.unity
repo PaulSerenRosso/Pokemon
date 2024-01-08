@@ -2577,14 +2577,6 @@ PrefabInstance:
       propertyPath: enemyFighter
       value: 
       objectReference: {fileID: 845728831}
-    - target: {fileID: 750595388017890881, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: probabilityToEngageFight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 750595388017890881, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: allPokemonSo.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8824c1d6c3daa1a41b12eb2d516228b6, type: 2}
     - target: {fileID: 1373954477590000443, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
       propertyPath: m_Name
       value: P_Route_1_Layers
@@ -2593,14 +2585,6 @@ PrefabInstance:
       propertyPath: enemyFighter
       value: 
       objectReference: {fileID: 845728831}
-    - target: {fileID: 1565225409645312159, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: probabilityToEngageFight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1565225409645312159, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: allPokemonSo.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8824c1d6c3daa1a41b12eb2d516228b6, type: 2}
     - target: {fileID: 4410437968939830700, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -2645,38 +2629,14 @@ PrefabInstance:
       propertyPath: enemyFighter
       value: 
       objectReference: {fileID: 845728831}
-    - target: {fileID: 4980707482407766694, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: probabilityToEngageFight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4980707482407766694, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: allPokemonSo.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8824c1d6c3daa1a41b12eb2d516228b6, type: 2}
     - target: {fileID: 7872570107295761785, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
       propertyPath: enemyFighter
       value: 
       objectReference: {fileID: 845728831}
-    - target: {fileID: 7872570107295761785, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: probabilityToEngageFight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7872570107295761785, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: allPokemonSo.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8824c1d6c3daa1a41b12eb2d516228b6, type: 2}
     - target: {fileID: 9015881191811614779, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
       propertyPath: enemyFighter
       value: 
       objectReference: {fileID: 845728831}
-    - target: {fileID: 9015881191811614779, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: probabilityToEngageFight
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9015881191811614779, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
-      propertyPath: allPokemonSo.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 8824c1d6c3daa1a41b12eb2d516228b6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
