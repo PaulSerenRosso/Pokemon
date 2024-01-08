@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bd1f6a7881bb024492d83590298bc8f, type: 3}
+  m_Name: Kayak
+  m_EditorClassIdentifier: 
+  itemName: Kayak
+  description: It's a Kayak
+  sprite: {fileID: 840000928, guid: fceb3811025c4c945b04fb8353d82876, type: 3}
+  itemType: 1
