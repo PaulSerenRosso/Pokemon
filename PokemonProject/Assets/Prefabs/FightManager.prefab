@@ -210,6 +210,8 @@ MonoBehaviour:
   - {fileID: 7340924983235744976}
   capacityTypeText: {fileID: 6122889364398856831}
   capacityStaminaText: {fileID: 400212576192776784}
+  bagPanel: {fileID: 0}
+  pokemonTeamPanel: {fileID: 0}
 --- !u!1 &3532474399740788227
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +355,7 @@ MonoBehaviour:
   enemyPokemonStatusBackground: {fileID: 6076534670063881767}
   playerPokemonStatusText: {fileID: 5281172296492724723}
   enemyPokemonStatusText: {fileID: 3984495670554070981}
+  isInFight: 0
 --- !u!1 &6367232383754196821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1630,34 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 1807353223829908693, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807353223829908693, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807353223829908693, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8536419549271574172}
+    - target: {fileID: 1807353223829908693, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807353223829908693, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenPokemonTeam
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807353223829908693, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerFighterController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1807353223829908693, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2093183679898664525, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -1650,6 +1681,34 @@ PrefabInstance:
     - target: {fileID: 2093183679898664525, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -211.0545
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124395944049427119, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124395944049427119, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124395944049427119, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8536419549271574172}
+    - target: {fileID: 2124395944049427119, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124395944049427119, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenBag
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124395944049427119, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerFighterController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2124395944049427119, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2940712615464625620, guid: e688d12ca1b7dad4094d4881852ed7b9, type: 3}
       propertyPath: m_text

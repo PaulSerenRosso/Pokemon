@@ -21,6 +21,7 @@ namespace SequencerNS
         [SerializeField] private bool isPlayingSequence;
         [SerializeField] private InteractionSO testInteraction;
         [SerializeField] private SequenceType currentSequenceType = SequenceType.None;
+        public Action OnEndSequence;
         public SequenceType CurrentSequenceType => currentSequenceType;
         
         private int currentTextIndex;
@@ -55,7 +56,8 @@ namespace SequencerNS
             {
                 // Disable l'UI
                 dialogueManager.backgroundImage.gameObject.SetActive(false);
-                Debug.Log("Plus rien à jouer");
+                OnEndSequence?.Invoke();
+                OnEndSequence = null;
                 return;
             }
 
@@ -81,13 +83,14 @@ namespace SequencerNS
             if (!isPlayingSequence) TryNextStack();
         }
         
-        public void AddCombatInteraction(string textToDraw)
+        public void AddCombatInteraction(string textToDraw, Action callback)
         {
             InteractionSO combatInteraction = ScriptableObject.CreateInstance<TextInteractionSO>();
             combatInteraction.interactionType = SequenceType.Dialogue;
             combatInteraction.fromGender = Gender.Annoucement;
-            combatInteraction.textToDraw[0] = textToDraw;
+            combatInteraction.textToDraw = new[] { textToDraw };
             stack.Add(combatInteraction);
+            OnEndSequence = callback;
             if (!isPlayingSequence) TryNextStack();
             //Destroy(combatInteraction); TODO - ESSAYER SI ça FONCTIONNE
         }
