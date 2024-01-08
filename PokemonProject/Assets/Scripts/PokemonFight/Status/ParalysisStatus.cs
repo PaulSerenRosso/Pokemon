@@ -8,15 +8,23 @@ public class ParalysisStatus : PokemonStatus
     public ParalysisStatus(Pokemon pokemon) : base(pokemon)
     {
         base.isTriggerAfterTurn = false;
+        statusColor = new Color(1, 1, 0);
+        statusText = "PAR";
     }
 
     public override void TriggerStatus()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public override void TriggerStatusFeedback( SpriteRenderer spriteRenderer, MonoBehaviour coroutineHandler)
+    public override bool CheckCanTriggerStatus()
     {
-        throw new System.NotImplementedException();
+        if (Random.Range(0, 100) < 25)
+        {
+            return true;
+        }
+        return false; 
     }
+
+ 
 }

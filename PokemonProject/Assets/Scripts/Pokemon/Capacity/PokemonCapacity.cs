@@ -14,8 +14,9 @@ public abstract class PokemonCapacity
     
     public virtual void Init(PokemonCapacitySO pokemonCapacitySo)
     {
-        pokemonStatusType = so.pokemonStatusType;
+     
         so = pokemonCapacitySo;
+        pokemonStatusType = so.pokemonStatusType;
         currentStamina = so.maxStamina;
     }
     

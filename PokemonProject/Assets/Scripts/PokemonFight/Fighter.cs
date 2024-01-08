@@ -76,7 +76,7 @@ public class Fighter : MonoBehaviour
         if (CheckUseCapacityStatus())
         {
             chooseActionEvent?.Invoke();
-            TriggerStatus();
+            TriggerStatusFeedback();
         }
         else
         {
@@ -102,7 +102,7 @@ public class Fighter : MonoBehaviour
         {
             if (CheckTriggerEndTurnStatus())
             {
-                TriggerStatus();
+                TriggerStatusFeedback();
             }
             else
             {
@@ -123,8 +123,23 @@ public class Fighter : MonoBehaviour
         {
             if (pokemons[currentPokemonIndex].currentStatus.isTriggerAfterTurn)
             {
-                return true;
+                if (CheckStatusCondition()) return true;
             }
+        }
+
+        return false;
+    }
+
+    private bool CheckStatusCondition()
+    {
+        if (!pokemons[currentPokemonIndex].currentStatus.CheckCanTriggerStatus())
+        {
+            return true;
+        }
+
+        if (pokemons[currentPokemonIndex].currentStatus.isEndStatus)
+        {
+            RemoveStatus();
         }
 
         return false;
@@ -186,9 +201,16 @@ public class Fighter : MonoBehaviour
         endTurnEvent?.Invoke();
     }
 
+    private void TriggerStatusFeedback()
+    {
+        pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
+        pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, this);
+    }
+    
     private void TriggerStatus()
     {
-        
+        pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
+        endTurnEvent?.Invoke();
     }
 
     public void RemoveStatus()

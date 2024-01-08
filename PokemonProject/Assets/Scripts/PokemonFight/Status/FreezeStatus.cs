@@ -6,16 +6,25 @@ public class FreezeStatus : PokemonStatus
 {
     public FreezeStatus(Pokemon pokemon) : base(pokemon)
     {
-        base.isTriggerAfterTurn = false;
+        isTriggerAfterTurn = false;
+        statusText = "FRZ";
+        statusColor = new Color(0, 1, 1);
     }
 
     public override void TriggerStatus()
     {
-        throw new System.NotImplementedException();
+        
     }
 
-    public override void TriggerStatusFeedback(SpriteRenderer spriteRenderer, MonoBehaviour coroutineHandler)
+    public override bool CheckCanTriggerStatus()
     {
-        throw new System.NotImplementedException();
+        if (Random.Range(0, 100) < 20)
+        {
+            isEndStatus = true;
+            return false;
+        }
+        return true; 
     }
+
+ 
 }

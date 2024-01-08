@@ -6,15 +6,18 @@ using UnityEngine;
 public abstract class PokemonStatus
 {
     public bool isTriggerAfterTurn;
-    private Pokemon pokemon;
+    protected Pokemon pokemon;
     public Action useCapacityFeedbackFinished;
     public string statusText;
     public Color statusColor;
+    public bool isEndStatus;
     public PokemonStatus(Pokemon pokemon)
     {
         this.pokemon = pokemon;
     }
     public abstract void TriggerStatus();
+
+    public abstract bool CheckCanTriggerStatus();
 
     public virtual void TriggerStatusFeedback(SpriteRenderer spriteRenderer, MonoBehaviour coroutineHandler)
     {

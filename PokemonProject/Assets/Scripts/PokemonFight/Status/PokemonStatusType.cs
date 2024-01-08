@@ -4,5 +4,5 @@ using System;
 [Serializable]
 public enum PokemonStatusType
 {
-    Poison, Paralysis, Sleep, Freeze, Burn
+    None, Poison, Paralysis, Sleep, Freeze, Burn
 }

@@ -5,18 +5,29 @@ using UnityEngine;
 
 public class SleepStatus : PokemonStatus
 {
+    private int sleepCount;
     public SleepStatus(Pokemon pokemon) : base(pokemon)
     {
         base.isTriggerAfterTurn = false;
+        sleepCount = Random.Range(1, 6);
+        statusColor = new Color(0.5f, 0.5f, 0.5f);
+        statusText = "SLP";
     }
 
     public override void TriggerStatus()
     {
-        throw new System.NotImplementedException();
+        sleepCount--;
     }
 
-    public override void TriggerStatusFeedback([CanBeNull] SpriteRenderer spriteRenderer , MonoBehaviour coroutineHandler)
+    public override bool CheckCanTriggerStatus()
     {
-        throw new System.NotImplementedException();
+        if (sleepCount <= 0)
+        {
+            isEndStatus = true;
+            return false; 
+        }
+
+        return true;
     }
+    
 }
