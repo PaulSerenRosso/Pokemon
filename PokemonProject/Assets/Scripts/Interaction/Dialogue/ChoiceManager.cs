@@ -1,17 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ChoiceManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject choiceHolder;
+    public Button[] buttons = new Button[4];
+
+    private void Start()
     {
-        
+        choiceHolder.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PopChoiceInteraction(ChoiceSO )
     {
         
     }

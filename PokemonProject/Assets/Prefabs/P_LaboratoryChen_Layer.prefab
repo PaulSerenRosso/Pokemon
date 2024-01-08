@@ -1795,7 +1795,8 @@ MonoBehaviour:
   objectType: 0
   interactionsToSend:
   - {fileID: 11400000, guid: fac2cfe8d0e39b6418fe6cc7e70578e3, type: 2}
-  interactionsOneShot: []
+  interactionsOneShot:
+  - {fileID: 0}
   sR: {fileID: 0}
   pngSprites: []
 --- !u!61 &434490919795873732
