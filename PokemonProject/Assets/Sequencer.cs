@@ -1,10 +1,5 @@
-using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace SequencerNS
 {
@@ -14,8 +9,9 @@ namespace SequencerNS
         public static Sequencer Instance => instance;
 
         // Differents behaviors possible
-        [SerializeField] DialogueManager dialogueManager;
+        public DialogueManager dialogueManager;
         [SerializeField] ChoiceManager choiceManager;
+        public PlayerCharacter character;
         
         [SerializeField] private List<InteractionSO> stack = new();
         [SerializeField] private bool isPlayingSequence;
@@ -45,7 +41,11 @@ namespace SequencerNS
 
         private void Start()
         {
-            if (testInteraction != null) AddPopInteraction(testInteraction);
+            if (testInteraction != null)
+            {
+                Debug.Log("Not null : " + testInteraction.name);
+                AddPopInteraction(testInteraction);
+            }
 
             TryNextStack();
         }
@@ -63,21 +63,36 @@ namespace SequencerNS
 
             if (!isPlayingSequence && stack.Count != 0)
             {
+                Debug.Log("Check SequenceType Interaction");
                 if (stack[0].interactionType == SequenceType.Dialogue) // Set if next if dialogue
                 {
                     StartDialogue();
                 }
+                else if (stack[0].interactionType == SequenceType.Choice) // Set if next if dialogue
+                {
+                    StartChoice();
+                }
             }
+        }
+
+        private async void StartChoice()
+        {
+            isPlayingSequence = true;
+            currentSequenceType = SequenceType.Choice;
+            currentTextIndex = 0;
+            await dialogueManager.ReadText(stack[0].textToDraw[0], stack[0].fromGender);
+            choiceManager.PopChoiceInteraction((ChoiceSO)stack[0]);
         }
 
         private void StartDialogue()
         {
+            isPlayingSequence = true;
             currentSequenceType = SequenceType.Dialogue;
             currentTextIndex = 0;
             DisplayNextSentence();  
         }
 
-        public async void AddPopInteraction(InteractionSO interactionSO)
+        public void AddPopInteraction(InteractionSO interactionSO)
         {
             stack.Add(interactionSO);
             if (!isPlayingSequence) TryNextStack();
@@ -109,9 +124,10 @@ namespace SequencerNS
             currentTextIndex++;
         }
 
-        private void OnEndInteraction()
+        public void OnEndInteraction()
         {
             currentSequenceType = SequenceType.None;
+            isPlayingSequence = false;
             stack.Remove(stack[0]);
             TryNextStack();
         }
@@ -126,6 +142,11 @@ namespace SequencerNS
                     DisplayNextSentence();
                 }
             }
+
+            if (currentSequenceType == SequenceType.Choice)
+            {
+                Debug.Log("On Click");
+            }
         }
         
         public void OnPerformedClick()
@@ -134,12 +155,24 @@ namespace SequencerNS
             {
                 dialogueManager.currentIntervalBetweenLetterDisplay = dialogueManager.speedUpBetweenLetterDisplay;
             }
+            
+            if (currentSequenceType == SequenceType.Choice)
+            {
+                Debug.Log("OnPerformedClick");
+                dialogueManager.currentIntervalBetweenLetterDisplay = dialogueManager.speedUpBetweenLetterDisplay;
+            }
         }
         
         public void OnReleaseClick()
         {
             if (currentSequenceType == SequenceType.Dialogue)
             {
+                dialogueManager.currentIntervalBetweenLetterDisplay = dialogueManager.baseintervalBetweenLetterDisplay;
+            }
+            
+            if (currentSequenceType == SequenceType.Choice)
+            {
+                Debug.Log("OnReleaseClick");
                 dialogueManager.currentIntervalBetweenLetterDisplay = dialogueManager.baseintervalBetweenLetterDisplay;
             }
         }

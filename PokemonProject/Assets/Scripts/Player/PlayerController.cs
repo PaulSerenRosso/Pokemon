@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 public class PlayerController : MonoBehaviour
 {
     public PlayerInputs playerInputs = null;
-    [SerializeField] private PlayerCharacter playerCharacter;
+    [SerializeField] public PlayerCharacter playerCharacter;
     [SerializeField] private Sequencer sequencer;
     [SerializeField] private Camera characterCamera;
     [SerializeField] private MenuManager _menuManager;
