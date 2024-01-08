@@ -10,6 +10,7 @@ public class Pokemon
     private int level;
     private bool isDied = false; 
     public PokemonCapacity[] capacities;
+    public PokemonStatus currentStatus;
     
     public Pokemon(PokemonSO pokemonSo)
     {

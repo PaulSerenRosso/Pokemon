@@ -49,6 +49,6 @@ public class PlayerFighterController : FighterController
 
     public void UseCapacity(int index)
     {
-        fighter.UseCapacityFeedback(index, this);
+        fighter.UseCapacityFeedback(index);
     }
 }
