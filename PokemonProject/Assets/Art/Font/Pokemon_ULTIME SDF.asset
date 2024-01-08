@@ -1846,14 +1846,6 @@ MonoBehaviour:
     m_Y: 0
     m_Width: 24
     m_Height: 98
-  - m_X: 1021
-    m_Y: 0
-    m_Width: 2
-    m_Height: 1023
-  - m_X: 997
-    m_Y: 262
-    m_Width: 26
-    m_Height: 761
   - m_X: 470
     m_Y: 360
     m_Width: 7
@@ -1966,6 +1958,22 @@ MonoBehaviour:
     m_Y: 439
     m_Width: 1
     m_Height: 584
+  - m_X: 1021
+    m_Y: 0
+    m_Width: 2
+    m_Height: 360
+  - m_X: 1022
+    m_Y: 0
+    m_Width: 1
+    m_Height: 1023
+  - m_X: 997
+    m_Y: 262
+    m_Width: 26
+    m_Height: 98
+  - m_X: 924
+    m_Y: 458
+    m_Width: 99
+    m_Height: 565
   m_fontInfo:
     Name: 
     PointSize: 0

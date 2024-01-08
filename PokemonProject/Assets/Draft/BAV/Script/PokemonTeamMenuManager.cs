@@ -18,7 +18,7 @@ public class PokemonTeamManager : MonoBehaviour
     
     [Header("Pokemon Option Menu")]
     public GameObject pokemonOptionMenu;
-    public List<Image> arrowPositionsPokemonOptionMenu = new List<Image>();
+    public List<Image> arrowImagesPokemonOptionMenu = new List<Image>();
     private int currentArrowPositionPokemonOptionMenu = 0;
     private bool isPokemonOptionMenuActive = false;
     
@@ -170,7 +170,6 @@ public class PokemonTeamManager : MonoBehaviour
             }
             else
             {
-                // Rest of your existing logic when the A button is pressed for the first time
                 if (currentPokemonIndex != GetPokemonTeamCount())
                 {
                     DisplayPokemonOptionMenu();
@@ -255,7 +254,7 @@ public class PokemonTeamManager : MonoBehaviour
     
     private int GetOptionMenuCount()
     {
-        return arrowPositionsPokemonOptionMenu.Count - 1;
+        return arrowImagesPokemonOptionMenu.Count - 1;
     }
     
     public void DisableListOfGO(List<GameObject> gos)
@@ -289,7 +288,7 @@ public class PokemonTeamManager : MonoBehaviour
 
     private void UpdateArrowPositionPokemonOptionMenu()
     {
-        foreach (Image arrowPosition in arrowPositionsPokemonOptionMenu)
+        foreach (Image arrowPosition in arrowImagesPokemonOptionMenu)
         {
             // Set alpha to 0 for all arrow positions
             Color color = arrowPosition.color;
@@ -298,9 +297,9 @@ public class PokemonTeamManager : MonoBehaviour
         }
 
         // Set alpha to 1 for the current arrow position
-        Color currentArrowColor = arrowPositionsPokemonOptionMenu[currentArrowPositionPokemonOptionMenu].color;
+        Color currentArrowColor = arrowImagesPokemonOptionMenu[currentArrowPositionPokemonOptionMenu].color;
         currentArrowColor.a = 1f;
-        arrowPositionsPokemonOptionMenu[currentArrowPositionPokemonOptionMenu].color = currentArrowColor;
+        arrowImagesPokemonOptionMenu[currentArrowPositionPokemonOptionMenu].color = currentArrowColor;
     }
     
     public void SwitchPokemon(int index1, int index2)
@@ -358,5 +357,4 @@ public class PokemonTeamManager : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    
 }
