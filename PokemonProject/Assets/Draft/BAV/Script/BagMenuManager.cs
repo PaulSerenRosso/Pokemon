@@ -27,6 +27,8 @@ public class BagMenuManager : MonoBehaviour
     [Header("Use Item")] 
     public GameObject itemActionMenu;
     public List<Image> arrowImagesItemOptionMenu;
+    public GameObject itemSelectedDescription;
+    public TMP_Text itemSelectedDescriptionText;
     public int currentArrowPositionItemOptionMenu = 0;
     private bool isItemActionMenuActive = false;
 
@@ -83,7 +85,6 @@ public class BagMenuManager : MonoBehaviour
         SwitchBagBaseOnDirection(characterIndex);
         
         //Handles Index Action Menu
-        HandleButtonAInput();
     }
 
     
@@ -95,7 +96,8 @@ public class BagMenuManager : MonoBehaviour
         int minIndex = 0;
 
         HandleUpDownInput(minIndex, maxIndex);
-
+        HandleButtonAInput(minIndex, maxIndex);
+        
         SetBagSectionText(bagSections[currentBagSectionIndex]);
     }
 
@@ -107,7 +109,6 @@ public class BagMenuManager : MonoBehaviour
             {
                 currentBagSectionIndex++;
             }
-            
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isItemActionMenuActive)
         {
@@ -160,7 +161,7 @@ public class BagMenuManager : MonoBehaviour
         }
     }
 
-    private void HandleButtonAInput()
+    private void HandleButtonAInput(int minIndex, int maxIndex)
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -170,7 +171,14 @@ public class BagMenuManager : MonoBehaviour
             }
             else
             {
-                DisplayItemOptionMenu();
+                if (GetArrowIndex() < maxIndex)
+                {
+                    DisplayItemOptionMenu();
+                }
+                else
+                {
+                    HandleCancelButton();   
+                }
             }
         }
     }
@@ -180,11 +188,11 @@ public class BagMenuManager : MonoBehaviour
         switch (currentBagSectionIndex)
         {
             case 0:
-                return itemsCommons.Count - 1;
+                return itemsCommons.Count;
             case 1:
-                return keyItems.Count - 1;
+                return keyItems.Count;
             case 2:
-                return pokeballItems.Count - 1;
+                return pokeballItems.Count;
             default:
                 return 0;
         }
@@ -340,16 +348,18 @@ public class BagMenuManager : MonoBehaviour
         EmptyTheBoard();
         int arrowIndex = GetArrowIndex();
         int i = arrowIndex;
-        for (int j = 0; j < Mathf.Min(itemList.Count, itemTextList.Count); j++)
+    
+        for (int j = 0; j < Mathf.Min(itemList.Count +1, itemTextList.Count); j++)
         {
             if (arrowIndex > 3)
             {
-                i = j + arrowIndex -3;
+                i = j + arrowIndex - 3;
             }
             else
             {
                 i = j;
             }
+            
             if (i >= 0 && i < itemList.Count)
             {
                 itemTextList[j].text = itemList[i].itemName;
@@ -361,22 +371,34 @@ public class BagMenuManager : MonoBehaviour
             }
             else
             {
-                itemTextList[j].text = "N/A"; 
-                itemCountTextList[j].text = "X 0"; 
+                itemTextList[j].text = "CANCEL";
+                itemCountTextList[j].text = "";
             }
         }
 
         if (itemList.Count > 0)
         {
             int firstItemIndex = arrowIndex % itemList.Count;
-            itemImage.sprite = itemList[firstItemIndex].sprite;
-            itemDescriptionText.text = itemList[firstItemIndex].description;
+            if (firstItemIndex >= 0 && firstItemIndex < itemList.Count)
+            {
+                itemImage.sprite = itemList[firstItemIndex].sprite;
+                itemDescriptionText.text = itemList[firstItemIndex].description;
+            }
         }
     }
+
     
     public void DisplayItemOptionMenu()
     {
+        //Enable Disable some Text
         itemActionMenu.SetActive(true);
+        itemSelectedDescription.SetActive(true);
+        bagItemsDescriptionText.gameObject.SetActive(false);
+        
+        //Update the text for the selected Object
+        SetItemSelectedDescriptionText();
+        
+        
         isItemActionMenuActive = true;
         currentArrowPositionItemOptionMenu = 0;
         UpdateArrowPositionPokemonOptionMenu();
@@ -404,6 +426,55 @@ public class BagMenuManager : MonoBehaviour
             PokeballItemSO pokeballItem => pokeballItem.numberOfItems.ToString(),
             _ => "N/A"
         };
+    }
+    
+    private void SetItemSelectedDescriptionText()
+    {
+        int selectedIndex = 0;
+
+        switch (currentBagSectionIndex)
+        {
+            case 0:
+                selectedIndex = arrowIndexCommonItem;
+                break;
+            case 1:
+                selectedIndex = arrowIndexKeyItem;
+                break;
+            case 2:
+                selectedIndex = arrowIndexPokeball;
+                break;
+            default:
+                break;
+        }
+
+        // Ensure the selected index is within valid bounds
+        if (selectedIndex >= 0 && selectedIndex < GetMaxIndex())
+        {
+            ItemSO selectedItem = GetSelectedItem(selectedIndex);
+            if (selectedItem != null)
+            {
+                itemSelectedDescriptionText.text = selectedItem.itemName + " is " +  "\n" + "selected.";
+            }
+            else
+            {
+                itemSelectedDescriptionText.text = "CANCEL";
+            }
+        }
+    }
+
+    private ItemSO GetSelectedItem(int index)
+    {
+        switch (currentBagSectionIndex)
+        {
+            case 0:
+                return (index >= 0 && index < itemsCommons.Count) ? itemsCommons[index] : null;
+            case 1:
+                return (index >= 0 && index < keyItems.Count) ? keyItems[index] : null;
+            case 2:
+                return (index >= 0 && index < pokeballItems.Count) ? pokeballItems[index] : null;
+            default:
+                return null;
+        }
     }
 
     private void SwitchBackgroundBaseOnCharacter(int index)
@@ -458,7 +529,19 @@ public class BagMenuManager : MonoBehaviour
     void HandleCancelButtonPokemonOptionMenu()
     {
         itemActionMenu.SetActive(false);
+        itemSelectedDescription.SetActive(false);
+        bagItemsDescriptionText.gameObject.SetActive(true);
         isItemActionMenuActive = false;
+    }
+    
+    public void HandleCancelButton()
+    {
+        ToggleOffTheBagMenu();
+    }
+    
+    public void ToggleOffTheBagMenu()
+    {
+        gameObject.SetActive(false);
     }
     
 }

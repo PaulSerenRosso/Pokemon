@@ -357,5 +357,4 @@ public class PokemonTeamManager : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    
 }

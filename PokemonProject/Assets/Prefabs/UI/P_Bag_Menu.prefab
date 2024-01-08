@@ -804,6 +804,8 @@ MonoBehaviour:
   - {fileID: 7420161160851471339}
   - {fileID: 6030798498892432287}
   - {fileID: 2553282950735442108}
+  itemSelectedDescription: {fileID: 833939139228495721}
+  itemSelectedDescriptionText: {fileID: 6410201580946347504}
   currentArrowPositionItemOptionMenu: 0
   itemSODebug: {fileID: 11400000, guid: ab038a7e0952de14486366ae2e5952f1, type: 2}
   itemsCommons:
@@ -2333,6 +2335,10 @@ PrefabInstance:
     - target: {fileID: 7947019111785371290, guid: 73c4063b61467bd48aecb28bf2b2445b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8487226903070381137, guid: 73c4063b61467bd48aecb28bf2b2445b, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 9034624778159769599, guid: 73c4063b61467bd48aecb28bf2b2445b, type: 3}
       propertyPath: m_AnchorMax.y
