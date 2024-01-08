@@ -6,7 +6,9 @@ using UnityEngine;
 public class Mover : MonoBehaviour
 {
     [SerializeField] float timeMovement;
+    [SerializeField] private float timeJumping =0.2f;
     private bool isMoving;
+    private bool isJumping;
     private Vector2 destination;
     private Vector2 startPosition;
     private float timer;
@@ -17,7 +19,11 @@ public class Mover : MonoBehaviour
     [SerializeField] private SerializableDictionary<Vector2, Sprite> allSprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private LayerMask rayCollisionLayerMask;
+    [SerializeField] private GameObject moverRenderer;
+    [SerializeField] private GameObject jumpShadowRenderer;
+    [SerializeField] private AnimationCurve jumpCurve;
     public bool IsMoving => isMoving;
+    public bool IsJumping => isJumping; 
 
     private void OnEnable()
     {
@@ -26,7 +32,7 @@ public class Mover : MonoBehaviour
 
     public void AddDirection(Vector2 direction)
     {
-        if (moveDirections.Contains(direction)) return;
+  
         moveDirections.Add(direction);
     }
 
@@ -48,7 +54,11 @@ public class Mover : MonoBehaviour
 
     private void Update()
     {
-        if (isMoving)
+        if (isJumping)
+        {
+            Jump();
+        }
+        else if (isMoving)
         {
             Move();
         }
@@ -58,6 +68,22 @@ public class Mover : MonoBehaviour
             {
                 StartMove();
             }
+        }
+    }
+
+    private void Jump()
+    {
+        timer += Time.deltaTime;
+        transform.position = Vector2.Lerp(startPosition, destination, timer / timeJumping);
+        var transformPosition = moverRenderer.transform.localPosition;
+        transformPosition.y = jumpCurve.Evaluate(timer / timeJumping); 
+        moverRenderer.transform.localPosition = transformPosition;
+        jumpShadowRenderer.SetActive(true);
+        if (timer >= timeJumping)
+        {
+            jumpShadowRenderer.SetActive(false);
+            isJumping = false;
+            endMoveEvent?.Invoke(this);
         }
     }
 
@@ -89,10 +115,31 @@ public class Mover : MonoBehaviour
         startPosition = transform.position;
         destination = startPosition + currentDirection;
         Physics2D.queriesHitTriggers = false;
-        if (!Physics2D.Raycast(startPosition, currentDirection, 1f, rayCollisionLayerMask ))
+        var hit = Physics2D.Raycast(startPosition, currentDirection, 1f, rayCollisionLayerMask);
+        if (!hit)
         {
             isMoving = true;
             SetAnimationMovement(currentDirection);
+        }
+        else if (hit.collider.CompareTag("Slope"))
+        {
+            if (hit.collider.GetComponent<Slope>().CheckSlopeDirection(currentDirection))
+            {
+                destination = startPosition + currentDirection * 2;
+                isMoving = true;
+                isJumping = true;
+                SetAnimationMovement(currentDirection);
+            }
+            else
+            {
+                isMoving = false;
+                RemoveDirection(currentDirection);
+            }
+        }
+        else
+        {
+            isMoving = false;
+            RemoveDirection(currentDirection);
         }
     }
 

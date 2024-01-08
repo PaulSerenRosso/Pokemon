@@ -11,12 +11,11 @@ public class DamageCapacity : PokemonCapacity
       base.Init(pokemonCapacitySo);
       damageCapacitySo =(DamageCapacitySO) so;
    }
-
-   
    public override bool TryUseCapacity(Pokemon pokemon, Pokemon enemyPokemon)
    {
        if (base.TryUseCapacity(pokemon, enemyPokemon))
        {
+           Debug.Log("damage");
            enemyPokemon.DecreaseHp(damageCapacitySo.damage);
        }
        return false;
