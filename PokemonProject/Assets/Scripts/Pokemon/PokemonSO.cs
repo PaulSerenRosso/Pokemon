@@ -11,7 +11,8 @@ public class PokemonSO : ScriptableObject
     public PokemonTypeSO pokemonTypeSo;
     public int pokemonSex;
     public Sprite battleSprite; 
-    public Sprite teamSprite; 
+    public Sprite teamSprite;
+    public int maxXpAmount;
 
     public Pokemon CreatePokemon()
     {

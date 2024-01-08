@@ -8,9 +8,12 @@ public class Pokemon
     private int hp;
     private int maxHp;
     private int level;
+    private int xp;
+    private int maxXp;
     private bool isDied = false; 
     public PokemonCapacity[] capacities;
     public PokemonStatus currentStatus;
+    
     
     public Pokemon(PokemonSO pokemonSo)
     {
@@ -30,7 +33,34 @@ public class Pokemon
     public int Hp => hp;
     public int MaxHp => maxHp;
     public int Level => level;
+    
+    
+    
+    // niveau ww
+    // max xp qui augmente
+    // statistiques
+    // dés que tu finis un combat 
+    // si ton pokemon meurt il ne gagne pas d'exp
+    // pokemon sent in the battle provide exp
+    // pokemon win et lost
+    // defeat pokemon
+    // or make damage
     public bool IsDied => isDied;
+    
+    public void IncreaseXP(int amount)
+    {
+        xp += amount;
+        if (xp > maxXp)
+        {
+            level++;
+            xp -= maxHp;
+            maxXp += so.maxXpAmount;
+        }
+    }
+    
+    
+    
+    
 
     public int GetActiveCapacityCount()
     {
