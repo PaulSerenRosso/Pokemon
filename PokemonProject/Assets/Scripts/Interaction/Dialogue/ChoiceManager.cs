@@ -21,16 +21,17 @@ public class ChoiceManager : MonoBehaviour
         
         //choiceHolder.SetActive(true);
         
-        Debug.Log(choice.choices.Length);
+        Debug.Log(choice.resolutions.Length);
         
-        for (int i = 0; i < choice.choices.Length; i++)
+        for (int i = 0; i < choice.resolutions.Length; i++)
         {
             // Setup Buttons
             buttons[i].gameObject.SetActive(true);
-            buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = choice.choices[i].title;
+            buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = choice.resolutions[i].title;
             
             // Add actions
-            buttons[i].onClick.AddListener(() => SetResolution(choice.choices[i]));
+            var i1 = i;
+            buttons[i].onClick.AddListener(() => SetResolution(choice.resolutions[i1]));
             buttons[i].onClick.AddListener(() => OnEndChoiceOnInteraction());
         }
         
