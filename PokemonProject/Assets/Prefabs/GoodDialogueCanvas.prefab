@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 9156017029096623572}
   - component: {fileID: 4374932731899573822}
   - component: {fileID: 5304960169582435459}
+  - component: {fileID: 782945704403206418}
   m_Layer: 5
   m_Name: GoodDialogueCanvas
   m_TagString: Untagged
@@ -472,8 +473,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f402358b16f4a1a498d54917aeab8b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueManager: {fileID: 0}
-  choiceManager: {fileID: 0}
+  dialogueManager: {fileID: 782945704403206418}
+  choiceManager: {fileID: 5304960169582435459}
+  character: {fileID: 0}
   stack: []
   isPlayingSequence: 0
   testInteraction: {fileID: 0}
@@ -496,6 +498,34 @@ MonoBehaviour:
   - {fileID: 1886493982706558927}
   - {fileID: 3180325870354450505}
   - {fileID: 1628932009268952363}
+--- !u!114 &782945704403206418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507372046526640718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e719d447694a299002a5f45319ca65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundImage: {fileID: 1097356393466727971}
+  textZone: {fileID: 9026650635587538544}
+  currentIntervalBetweenLetterDisplay: 0
+  tempText: 
+  fullTempText: 
+  indexLetter: 0
+  timer: 0
+  textColorByGender:
+  - {r: 0.26739267, g: 0.21782663, b: 0.8396226, a: 1}
+  - {r: 0.8018868, g: 0.19290671, b: 0.19290671, a: 1}
+  - {r: 0.14150941, g: 0.14150941, b: 0.14150941, a: 1}
+  - {r: 0.18867922, g: 0.18867922, b: 0.18867922, a: 1}
+  dialoguesBoxSprites:
+  - {fileID: 21300000, guid: 240f74763f9400548b3b7fd0288fa5d7, type: 3}
+  - {fileID: 379489962, guid: fceb3811025c4c945b04fb8353d82876, type: 3}
+  isReading: 0
 --- !u!1 &2510371327170948818
 GameObject:
   m_ObjectHideFlags: 0
