@@ -10,6 +10,7 @@ public class ChoiceFocusedHelper : MonoBehaviour
     
     private void OnEnable()
     {
+        Debug.Log("ENABLE");
         evt.SetSelectedGameObject(startButtonFocused.gameObject);
     }
 }
