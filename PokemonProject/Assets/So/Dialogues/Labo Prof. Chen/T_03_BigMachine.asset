@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 743f93eb66884464287a64fccd4a0c86, type: 3}
-  m_Name: 1
+  m_Name: T_03_BigMachine
   m_EditorClassIdentifier: 
-  textToDraw: "Bienvenu dans notre CENTRE POK\xC9MON !"
+  interactionType: 0
+  textToDraw:
+  - "A quoi \xE7a peut bien servir ? Mieux vaut ne pas y toucher !"
+  fromGender: 0

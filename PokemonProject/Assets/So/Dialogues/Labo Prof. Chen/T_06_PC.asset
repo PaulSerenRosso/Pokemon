@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 743f93eb66884464287a64fccd4a0c86, type: 3}
+  m_Name: T_06_PC
+  m_EditorClassIdentifier: 
+  interactionType: 0
+  textToDraw:
+  - Il y a un e-mail !
+  - ...
+  - "Avis \xE0 tous les DRESSEURS de POKEMON ! "
+  - "Le CONSEIL 4 est pr\xEAt \xE0 affronter tout concurrent !"
+  - "Pr\xE9sentez vos meilleurs POKEMON et d\xE9couvrez votre niveau en tant"
+  - 'Que DRESSEUR !
+
+    LIGUE POKEMON, PLATEAU INDIGO
+
+'
+  - 'PS : PROF. CHEN, votre visite est attendue'
+  fromGender: 3
