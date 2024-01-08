@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 3455952585591306329}
   - component: {fileID: 7615637969466124958}
   m_Layer: 0
-  m_Name: SummaryOption
+  m_Name: UseOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -462,7 +462,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SUMMARY
+  m_text: USE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3313d627726ad664daea4029842a238c, type: 2}
   m_sharedMaterial: {fileID: -5923612710736047212, guid: 3313d627726ad664daea4029842a238c, type: 2}
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 4513993354805351142}
   - component: {fileID: 374310343917475031}
   m_Layer: 0
-  m_Name: SwitchOption
+  m_Name: GiveOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -596,7 +596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SWITCH
+  m_text: GIVE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3313d627726ad664daea4029842a238c, type: 2}
   m_sharedMaterial: {fileID: -5923612710736047212, guid: 3313d627726ad664daea4029842a238c, type: 2}
@@ -677,7 +677,7 @@ GameObject:
   - component: {fileID: 3096563213313618639}
   - component: {fileID: 2332513995932578995}
   m_Layer: 0
-  m_Name: ItemOption
+  m_Name: TossOption
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -730,7 +730,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: ITEM
+  m_text: TOSS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3313d627726ad664daea4029842a238c, type: 2}
   m_sharedMaterial: {fileID: -5923612710736047212, guid: 3313d627726ad664daea4029842a238c, type: 2}

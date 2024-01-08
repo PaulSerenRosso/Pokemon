@@ -16,6 +16,7 @@ public class BagMenuManager : MonoBehaviour
     [Header("Informations Panels")]
     public Image bagItemsImage;
     public TMP_Text bagItemsDescriptionText;
+    
     [Header("Arrow Selector")] 
     public int arrowIndexCommonItem = 0;
     public int arrowIndexKeyItem = 0;
@@ -24,7 +25,11 @@ public class BagMenuManager : MonoBehaviour
     public List<Image> arrowsSelectorPosition;
 
     [Header("Use Item")] 
-    public GameObject actionItemPannel;
+    public GameObject itemActionMenu;
+    public List<Image> arrowImagesItemOptionMenu;
+    public int currentArrowPositionItemOptionMenu = 0;
+    private bool isItemActionMenuActive = false;
+
     
     [Header("Items Data Store")]
     public ItemSO itemSODebug;
@@ -76,6 +81,9 @@ public class BagMenuManager : MonoBehaviour
         
         //Switch Between Bag Directions
         SwitchBagBaseOnDirection(characterIndex);
+        
+        //Handles Index Action Menu
+        HandleButtonAInput();
     }
 
     
@@ -93,25 +101,77 @@ public class BagMenuManager : MonoBehaviour
 
     private void HandleArrowInput()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow) && currentBagSectionIndex < bagSections.Length - 1)
+        if (Input.GetKeyDown(KeyCode.RightArrow) && !isItemActionMenuActive)
         {
-            currentBagSectionIndex++;
+            if (currentBagSectionIndex < bagSections.Length - 1)
+            {
+                currentBagSectionIndex++;
+            }
+            
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) && currentBagSectionIndex > 0)
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) && !isItemActionMenuActive)
         {
-            currentBagSectionIndex--;
+            if (currentBagSectionIndex > 0)
+            {
+                currentBagSectionIndex--;   
+            }
         }
     }
 
     private void HandleUpDownInput(int minIndex, int maxIndex)
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && GetArrowIndex() > minIndex)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            ModifyArrowIndex(-1);
+            if (!isItemActionMenuActive)
+            {
+                if (GetArrowIndex() > minIndex)
+                {
+                    ModifyArrowIndex(-1);
+                }
+            }
+            else
+            {
+                currentArrowPositionItemOptionMenu--;
+                if (currentArrowPositionItemOptionMenu < 0)
+                {
+                    currentArrowPositionItemOptionMenu = arrowImagesItemOptionMenu.Count - 1;
+                }
+                UpdateArrowPositionPokemonOptionMenu();
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) && GetArrowIndex() < maxIndex)
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            ModifyArrowIndex(1);
+            if (!isItemActionMenuActive)
+            {
+                if (GetArrowIndex() < maxIndex)
+                {
+                    ModifyArrowIndex(1);
+                } 
+            }
+            else
+            {
+                currentArrowPositionItemOptionMenu++;
+                if (currentArrowPositionItemOptionMenu > arrowImagesItemOptionMenu.Count - 1) //Change this if this is a pokeball or a common Items
+                {
+                    currentArrowPositionItemOptionMenu = 0;
+                }
+                UpdateArrowPositionPokemonOptionMenu();
+            }
+        }
+    }
+
+    private void HandleButtonAInput()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            if (isItemActionMenuActive)
+            {
+                HandleArrowIndex();
+            }
+            else
+            {
+                DisplayItemOptionMenu();
+            }
         }
     }
 
@@ -193,7 +253,6 @@ public class BagMenuManager : MonoBehaviour
     {
         arrowImage.sprite = this.arrowImage;
 
-        // Set alpha to 1
         Color color = arrowImage.color;
         color.a = 1f;
         arrowImage.color = color;
@@ -267,10 +326,8 @@ public class BagMenuManager : MonoBehaviour
     {
         EmptyTextList(bagItemsText);
         bagItemsText[0].text = item.itemName;
-        // Check if ItemType is not KeyItems to display numberOfItems
         if (item.itemType != ItemType.KeyItems)
         {
-            // Display "X" and the number of items
             bagItemsCountText[0].text = "X" + " " + GetItemCountText(item);
         }
 
@@ -282,7 +339,6 @@ public class BagMenuManager : MonoBehaviour
     {
         EmptyTheBoard();
         int arrowIndex = GetArrowIndex();
-        int maxIndex = GetMaxIndex();
         int i = arrowIndex;
         for (int j = 0; j < Mathf.Min(itemList.Count, itemTextList.Count); j++)
         {
@@ -294,33 +350,50 @@ public class BagMenuManager : MonoBehaviour
             {
                 i = j;
             }
-            // Check if the adjusted index is within the valid range of itemList
             if (i >= 0 && i < itemList.Count)
             {
                 itemTextList[j].text = itemList[i].itemName;
 
-                // Check if ItemType is not KeyItems to display numberOfItems
                 if (itemList[i].itemType != ItemType.KeyItems)
                 {
-                    // Display "X" and the number of items
                     itemCountTextList[j].text = "X" + " " + GetItemCountText(itemList[i]);
                 }
             }
             else
             {
-                // Handle the case where the index is out of range
-                itemTextList[j].text = "N/A"; // or any default text
-                itemCountTextList[j].text = "X 0"; // or any default text for itemCount
+                itemTextList[j].text = "N/A"; 
+                itemCountTextList[j].text = "X 0"; 
             }
         }
 
-        // Set item-specific image and description for the first item in the list
         if (itemList.Count > 0)
         {
             int firstItemIndex = arrowIndex % itemList.Count;
             itemImage.sprite = itemList[firstItemIndex].sprite;
             itemDescriptionText.text = itemList[firstItemIndex].description;
         }
+    }
+    
+    public void DisplayItemOptionMenu()
+    {
+        itemActionMenu.SetActive(true);
+        isItemActionMenuActive = true;
+        currentArrowPositionItemOptionMenu = 0;
+        UpdateArrowPositionPokemonOptionMenu();
+    }
+    
+    private void UpdateArrowPositionPokemonOptionMenu()
+    {
+        foreach (Image arrowPosition in arrowImagesItemOptionMenu)
+        {
+            Color color = arrowPosition.color;
+            color.a = 0f;
+            arrowPosition.color = color;
+        }
+
+        Color currentArrowColor = arrowImagesItemOptionMenu[currentArrowPositionItemOptionMenu].color;
+        currentArrowColor.a = 1f;
+        arrowImagesItemOptionMenu[currentArrowPositionItemOptionMenu].color = currentArrowColor;
     }
 
     private string GetItemCountText(ItemSO item)
@@ -362,4 +435,30 @@ public class BagMenuManager : MonoBehaviour
                 break;
         }
     }
+    
+    void HandleArrowIndex()
+    {
+        switch (currentArrowPositionItemOptionMenu)
+        {
+            case 0:
+                Debug.Log("Use Item");
+                break;
+            case 1:
+                Debug.Log("Give Item To Pokemon");
+                break;
+            case 2:
+                Debug.Log("Toss the Item");
+                break;
+            case 3:
+                HandleCancelButtonPokemonOptionMenu();
+                break;
+        }
+    }
+    
+    void HandleCancelButtonPokemonOptionMenu()
+    {
+        itemActionMenu.SetActive(false);
+        isItemActionMenuActive = false;
+    }
+    
 }
