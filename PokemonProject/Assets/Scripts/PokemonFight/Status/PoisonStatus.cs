@@ -14,6 +14,7 @@ public class PoisonStatus : PokemonStatus
     public override void TriggerStatus()
     {
         pokemon.DecreaseHp(pokemon.MaxHp/8);
+     
     }
 
     public override bool CheckCanTriggerStatus()

@@ -21,6 +21,7 @@ public class SleepStatus : PokemonStatus
 
     public override bool CheckCanTriggerStatus()
     {
+        Debug.Log(sleepCount);
         if (sleepCount <= 0)
         {
             isEndStatus = true;

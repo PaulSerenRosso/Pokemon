@@ -7,7 +7,7 @@ public class ParalysisStatus : PokemonStatus
 {
     public ParalysisStatus(Pokemon pokemon) : base(pokemon)
     {
-        base.isTriggerAfterTurn = false;
+        isTriggerAfterTurn = false;
         statusColor = new Color(1, 1, 0);
         statusText = "PAR";
     }
@@ -19,7 +19,8 @@ public class ParalysisStatus : PokemonStatus
 
     public override bool CheckCanTriggerStatus()
     {
-        if (Random.Range(0, 100) < 25)
+        var rand = Random.Range(0, 100);
+        if (rand < 25)
         {
             return true;
         }

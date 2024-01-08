@@ -20,12 +20,13 @@ public class Fighter : MonoBehaviour
     private Slider hpSlider;
     private Image statusBackground;
     private TextMeshProUGUI statusText;
+    private MonoBehaviour coroutineHandler;
     protected virtual void Start()
     {
       
     }
     
-    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground )
+    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground, MonoBehaviour coroutineHandler )
     {
         this.enemyFighter = enemyFighter;
         hasLost = false;
@@ -39,6 +40,7 @@ public class Fighter : MonoBehaviour
         this.fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.battleSprite;
         this.statusBackground = statusBackground;
         this.statusText = statusText;
+        this.coroutineHandler = coroutineHandler;
     }
 
     public virtual void Disable()
@@ -71,7 +73,7 @@ public class Fighter : MonoBehaviour
         return areAllDead;
     }
 
-    public void UseCapacityFeedback(int index, MonoBehaviour coroutineHandler)
+    public void UseCapacityFeedback(int index)
     {
         if (CheckUseCapacityStatus())
         {
@@ -94,7 +96,7 @@ public class Fighter : MonoBehaviour
     {
         pokemons[currentPokemonIndex].capacities[index].TryUseCapacity(pokemons[currentPokemonIndex], enemyFighter.pokemons[enemyFighter.currentPokemonIndex]);
         if (pokemons[currentPokemonIndex].capacities[index].TryUseStatus() &&
-            enemyFighter.pokemons[enemyFighter.currentPokemonIndex].currentStatus != null)
+            enemyFighter.pokemons[enemyFighter.currentPokemonIndex].currentStatus == null)
         {
             enemyFighter.AddStatus(pokemons[currentPokemonIndex].capacities[index].pokemonStatusType);
         }
@@ -132,7 +134,7 @@ public class Fighter : MonoBehaviour
 
     private bool CheckStatusCondition()
     {
-        if (!pokemons[currentPokemonIndex].currentStatus.CheckCanTriggerStatus())
+        if (pokemons[currentPokemonIndex].currentStatus.CheckCanTriggerStatus())
         {
             return true;
         }
@@ -151,7 +153,8 @@ public class Fighter : MonoBehaviour
         {
             if (!pokemons[currentPokemonIndex].currentStatus.isTriggerAfterTurn)
             { 
-                return true;
+                
+                if (CheckStatusCondition()) return true;
             }
         }
 
@@ -189,7 +192,7 @@ public class Fighter : MonoBehaviour
             }
         }
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = AddUIStatus;
-        pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, this);
+        pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
 
     private void AddUIStatus()
@@ -204,7 +207,7 @@ public class Fighter : MonoBehaviour
     private void TriggerStatusFeedback()
     {
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
-        pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, this);
+        pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
     
     private void TriggerStatus()
@@ -215,6 +218,7 @@ public class Fighter : MonoBehaviour
 
     public void RemoveStatus()
     {
+        pokemons[currentPokemonIndex].currentStatus = null;
         statusBackground.gameObject.SetActive(false);
         statusText.gameObject.SetActive(false);
     }

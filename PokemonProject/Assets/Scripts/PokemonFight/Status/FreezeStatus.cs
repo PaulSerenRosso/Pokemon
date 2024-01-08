@@ -18,7 +18,8 @@ public class FreezeStatus : PokemonStatus
 
     public override bool CheckCanTriggerStatus()
     {
-        if (Random.Range(0, 100) < 20)
+        var rand = Random.Range(0, 100);
+        if (rand < 20)
         {
             isEndStatus = true;
             return false;

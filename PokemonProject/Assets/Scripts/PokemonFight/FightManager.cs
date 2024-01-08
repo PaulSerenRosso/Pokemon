@@ -17,7 +17,6 @@ public class FightManager : MonoBehaviour
     public SpriteRenderer playerPokemonSpriteRenderer;
     public SpriteRenderer enemyPokemonSpriteRenderer;
     [SerializeField] private Camera camera;
-
     [SerializeField] private Image playerPokemonStatusBackground;
     [SerializeField] private Image enemyPokemonStatusBackground;
     [SerializeField] private TextMeshProUGUI playerPokemonStatusText;
@@ -36,8 +35,8 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter = enemyFighter;
         enemyFighterController.fighter.chooseActionEvent =ResolveFight;
         enemyFighterController.fighter.endTurnEvent = ChangeTurn;
-        playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground );
-        enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground   );
+        playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this );
+        enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground, this   );
         isPlayerTurn = false;
         ChangeTurn();
     }
