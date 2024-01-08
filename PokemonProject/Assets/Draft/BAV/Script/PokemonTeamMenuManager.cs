@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using SequencerNS;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,6 @@ using UnityEngine.UI;
 public class PokemonTeamManager : MonoBehaviour
 {
     [Header("Player Pokemon Team")] 
-    public List<PokemonSO> pokemonTeam = new List<PokemonSO>();
     public List<GameObject> pokemonDisplayOnTeams = new List<GameObject>();
     
     [Header("Cursor Selected Pokemon")]
@@ -40,6 +40,10 @@ public class PokemonTeamManager : MonoBehaviour
     public int currentPokemonWithPlayer = 0;
     public int currentPokemonIndex = 0;
     
+    
+    private Action<Pokemon> pokemonSelectedAction;
+
+    private bool inUsingItem = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,13 @@ public class PokemonTeamManager : MonoBehaviour
         UpdateSwapPokeballCancelButton();
         EnablePokemonDisplaysAndUpdateUI();
     }
+
+    public void OpenPokemonTeamMenuForApplyItem(Action<Pokemon> callback)
+    {
+        pokemonSelectedAction = callback;
+        inUsingItem = true;
+        gameObject.SetActive(true);
+    }
     
     void UpdateUIForCurrentPokemon()
     {
@@ -69,7 +80,7 @@ public class PokemonTeamManager : MonoBehaviour
         DisableListOfGO(pokemonDisplayOnTeams);
 
         // Enable displays up to the count of the Pokemon team
-        for (int i = 0; i < pokemonTeam.Count && i < pokemonDisplayOnTeams.Count; i++)
+        for (int i = 0; i < PlayerManager.Instance.playerFighter.pokemons.Count && i < pokemonDisplayOnTeams.Count; i++)
         {
             pokemonDisplayOnTeams[i].SetActive(true);
 
@@ -84,24 +95,24 @@ public class PokemonTeamManager : MonoBehaviour
 
     private void UpdateUIForPokemonAtIndex(int index)
     {
-        if (index < 0 || index >= pokemonTeam.Count)
+        if (index < 0 || index >= PlayerManager.Instance.playerFighter.pokemons.Count)
         {
             Debug.LogError("Invalid index for updating UI");
             return;
         }
 
         // NAME
-        pokemonNameTexts[index].text = pokemonTeam[index].name;
+        pokemonNameTexts[index].text =PlayerManager.Instance.playerFighter.pokemons[index].so.name;
         // CurrentLevel
-        pokemonLevels[index].text = pokemonTeam[index].startLevel.ToString();
+        pokemonLevels[index].text = PlayerManager.Instance.playerFighter.pokemons[index].Level.ToString();
         // TODO : CurrentHP
-        //pokemonCurrentsHP[index].text = pokemonTeam[index].maxHp.ToString();
+        pokemonCurrentsHP[index].text =PlayerManager.Instance.playerFighter.pokemons[index].Hp.ToString();
         // MaxHP
-        pokemonMaxsHP[index].text = pokemonTeam[index].maxHp.ToString();
+        pokemonMaxsHP[index].text = PlayerManager.Instance.playerFighter.pokemons[index].MaxHp.ToString();
         // Icon Pokemon Team
-        pokemonImages[index].sprite = pokemonTeam[index].teamSprite;
+        pokemonImages[index].sprite = PlayerManager.Instance.playerFighter.pokemons[index].so.teamSprite;
         //Icon Sex
-        pokemonSexImages[index].sprite = pokemonSexSprites[pokemonTeam[index].pokemonSex];
+        pokemonSexImages[index].sprite = pokemonSexSprites[PlayerManager.Instance.playerFighter.pokemons[index].so.pokemonSex];
     }
     
     public void EnableListOfGO(List<GameObject> gos)
@@ -161,7 +172,7 @@ public class PokemonTeamManager : MonoBehaviour
     
     void HandleButtonAInput()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && Sequencer.Instance.CurrentSequenceType == SequenceType.None)
         {
             if (isPokemonOptionMenuActive)
             {
@@ -249,7 +260,7 @@ public class PokemonTeamManager : MonoBehaviour
     
     private int GetPokemonTeamCount()
     {
-        return pokemonTeam.Count;
+        return PlayerManager.Instance.playerFighter.pokemons.Count;
     }
     
     private int GetOptionMenuCount()
@@ -280,10 +291,23 @@ public class PokemonTeamManager : MonoBehaviour
     
     public void DisplayPokemonOptionMenu()
     {
-        pokemonOptionMenu.SetActive(true);
-        isPokemonOptionMenuActive = true;
-        currentArrowPositionPokemonOptionMenu = 0;
-        UpdateArrowPositionPokemonOptionMenu();
+        if (inUsingItem)
+        {
+            if (PlayerManager.Instance.playerFighter.pokemons[currentPokemonIndex].IsDied && 
+                PlayerManager.Instance.playerFighter.pokemons[currentPokemonIndex].Hp != PlayerManager.Instance.playerFighter.pokemons[currentPokemonIndex].MaxHp)
+            {
+                return;
+            }
+            pokemonSelectedAction?.Invoke(PlayerManager.Instance.playerFighter.pokemons[currentPokemonIndex]);
+        }
+        else
+        {
+            pokemonOptionMenu.SetActive(true);
+            isPokemonOptionMenuActive = true;
+            currentArrowPositionPokemonOptionMenu = 0;
+            UpdateArrowPositionPokemonOptionMenu(); 
+        }
+
     }
 
     private void UpdateArrowPositionPokemonOptionMenu()
@@ -304,14 +328,14 @@ public class PokemonTeamManager : MonoBehaviour
     
     public void SwitchPokemon(int index1, int index2)
     {
-        if (index1 < 0 || index1 >= pokemonTeam.Count || index2 < 0 || index2 >= pokemonTeam.Count)
+        if (index1 < 0 || index1 >= PlayerManager.Instance.playerFighter.pokemons.Count || index2 < 0 || index2 >=PlayerManager.Instance.playerFighter.pokemons.Count)
         {
             Debug.LogError("Invalid indices for switching Pokemon.");
             return;
         }
 
         // Swap Pokemon at index1 and index2
-        (pokemonTeam[index1], pokemonTeam[index2]) = (pokemonTeam[index2], pokemonTeam[index1]);
+        (PlayerManager.Instance.playerFighter.pokemons[index1], PlayerManager.Instance.playerFighter.pokemons[index2]) = (PlayerManager.Instance.playerFighter.pokemons[index2], PlayerManager.Instance.playerFighter.pokemons[index1]);
 
         // Update UI for the switched Pokemon
         UpdateUIForPokemonAtIndex(index1);

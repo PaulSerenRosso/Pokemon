@@ -810,6 +810,7 @@ MonoBehaviour:
   itemSODebug: {fileID: 11400000, guid: ab038a7e0952de14486366ae2e5952f1, type: 2}
   itemsCommons:
   - {fileID: 11400000, guid: ab038a7e0952de14486366ae2e5952f1, type: 2}
+  - {fileID: 11400000, guid: 7896e6ca39993ec4dba2e5803cd70044, type: 2}
   keyItems:
   - {fileID: 11400000, guid: b4a0848a271216a488bb23ba2cfe45f0, type: 2}
   - {fileID: 11400000, guid: b4a0848a271216a488bb23ba2cfe45f0, type: 2}
@@ -840,6 +841,7 @@ MonoBehaviour:
   - {fileID: 819416340, guid: 6f42ce1e43bf63f468fc9f7a85f6e102, type: 3}
   - {fileID: -1261959468, guid: 6f42ce1e43bf63f468fc9f7a85f6e102, type: 3}
   characterIndex: 1
+  pokemonTeamManager: {fileID: 0}
 --- !u!1 &4258383141841403153
 GameObject:
   m_ObjectHideFlags: 0

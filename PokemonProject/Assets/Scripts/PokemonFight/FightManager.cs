@@ -21,6 +21,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] private Image enemyPokemonStatusBackground;
     [SerializeField] private TextMeshProUGUI playerPokemonStatusText;
     [SerializeField] private TextMeshProUGUI enemyPokemonStatusText;
+    public bool isInFight;
     private void Start()
     {
         playerFighterController.fleeEvent= ExitFight; 
@@ -30,6 +31,7 @@ public class FightManager : MonoBehaviour
 
     public void InitFight(Fighter enemyFighter)
     {
+        isInFight = true;
         camera.gameObject.SetActive(true);
         previousSpace = WorldManager.instance.CurrentSpace;
         WorldManager.instance.ChangeSpace(fightSpace);
@@ -81,6 +83,7 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter.Disable();
         playerFighterController.fighter.Disable();
         WorldManager.instance.ChangeSpace(previousSpace);
+        isInFight = false;
     }
     
     private void EndFight()

@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     private static PlayerManager instance;
     public static PlayerManager Instance => instance;
     
-    [SerializeField] private PlayerFighter playerFighter;
+    public PlayerFighter playerFighter;
     public FightManager fightManager;
     [SerializeField] private PlayerController playerController;
 

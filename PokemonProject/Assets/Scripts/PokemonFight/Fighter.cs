@@ -191,6 +191,7 @@ public class Fighter : MonoBehaviour
                 break;
             }
         }
+        //TODO : fix le bug qui a la 
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = AddUIStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }

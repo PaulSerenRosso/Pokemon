@@ -10,6 +10,8 @@ public class PlayerFighterController : FighterController
     [SerializeField] private TextMeshProUGUI[] allCapacitiesText;
     [SerializeField] private TextMeshProUGUI capacityTypeText;
     [SerializeField] private TextMeshProUGUI capacityStaminaText;
+    [SerializeField] private GameObject bagPanel;
+    [SerializeField] private GameObject pokemonTeamPanel;
     public Action fleeEvent;
     public void ActivateChoiceCapacityPanel()
     {
@@ -43,7 +45,6 @@ public class PlayerFighterController : FighterController
 
     public override void Deactivate()
     {
-
         choiceCapacityPanel.SetActive(false);
         choiceActionPanel.SetActive(false);
         capacityInfoPanel.SetActive(false);
@@ -57,5 +58,14 @@ public class PlayerFighterController : FighterController
     public void Flee()
     {
         fleeEvent?.Invoke();
+    }
+    public void OpenBag()
+    {
+        bagPanel.SetActive(true);
+    }
+    
+    public void OpenPokemonTeam()
+    {
+        pokemonTeamPanel.SetActive(true);
     }
 }

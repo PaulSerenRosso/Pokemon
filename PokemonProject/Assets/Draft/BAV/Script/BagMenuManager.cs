@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using SequencerNS;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Serialization;
@@ -47,6 +48,9 @@ public class BagMenuManager : MonoBehaviour
     [Range(0,1)]
     [Tooltip("0 is for Man and 1 is for Woman")]
     public int characterIndex = 0;
+    
+    [SerializeField] private PokemonTeamManager pokemonTeamManager;
+    [SerializeField] private FightManager fightManager; 
     
     void Start()
     {
@@ -163,7 +167,7 @@ public class BagMenuManager : MonoBehaviour
 
     private void HandleButtonAInput(int minIndex, int maxIndex)
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && Sequencer.Instance.CurrentSequenceType == SequenceType.None)
         {
             if (isItemActionMenuActive)
             {
@@ -512,6 +516,7 @@ public class BagMenuManager : MonoBehaviour
         switch (currentArrowPositionItemOptionMenu)
         {
             case 0:
+                UseItem();
                 Debug.Log("Use Item");
                 break;
             case 1:
@@ -525,6 +530,48 @@ public class BagMenuManager : MonoBehaviour
                 break;
         }
     }
+
+    void UseItem()
+    {
+       
+        int selectedIndex = 0;
+        if (currentBagSectionIndex == 0)
+        { 
+            selectedIndex = arrowIndexCommonItem;
+            if (itemsCommons[selectedIndex] is PotionSO potionSo)
+            {
+                pokemonTeamManager.OpenPokemonTeamMenuForApplyItem(UsePotion);
+                
+                void UsePotion(Pokemon pokemon)
+                {
+                    potionSo.HealPokemon(pokemon);
+                    Sequencer.Instance.AddCombatInteraction("Heal Pokemon", () =>
+                    {
+                        if (fightManager.isInFight)
+                        {
+                            gameObject.SetActive(false);
+                            pokemonTeamManager.gameObject.SetActive(false);
+                            fightManager.ChangeTurn();
+                        }
+                        else
+                        {
+                            gameObject.SetActive(true);
+                            pokemonTeamManager.gameObject.SetActive(false);
+                        }
+                    });
+                }
+            }
+        }
+        else if(currentBagSectionIndex == 2)
+        {
+            selectedIndex = arrowIndexPokeball;
+        }
+        gameObject.SetActive(false);
+    }
+
+
+    
+    
     
     void HandleCancelButtonPokemonOptionMenu()
     {

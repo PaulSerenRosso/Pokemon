@@ -12,8 +12,8 @@ public class ChoiceManager : MonoBehaviour
         choiceHolder.SetActive(false);
     }
 
-    public void PopChoiceInteraction(ChoiceSO )
+   /* public void PopChoiceInteraction(ChoiceSO )
     {
         
-    }
+    }*/
 }

@@ -7,11 +7,12 @@ using UnityEngine.InputSystem;
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
-    [SerializeField] private GameObject menuPanel;
     private bool menuIsActive = false;
     [SerializeField] private GameObject pokemonPanel;
     [SerializeField] private GameObject startMenu;
     [SerializeField] private GameObject menuHelper;
+    [SerializeField] private GameObject bagPanel;
+    [SerializeField] private FightManager fightManager; 
    
     private void OnEnable()
     {
@@ -25,7 +26,6 @@ public class MenuManager : MonoBehaviour
     private void OpenCloseMenu(InputAction.CallbackContext obj)
     {
         menuIsActive = !menuIsActive;
-        menuPanel.SetActive(menuIsActive);
         menuHelper.SetActive(menuIsActive);
         startMenu.SetActive(menuIsActive);
         pokemonPanel.SetActive(false);
@@ -34,6 +34,13 @@ public class MenuManager : MonoBehaviour
     private void OnDisable()
     {
         playerController.playerInputs.UI.OpenCloseMenu.performed -= OpenCloseMenu;
+    }
+    
+    public void ActivateBagPanel()
+    {
+        menuHelper.SetActive(false);
+        startMenu.SetActive(false);
+        bagPanel.SetActive(true);
     }
 
     public void ActivatePokemonPanel()
@@ -46,8 +53,11 @@ public class MenuManager : MonoBehaviour
     
     public void DeactivatePokemonPanel()
     {
-        menuHelper.SetActive(true);
-        startMenu.SetActive(true);
+        if (!fightManager.isInFight)
+        {
+            menuHelper.SetActive(true);
+            startMenu.SetActive(true);
+        }
         pokemonPanel.SetActive(false);
     }
 
