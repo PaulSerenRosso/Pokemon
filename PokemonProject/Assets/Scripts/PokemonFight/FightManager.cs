@@ -23,6 +23,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI enemyPokemonStatusText;
     private void Start()
     {
+        playerFighterController.fleeEvent= EndFight; 
         playerFighterController.fighter.chooseActionEvent = ResolveFight;
         playerFighterController.fighter.endTurnEvent = ChangeTurn;
     }
@@ -74,7 +75,7 @@ public class FightManager : MonoBehaviour
         }
     }
     
-    void EndFight()
+    private void EndFight()
     {
         camera.gameObject.SetActive(false);
         enemyFighterController.fighter.Disable();

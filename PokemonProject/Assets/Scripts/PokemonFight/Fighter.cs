@@ -222,8 +222,7 @@ public class Fighter : MonoBehaviour
         statusBackground.gameObject.SetActive(false);
         statusText.gameObject.SetActive(false);
     }
-    
-    
 
-  
+
+ 
 }

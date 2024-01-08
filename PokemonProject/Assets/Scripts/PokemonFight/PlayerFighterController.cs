@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ public class PlayerFighterController : FighterController
     [SerializeField] private TextMeshProUGUI[] allCapacitiesText;
     [SerializeField] private TextMeshProUGUI capacityTypeText;
     [SerializeField] private TextMeshProUGUI capacityStaminaText;
+    public Action fleeEvent;
     public void ActivateChoiceCapacityPanel()
     {
         choiceActionPanel.SetActive(false);
@@ -50,5 +52,10 @@ public class PlayerFighterController : FighterController
     public void UseCapacity(int index)
     {
         fighter.UseCapacityFeedback(index);
+    }
+
+    public void Flee()
+    {
+        fleeEvent?.Invoke();
     }
 }
