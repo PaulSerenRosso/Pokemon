@@ -5,7 +5,7 @@ using UnityEngine;
 public class PokemonTrainer : MonoBehaviour
 {
     [SerializeField] private EnemyFighter enemyFighter;
-    [SerializeField] private PokemonSO pokemonSo;
+    public PokemonSO  pokemonSo;
     private PlayerManager playerManager;
 
     public void TriggerFight()

@@ -49,7 +49,7 @@ namespace SequencerNS
             TryNextStack();
         }
 
-        private async void TryNextStack()
+        private void TryNextStack()
         {
             if (!isPlayingSequence && stack.Count == 0) // Si y'a plus de sequence à jouer
             {
@@ -79,6 +79,17 @@ namespace SequencerNS
         {
             stack.Add(interactionSO);
             if (!isPlayingSequence) TryNextStack();
+        }
+        
+        public void AddCombatInteraction(string textToDraw)
+        {
+            InteractionSO combatInteraction = ScriptableObject.CreateInstance<TextInteractionSO>();
+            combatInteraction.interactionType = SequenceType.Dialogue;
+            combatInteraction.fromGender = Gender.Annoucement;
+            combatInteraction.textToDraw[0] = textToDraw;
+            stack.Add(combatInteraction);
+            if (!isPlayingSequence) TryNextStack();
+            //Destroy(combatInteraction); TODO - ESSAYER SI ça FONCTIONNE
         }
 
         private void DisplayNextSentence()

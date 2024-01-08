@@ -9,4 +9,8 @@ public class PlayerFighter : Fighter
        base.Start();
        pokemons.Add(defaultPokemonSO.CreatePokemon()); 
    }
+   public void AddPokemon(PokemonSO pokemonSo)
+   {
+       pokemons.Add(pokemonSo.CreatePokemon());
+   }
 }
