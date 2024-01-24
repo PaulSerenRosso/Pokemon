@@ -149,19 +149,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f402358b16f4a1a498d54917aeab8b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 6742818567718058941}
-  textZone: {fileID: 586232811285824603}
-  intervalBetweenLetterDisplay: 0.15
-  TestText: "Chen : H\xE9 attends!\nNe pars pas!"
-  tempText: 
-  indexLetter: 0
-  timer: 0
-  isReading: 0
-  textColorByGender:
-  - {r: 0.17254902, g: 0.2784314, b: 0.70980394, a: 1}
-  - {r: 0.70980394, g: 0.17254901, b: 0.20822532, a: 1}
-  - {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
-  - {r: 1, g: 1, b: 1, a: 1}
+  dialogueManager: {fileID: 0}
+  choiceManager: {fileID: 0}
+  character: {fileID: 0}
+  stack: []
+  isPlayingSequence: 0
+  testInteraction: {fileID: 0}
+  currentSequenceType: 3
 --- !u!1 &4347855906433102316
 GameObject:
   m_ObjectHideFlags: 0
