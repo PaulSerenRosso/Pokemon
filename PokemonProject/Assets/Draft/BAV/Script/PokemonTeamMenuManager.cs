@@ -39,7 +39,7 @@ public class PokemonTeamManager : MonoBehaviour
     [Range(0,1)]
     public int currentPokemonWithPlayer = 0;
     public int currentPokemonIndex = 0;
-    
+    [SerializeField] private FightManager fightManager;
     
     private Action<Pokemon> pokemonSelectedAction;
 
@@ -334,30 +334,47 @@ public class PokemonTeamManager : MonoBehaviour
             return;
         }
 
+
         // Swap Pokemon at index1 and index2
         (PlayerManager.Instance.playerFighter.pokemons[index1], PlayerManager.Instance.playerFighter.pokemons[index2]) = (PlayerManager.Instance.playerFighter.pokemons[index2], PlayerManager.Instance.playerFighter.pokemons[index1]);
 
         // Update UI for the switched Pokemon
         UpdateUIForPokemonAtIndex(index1);
         UpdateUIForPokemonAtIndex(index2);
+        if (fightManager.isInFight)
+        { 
+            fightManager.ChangeTurn();
+            pokemonOptionMenu.SetActive(false);
+            gameObject.SetActive(false);
+        }
     }
     
     void HandleSwitchPokemon()
     {
         if (GetPokemonTeamCount() >= 2)
         {
-            int nextPokemonIndex = (currentPokemonIndex + 1) % GetPokemonTeamCount();
-            SwitchPokemon(currentPokemonIndex, nextPokemonIndex);
-
-            UpdateUIForPokemonAtIndex(currentPokemonIndex);
-            UpdateUIForPokemonAtIndex(nextPokemonIndex);
-
-            currentPokemonIndex = nextPokemonIndex;
+    
+            if(!PlayerManager.Instance.playerFighter.pokemons[currentPokemonIndex].IsDied && !PlayerManager.Instance.playerFighter.pokemons[0].IsDied) 
+            {
+                if (currentPokemonIndex == 0)
+                {
+                    Sequencer.Instance.AddCombatInteraction("Select another Pokemon than the current one activated", ()=>{});
+                    return;
+                }
+                SwitchPokemon(currentPokemonIndex, 0);
+                UpdateUIForPokemonAtIndex(currentPokemonIndex);
+                UpdateUIForPokemonAtIndex(0);
+                currentPokemonIndex = 0;
+                return;
+            }
+            else
+            {
+                Sequencer.Instance.AddCombatInteraction("The Pokemons need to be alive", ()=>{});
+            }
         }
         else
         {
-            // Handle the case when there are not enough Pokemon in the team
-            Debug.Log("Not enough Pokemon to switch.");
+            Sequencer.Instance.AddCombatInteraction("You need more than one Pokemon", ()=>{});
         }
     }
 

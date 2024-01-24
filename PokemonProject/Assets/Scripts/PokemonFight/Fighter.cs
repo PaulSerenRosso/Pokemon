@@ -40,12 +40,12 @@ public class Fighter : MonoBehaviour
         this.enemySpriteRenderer = enemySpriteRenderer;
         this.hpSlider = hpSlider;
         this.nameText = nameText;
-        nameText.text = pokemons[currentPokemonIndex].so.name;
-        this.fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.battleSprite;
         this.statusBackground = statusBackground;
         this.statusText = statusText;
         this.coroutineHandler = coroutineHandler;
     }
+
+  
 
     public virtual void Disable()
     {
@@ -82,8 +82,10 @@ public class Fighter : MonoBehaviour
            
         }
     }
+    
 
-    private string GetCurrentPokemonName()
+
+    public string GetCurrentPokemonName()
     {
         return $"{pokemons[currentPokemonIndex].so.name}{pokemonAdjective}";
     }
@@ -157,6 +159,19 @@ public class Fighter : MonoBehaviour
 
     public void RefreshRenderer()
     {
+        nameText.text = pokemons[currentPokemonIndex].so.name;
+        fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.battleSprite;
+        if (pokemons[currentPokemonIndex].currentStatus != null)
+        {
+                    statusBackground.gameObject.SetActive(true);
+                    statusText.gameObject.SetActive(true);
+                    statusText.text = pokemons[currentPokemonIndex].currentStatus.statusText;
+                    statusBackground.color = pokemons[currentPokemonIndex].currentStatus.statusColor;
+        }
+        else
+        {
+            statusBackground.gameObject.SetActive(false);
+        }
         hpSlider.value = (float)pokemons[currentPokemonIndex].Hp / pokemons[currentPokemonIndex].MaxHp;
     }
 
