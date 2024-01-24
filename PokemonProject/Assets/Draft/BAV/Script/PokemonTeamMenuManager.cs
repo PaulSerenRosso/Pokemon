@@ -78,7 +78,7 @@ public class PokemonTeamManager : MonoBehaviour
     {
         // Disable all displays first
         DisableListOfGO(pokemonDisplayOnTeams);
-
+        
         // Enable displays up to the count of the Pokemon team
         for (int i = 0; i < PlayerManager.Instance.playerFighter.pokemons.Count && i < pokemonDisplayOnTeams.Count; i++)
         {
