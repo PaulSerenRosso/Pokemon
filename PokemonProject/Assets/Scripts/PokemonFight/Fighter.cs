@@ -69,6 +69,18 @@ public class Fighter : MonoBehaviour
                 }
             });
         }
+        else
+        {
+            if (CheckTriggerEndTurnStatus())
+            {
+                TriggerStatusFeedback();
+            }
+            else
+            {
+                 endTurnEvent?.Invoke();
+            }
+           
+        }
     }
 
     private string GetCurrentPokemonName()
@@ -106,13 +118,14 @@ public class Fighter : MonoBehaviour
     }
 
     public void UseCapacityFeedback(int index)
-    {
+    {  
+        chooseActionEvent?.Invoke();
         Sequencer.Instance.AddCombatInteraction(
-            $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name} ", () =>
+            $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name}", () =>
             {
                 if (CheckUseCapacityStatus())
                 {
-                    chooseActionEvent?.Invoke();
+                 
                     TriggerStatusFeedback();
                 }
                 else
@@ -121,7 +134,6 @@ public class Fighter : MonoBehaviour
                     if (pokemons[currentPokemonIndex].capacities[index]
                         .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer, coroutineHandler))
                     {
-          
                         chooseActionEvent?.Invoke();
                     };
                 }
@@ -138,14 +150,7 @@ public class Fighter : MonoBehaviour
         }
         else
         {
-            if (CheckTriggerEndTurnStatus())
-            {
-                TriggerStatusFeedback();
-            }
-            else
-            {
-               CheckPokemonIsDead();
-            }
+            CheckPokemonIsDead();
         }
        
     }
@@ -227,6 +232,7 @@ public class Fighter : MonoBehaviour
                 break;
             }
         }
+   
         //TODO : fix le bug qui a la 
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = AddUIStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
@@ -234,23 +240,34 @@ public class Fighter : MonoBehaviour
 
     private void AddUIStatus()
     {
-        statusBackground.gameObject.SetActive(true);
-        statusText.gameObject.SetActive(true);
-        statusText.text = pokemons[currentPokemonIndex].currentStatus.statusText;
-        statusBackground.color = pokemons[currentPokemonIndex].currentStatus.statusColor;
-        CheckPokemonIsDead();
+        Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}",()=>
+        {
+            statusBackground.gameObject.SetActive(true);
+            statusText.gameObject.SetActive(true);
+            statusText.text = pokemons[currentPokemonIndex].currentStatus.statusTextConcact;
+            statusBackground.color = pokemons[currentPokemonIndex].currentStatus.statusColor;
+            CheckPokemonIsDead();
+        });
+
     }
 
     private void TriggerStatusFeedback()
     {
+        // trigger
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
     
     private void TriggerStatus()
     {
-        pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
-        CheckPokemonIsDead();
+        Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}", () =>
+            {
+                pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
+                CheckPokemonIsDead();
+            });
+            
+            pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
+            CheckPokemonIsDead();
     }
 
     public void RemoveStatus()

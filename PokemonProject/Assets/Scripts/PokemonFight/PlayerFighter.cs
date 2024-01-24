@@ -2,12 +2,15 @@ using UnityEngine;
 
 public class PlayerFighter : Fighter
 {
-   [SerializeField] private PokemonSO defaultPokemonSO;
+   [SerializeField] private PokemonSO[] defaultPokemonsSO;
 
    protected override void Start()
    {
        base.Start();
-       pokemons.Add(defaultPokemonSO.CreatePokemon()); 
+       foreach (var pokemon in defaultPokemonsSO)
+       {
+           pokemons.Add(pokemon.CreatePokemon()); 
+       }
    }
    public void AddPokemon(PokemonSO pokemonSo)
    {

@@ -8,8 +8,9 @@ public class PoisonStatus : PokemonStatus
     {
         base.isTriggerAfterTurn = true;
         statusColor = new Color(1, 0, 1);
-        statusText = "PSN";
+        statusTextConcact = "PSN";
         captureFactor = 1.5f;
+        statusText = "poisoned";
     }
 
     public override void TriggerStatus()

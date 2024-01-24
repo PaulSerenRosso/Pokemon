@@ -9,8 +9,9 @@ public class ParalysisStatus : PokemonStatus
     {
         isTriggerAfterTurn = false;
         statusColor = new Color(1, 1, 0);
-        statusText = "PAR";
+        statusTextConcact = "PAR";
         captureFactor = 1.5f;
+        statusText = "paralysed";
     }
 
     public override void TriggerStatus()

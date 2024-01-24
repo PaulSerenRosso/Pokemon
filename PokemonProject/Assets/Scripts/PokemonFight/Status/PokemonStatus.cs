@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public abstract class PokemonStatus
@@ -8,10 +9,11 @@ public abstract class PokemonStatus
     public bool isTriggerAfterTurn;
     protected Pokemon pokemon;
     public Action useCapacityFeedbackFinished;
-    public string statusText;
+    public string statusTextConcact;
     public Color statusColor;
     public bool isEndStatus;
     public float captureFactor;
+    public string statusText;
     public PokemonStatus(Pokemon pokemon)
     {
         this.pokemon = pokemon;

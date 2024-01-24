@@ -14,6 +14,8 @@ public class PlayerFighterController : FighterController
     [SerializeField] private GameObject bagPanel;
     [SerializeField] private GameObject pokemonTeamPanel;
     public Action fleeEvent;
+
+
     public void ActivateChoiceCapacityPanel()
     {
         choiceActionPanel.SetActive(false);

@@ -8,8 +8,9 @@ public class BurnStatus : PokemonStatus
     {
         base.isTriggerAfterTurn = true;
         statusColor = new Color(1, 0, 0);
-        statusText = "BRN";
+        statusTextConcact = "BRN";
         captureFactor = 1.5f;
+        statusText = "burnt";
     }
 
     public override void TriggerStatus()
