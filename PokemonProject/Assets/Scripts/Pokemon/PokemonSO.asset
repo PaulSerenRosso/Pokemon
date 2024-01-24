@@ -18,7 +18,9 @@ MonoBehaviour:
   maxHp: 0
   pokemonTypeSo: {fileID: 0}
   pokemonSex: 0
-  battleSprite: {fileID: 0}
+  battleSprite:
+  - {fileID: 0}
+  - {fileID: 0}
   teamSprite: {fileID: 0}
   maxXpAmount: 0
   captureFactor: 1

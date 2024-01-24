@@ -6338,6 +6338,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6777833793472356604, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: defaultPokemonsSO.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6777833793472356604, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: defaultPokemonsSO.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 4c598761972cc2a4f943c53d6fe81c43, type: 2}
+    - target: {fileID: 6777833793472356604, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: defaultPokemonsSO.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8824c1d6c3daa1a41b12eb2d516228b6, type: 2}
     - target: {fileID: 6885156750948161638, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6832,7 +6844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[4].second.m_AnimationSpeed
-      value: 3.0000002
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[5].second.m_AnimationSpeed
@@ -6840,7 +6852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[6].second.m_AnimationSpeed
-      value: 3
+      value: 3.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[7].second.m_AnimationSpeed
@@ -6852,7 +6864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[9].second.m_AnimationSpeed
-      value: 3
+      value: 3.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 7892571603731999425, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: bagPanel
@@ -6862,6 +6874,10 @@ PrefabInstance:
       propertyPath: pokemonTeamPanel
       value: 
       objectReference: {fileID: 174378114}
+    - target: {fileID: 7920583561656414834, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: fightManager
+      value: 
+      objectReference: {fileID: 1395565288}
     - target: {fileID: 7968018494017607369, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

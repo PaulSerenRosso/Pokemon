@@ -130,6 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2883009611079226899}
+  - component: {fileID: 5110106239804792487}
   m_Layer: 0
   m_Name: FightScene
   m_TagString: Untagged
@@ -155,6 +156,27 @@ Transform:
   - {fileID: 6870191905942467004}
   m_Father: {fileID: 3402647185174266100}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &5110106239804792487
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2627503058660272873}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3168003667819869461
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +377,7 @@ MonoBehaviour:
   enemyPokemonStatusBackground: {fileID: 6076534670063881767}
   playerPokemonStatusText: {fileID: 5281172296492724723}
   enemyPokemonStatusText: {fileID: 3984495670554070981}
+  animator: {fileID: 0}
   isInFight: 0
 --- !u!1 &6367232383754196821
 GameObject:
@@ -922,6 +945,14 @@ PrefabInstance:
     - target: {fileID: 2972724737474762122, guid: 4530f59147463bc4aa26961784aa9a68, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455269618641384055, guid: 4530f59147463bc4aa26961784aa9a68, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455269618641384055, guid: 4530f59147463bc4aa26961784aa9a68, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2319,6 +2350,10 @@ PrefabInstance:
     - target: {fileID: 2972724737474762122, guid: 4530f59147463bc4aa26961784aa9a68, type: 3}
       propertyPath: m_Name
       value: FightPokemonGroup (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5455269618641384055, guid: 4530f59147463bc4aa26961784aa9a68, type: 3}
+      propertyPath: m_FlipX
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
