@@ -1,4 +1,5 @@
 
+using SequencerNS;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,7 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter = enemyFighter;
         enemyFighterController.fighter.chooseActionEvent =ResolveFight;
         enemyFighterController.fighter.endTurnEvent = ChangeTurn;
+        //Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.getPokemonName}");
         playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this );
         enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground, this   );
         isPlayerTurn = false;
