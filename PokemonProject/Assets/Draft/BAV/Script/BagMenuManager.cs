@@ -7,51 +7,44 @@ using UnityEngine.UI;
 
 public class BagMenuManager : MonoBehaviour
 {
-    [Header("Bag Section")]
-    public TMP_Text bagSectionText;
-    public string[] bagSections = { "Items", "Key Items", "Poke Balls"};
+    [Header("Bag Section")] public TMP_Text bagSectionText;
+    public string[] bagSections = { "Items", "Key Items", "Poke Balls" };
     public int currentBagSectionIndex = 0;
-    [Header("Bag Items")]
-    public List<TMP_Text> bagItemsText;
+    [Header("Bag Items")] public List<TMP_Text> bagItemsText;
     public List<TMP_Text> bagItemsCountText;
-    [Header("Informations Panels")]
-    public Image bagItemsImage;
+    [Header("Informations Panels")] public Image bagItemsImage;
     public TMP_Text bagItemsDescriptionText;
-    
-    [Header("Arrow Selector")] 
-    public int arrowIndexCommonItem = 0;
+
+    [Header("Arrow Selector")] public int arrowIndexCommonItem = 0;
     public int arrowIndexKeyItem = 0;
     public int arrowIndexPokeball = 0;
     public Sprite arrowImage;
     public List<Image> arrowsSelectorPosition;
 
-    [Header("Use Item")] 
-    public GameObject itemActionMenu;
+    [Header("Use Item")] public GameObject itemActionMenu;
     public List<Image> arrowImagesItemOptionMenu;
     public GameObject itemSelectedDescription;
     public TMP_Text itemSelectedDescriptionText;
     public int currentArrowPositionItemOptionMenu = 0;
     private bool isItemActionMenuActive = false;
 
-    
-    [Header("Items Data Store")]
-    public ItemSO itemSODebug;
-    public List<ItemSO> itemsCommons = new List<ItemSO>();
+
+    [Header("Items Data Store")] public ItemSO itemSODebug;
+    public List<Item> itemsCommons = new List<Item>();
     public List<ItemSO> keyItems = new List<ItemSO>();
-    public List<ItemSO> pokeballItems = new List<ItemSO>();
-    
-    [Header("Look base On Character")]
-    public Image bagImage;
+    public List<Item> pokeballItems = new List<Item>();
+
+    [Header("Look base On Character")] public Image bagImage;
     public Image backgroundBagMenu;
     public List<Sprite> backgroundSprites = new List<Sprite>();
     public List<Sprite> bagSprites = new List<Sprite>();
-    [Range(0,1)]
-    [Tooltip("0 is for Man and 1 is for Woman")]
+
+    [Range(0, 1)] [Tooltip("0 is for Man and 1 is for Woman")]
     public int characterIndex = 0;
-    
+
     [SerializeField] private PokemonTeamManager pokemonTeamManager;
-    [SerializeField] private FightManager fightManager; 
-    
+    [SerializeField] private FightManager fightManager;
+
     void Start()
     {
         EmptyTextList(bagItemsText);
@@ -67,13 +60,16 @@ public class BagMenuManager : MonoBehaviour
         switch (currentBagSectionIndex)
         {
             case 0:
-                SetInformationsForItemList(itemsCommons, bagItemsText, bagItemsCountText, bagItemsImage, bagItemsDescriptionText);
+                SetInformationsForItemList(itemsCommons, bagItemsText, bagItemsCountText, bagItemsImage,
+                    bagItemsDescriptionText);
                 break;
             case 1:
-                SetInformationsForItemList(keyItems, bagItemsText, bagItemsCountText, bagItemsImage, bagItemsDescriptionText);
+                SetInformationsForItemList(keyItems, bagItemsText, bagItemsCountText, bagItemsImage,
+                    bagItemsDescriptionText);
                 break;
             case 2:
-                SetInformationsForItemList(pokeballItems, bagItemsText, bagItemsCountText, bagItemsImage, bagItemsDescriptionText);
+                SetInformationsForItemList(pokeballItems, bagItemsText, bagItemsCountText, bagItemsImage,
+                    bagItemsDescriptionText);
                 break;
             default:
                 // Handle any other cases or log an error
@@ -84,14 +80,14 @@ public class BagMenuManager : MonoBehaviour
 
         //Handles Cursor Selector
         DisplayArrow();
-        
+
         //Switch Between Bag Directions
         SwitchBagBaseOnDirection(characterIndex);
-        
+
         //Handles Index Action Menu
     }
 
-    
+
     private void HandleBagSectionChange()
     {
         HandleArrowInput();
@@ -101,7 +97,7 @@ public class BagMenuManager : MonoBehaviour
 
         HandleUpDownInput(minIndex, maxIndex);
         HandleButtonAInput(minIndex, maxIndex);
-        
+
         SetBagSectionText(bagSections[currentBagSectionIndex]);
     }
 
@@ -118,7 +114,7 @@ public class BagMenuManager : MonoBehaviour
         {
             if (currentBagSectionIndex > 0)
             {
-                currentBagSectionIndex--;   
+                currentBagSectionIndex--;
             }
         }
     }
@@ -141,6 +137,7 @@ public class BagMenuManager : MonoBehaviour
                 {
                     currentArrowPositionItemOptionMenu = arrowImagesItemOptionMenu.Count - 1;
                 }
+
                 UpdateArrowPositionPokemonOptionMenu();
             }
         }
@@ -151,15 +148,17 @@ public class BagMenuManager : MonoBehaviour
                 if (GetArrowIndex() < maxIndex)
                 {
                     ModifyArrowIndex(1);
-                } 
+                }
             }
             else
             {
                 currentArrowPositionItemOptionMenu++;
-                if (currentArrowPositionItemOptionMenu > arrowImagesItemOptionMenu.Count - 1) //Change this if this is a pokeball or a common Items
+                if (currentArrowPositionItemOptionMenu >
+                    arrowImagesItemOptionMenu.Count - 1) //Change this if this is a pokeball or a common Items
                 {
                     currentArrowPositionItemOptionMenu = 0;
                 }
+
                 UpdateArrowPositionPokemonOptionMenu();
             }
         }
@@ -181,7 +180,7 @@ public class BagMenuManager : MonoBehaviour
                 }
                 else
                 {
-                    HandleCancelButton();   
+                    HandleCancelButton();
                 }
             }
         }
@@ -201,7 +200,6 @@ public class BagMenuManager : MonoBehaviour
                 return 0;
         }
     }
-
 
 
     private int GetArrowIndex()
@@ -245,7 +243,7 @@ public class BagMenuManager : MonoBehaviour
         EmptyListImage(arrowsSelectorPosition);
         int arrowIndex = GetArrowIndex();
         int maxIndex = GetMaxIndex();
-    
+
         if (arrowIndex is >= 0 and <= 3)
         {
             SetArrowImageAndAlpha(arrowsSelectorPosition[arrowIndex]);
@@ -271,7 +269,6 @@ public class BagMenuManager : MonoBehaviour
     }
 
 
-  
     private void EmptyTheBoard()
     {
         EmptyTextList(bagItemsText);
@@ -284,12 +281,12 @@ public class BagMenuManager : MonoBehaviour
     {
         bagSectionText.text = text;
     }
-    
+
     public void EmptyText(TMP_Text text)
     {
         text.text = "";
     }
-    
+
     public void EmptyImage(Image image)
     {
         image.sprite = null;
@@ -309,7 +306,7 @@ public class BagMenuManager : MonoBehaviour
         }
     }
 
-    
+
     public void EmptyTextList(List<TMP_Text> texts)
     {
         foreach (var item in texts)
@@ -317,7 +314,7 @@ public class BagMenuManager : MonoBehaviour
             item.text = "";
         }
     }
-    
+
     public void DisableListOfText(List<TMP_Text> texts)
     {
         foreach (var item in texts)
@@ -325,7 +322,7 @@ public class BagMenuManager : MonoBehaviour
             item.gameObject.SetActive(false);
         }
     }
-    
+
     public void EnableListOfText(List<TMP_Text> texts)
     {
         foreach (var item in texts)
@@ -334,26 +331,27 @@ public class BagMenuManager : MonoBehaviour
         }
     }
 
-    public void SetInformationsItemSo(ItemSO item)
+    public void SetInformationsItemSo(Item item)
     {
         EmptyTextList(bagItemsText);
-        bagItemsText[0].text = item.itemName;
-        if (item.itemType != ItemType.KeyItems)
+        bagItemsText[0].text = item.so.itemName;
+        if (item.so.itemType != ItemType.KeyItems)
         {
             bagItemsCountText[0].text = "X" + " " + GetItemCountText(item);
         }
 
-        bagItemsImage.sprite = item.sprite;
-        bagItemsDescriptionText.text = item.description;
+        bagItemsImage.sprite = item.so.sprite;
+        bagItemsDescriptionText.text = item.so.description;
     }
-    
-    public void SetInformationsForItemList(List<ItemSO> itemList, List<TMP_Text> itemTextList, List<TMP_Text> itemCountTextList, Image itemImage, TMP_Text itemDescriptionText)
+
+    public void SetInformationsForItemList(List<Item> itemList, List<TMP_Text> itemTextList,
+        List<TMP_Text> itemCountTextList, Image itemImage, TMP_Text itemDescriptionText)
     {
         EmptyTheBoard();
         int arrowIndex = GetArrowIndex();
         int i = arrowIndex;
-    
-        for (int j = 0; j < Mathf.Min(itemList.Count +1, itemTextList.Count); j++)
+
+        for (int j = 0; j < Mathf.Min(itemList.Count + 1, itemTextList.Count); j++)
         {
             if (arrowIndex > 3)
             {
@@ -363,15 +361,55 @@ public class BagMenuManager : MonoBehaviour
             {
                 i = j;
             }
-            
+
             if (i >= 0 && i < itemList.Count)
             {
-                itemTextList[j].text = itemList[i].itemName;
+                itemTextList[j].text = itemList[i].so.itemName;
 
-                if (itemList[i].itemType != ItemType.KeyItems)
+                if (itemList[i].so.itemType != ItemType.KeyItems)
                 {
                     itemCountTextList[j].text = "X" + " " + GetItemCountText(itemList[i]);
                 }
+            }
+            else
+            {
+                itemTextList[j].text = "CANCEL";
+                itemCountTextList[j].text = "";
+            }
+        }
+
+        if (itemList.Count > 0)
+        {
+            int firstItemIndex = arrowIndex % itemList.Count;
+            if (firstItemIndex >= 0 && firstItemIndex < itemList.Count)
+            {
+                itemImage.sprite = itemList[firstItemIndex].so.sprite;
+                itemDescriptionText.text = itemList[firstItemIndex].so.description;
+            }
+        }
+    }
+
+    public void SetInformationsForItemList(List<ItemSO> itemList, List<TMP_Text> itemTextList,
+        List<TMP_Text> itemCountTextList, Image itemImage, TMP_Text itemDescriptionText)
+    {
+        EmptyTheBoard();
+        int arrowIndex = GetArrowIndex();
+        int i = arrowIndex;
+
+        for (int j = 0; j < Mathf.Min(itemList.Count + 1, itemTextList.Count); j++)
+        {
+            if (arrowIndex > 3)
+            {
+                i = j + arrowIndex - 3;
+            }
+            else
+            {
+                i = j;
+            }
+
+            if (i >= 0 && i < itemList.Count)
+            {
+                itemTextList[j].text = itemList[i].itemName;
             }
             else
             {
@@ -391,23 +429,23 @@ public class BagMenuManager : MonoBehaviour
         }
     }
 
-    
+
     public void DisplayItemOptionMenu()
     {
         //Enable Disable some Text
         itemActionMenu.SetActive(true);
         itemSelectedDescription.SetActive(true);
         bagItemsDescriptionText.gameObject.SetActive(false);
-        
+
         //Update the text for the selected Object
         SetItemSelectedDescriptionText();
-        
-        
+
+
         isItemActionMenuActive = true;
         currentArrowPositionItemOptionMenu = 0;
         UpdateArrowPositionPokemonOptionMenu();
     }
-    
+
     private void UpdateArrowPositionPokemonOptionMenu()
     {
         foreach (Image arrowPosition in arrowImagesItemOptionMenu)
@@ -422,16 +460,11 @@ public class BagMenuManager : MonoBehaviour
         arrowImagesItemOptionMenu[currentArrowPositionItemOptionMenu].color = currentArrowColor;
     }
 
-    private string GetItemCountText(ItemSO item)
+    private string GetItemCountText(Item item)
     {
-        return item switch
-        {
-            ItemCommonSO commonItem => commonItem.numberOfItems.ToString(),
-            PokeballItemSO pokeballItem => pokeballItem.numberOfItems.ToString(),
-            _ => "N/A"
-        };
+        return item.count.ToString();
     }
-    
+
     private void SetItemSelectedDescriptionText()
     {
         int selectedIndex = 0;
@@ -457,7 +490,7 @@ public class BagMenuManager : MonoBehaviour
             ItemSO selectedItem = GetSelectedItem(selectedIndex);
             if (selectedItem != null)
             {
-                itemSelectedDescriptionText.text = selectedItem.itemName + " is " +  "\n" + "selected.";
+                itemSelectedDescriptionText.text = selectedItem.itemName + " is " + "\n" + "selected.";
             }
             else
             {
@@ -471,11 +504,11 @@ public class BagMenuManager : MonoBehaviour
         switch (currentBagSectionIndex)
         {
             case 0:
-                return (index >= 0 && index < itemsCommons.Count) ? itemsCommons[index] : null;
+                return (index >= 0 && index < itemsCommons.Count) ? itemsCommons[index].so : null;
             case 1:
                 return (index >= 0 && index < keyItems.Count) ? keyItems[index] : null;
             case 2:
-                return (index >= 0 && index < pokeballItems.Count) ? pokeballItems[index] : null;
+                return (index >= 0 && index < pokeballItems.Count) ? pokeballItems[index].so : null;
             default:
                 return null;
         }
@@ -510,7 +543,7 @@ public class BagMenuManager : MonoBehaviour
                 break;
         }
     }
-    
+
     void HandleArrowIndex()
     {
         switch (currentArrowPositionItemOptionMenu)
@@ -533,55 +566,64 @@ public class BagMenuManager : MonoBehaviour
 
     void UseItem()
     {
-       
         int selectedIndex = 0;
         if (currentBagSectionIndex == 0)
-        { 
-            selectedIndex = arrowIndexCommonItem;
-            if (itemsCommons[selectedIndex] is PotionSO potionSo)
-            {
-                pokemonTeamManager.OpenPokemonTeamMenuForApplyItem(UsePotion);
-                
-                void UsePotion(Pokemon pokemon)
-                {
-                    potionSo.HealPokemon(pokemon);
-                    Sequencer.Instance.AddCombatInteraction("Heal Pokemon", () =>
-                    {
-                        if (fightManager.isInFight)
-                        {
-                            gameObject.SetActive(false);
-                            pokemonTeamManager.gameObject.SetActive(false);
-                            fightManager.ChangeTurn();
-                        }
-                        else
-                        {
-                            gameObject.SetActive(true);
-                            pokemonTeamManager.gameObject.SetActive(false);
-                        }
-                    });
-                }
-            }
-        }
-        else if(currentBagSectionIndex == 2)
         {
-            selectedIndex = arrowIndexPokeball;
-            if (fightManager.isInFight)
+            selectedIndex = arrowIndexCommonItem;
+            if (itemsCommons[selectedIndex].CheckCount())
             {
-                var pokeball = (PokeballItemSO) pokeballItems[selectedIndex];
+                if (itemsCommons[selectedIndex].so is PotionSO potionSo)
+                {
+                    pokemonTeamManager.OpenPokemonTeamMenuForApplyItem(UsePotion);
+
+                    void UsePotion(Pokemon pokemon)
+                    {
+                        potionSo.HealPokemon(pokemon);
+                        itemsCommons[selectedIndex].DecrementCount();
+                        if (!itemsCommons[selectedIndex].CheckCount())
+                        {
+                            itemsCommons.RemoveAt(selectedIndex);
+                        }
+                        Sequencer.Instance.AddCombatInteraction("Heal Pokemon", () =>
+                        {
+                            if (fightManager.isInFight)
+                            {
+                                gameObject.SetActive(false);
+                                pokemonTeamManager.gameObject.SetActive(false);
+                                fightManager.ChangeTurn();
+                            }
+                            else
+                            {
+                                gameObject.SetActive(true);
+                                pokemonTeamManager.gameObject.SetActive(false);
+                            }
+                        });
+                    }
+                }
+                else if (currentBagSectionIndex == 2)
+                {
+                    selectedIndex = arrowIndexPokeball;
+                    if (fightManager.isInFight)
+                    {
+                        var pokeball = (PokeballItemSO)pokeballItems[selectedIndex].so;
+                        
+                        void UsePokeball()
+                        {
+                            pokeball.UsePokeball(fightManager);
+                        }
+                    }
+
+                }
+                gameObject.SetActive(false);
                 
             }
-            void UsePokeball()
-            {
-                
-            }
+           
+
+       
         }
-        gameObject.SetActive(false);
     }
 
 
-    
-    
-    
     void HandleCancelButtonPokemonOptionMenu()
     {
         itemActionMenu.SetActive(false);
@@ -589,15 +631,14 @@ public class BagMenuManager : MonoBehaviour
         bagItemsDescriptionText.gameObject.SetActive(true);
         isItemActionMenuActive = false;
     }
-    
+
     public void HandleCancelButton()
     {
         ToggleOffTheBagMenu();
     }
-    
+
     public void ToggleOffTheBagMenu()
     {
         gameObject.SetActive(false);
     }
-    
 }

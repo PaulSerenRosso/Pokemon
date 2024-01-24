@@ -9,6 +9,5 @@ public class PotionSO : ItemCommonSO
     public void HealPokemon(Pokemon pokemon)
     {
         pokemon.IncreaseHp(healAmount);
-        DecrementItemCount();
     }
 }
