@@ -22,3 +22,5 @@ MonoBehaviour:
   pokemonSex: 1
   battleSprite: {fileID: 834486840, guid: de9e3320a2855a74c9450f753b45fd3d, type: 3}
   teamSprite: {fileID: 840000928, guid: fceb3811025c4c945b04fb8353d82876, type: 3}
+  maxXpAmount: 0
+  captureFactor: 255

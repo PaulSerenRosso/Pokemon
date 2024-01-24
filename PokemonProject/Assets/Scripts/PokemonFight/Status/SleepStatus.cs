@@ -12,6 +12,7 @@ public class SleepStatus : PokemonStatus
         sleepCount = Random.Range(1, 6);
         statusColor = new Color(0.5f, 0.5f, 0.5f);
         statusText = "SLP";
+        captureFactor = 2.5f;
     }
 
     public override void TriggerStatus()

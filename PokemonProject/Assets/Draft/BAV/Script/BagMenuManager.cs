@@ -439,8 +439,6 @@ public class BagMenuManager : MonoBehaviour
 
         //Update the text for the selected Object
         SetItemSelectedDescriptionText();
-
-
         isItemActionMenuActive = true;
         currentArrowPositionItemOptionMenu = 0;
         UpdateArrowPositionPokemonOptionMenu();
@@ -570,8 +568,7 @@ public class BagMenuManager : MonoBehaviour
         if (currentBagSectionIndex == 0)
         {
             selectedIndex = arrowIndexCommonItem;
-            if (itemsCommons[selectedIndex].CheckCount())
-            {
+           
                 if (itemsCommons[selectedIndex].so is PotionSO potionSo)
                 {
                     pokemonTeamManager.OpenPokemonTeamMenuForApplyItem(UsePotion);
@@ -584,6 +581,7 @@ public class BagMenuManager : MonoBehaviour
                         {
                             itemsCommons.RemoveAt(selectedIndex);
                         }
+
                         Sequencer.Instance.AddCombatInteraction("Heal Pokemon", () =>
                         {
                             if (fightManager.isInFight)
@@ -600,27 +598,69 @@ public class BagMenuManager : MonoBehaviour
                         });
                     }
                 }
-                else if (currentBagSectionIndex == 2)
+        }
+        else if (currentBagSectionIndex == 2)
                 {
                     selectedIndex = arrowIndexPokeball;
-                    if (fightManager.isInFight)
+                    if (fightManager.isInFight && fightManager.enemyFighterController.fighter.canCapturedPokemons)
                     {
                         var pokeball = (PokeballItemSO)pokeballItems[selectedIndex].so;
+                        var enemyFighter = fightManager.enemyFighterController.fighter;
+                        pokeball.useBeginCinematicFeedback = UsePokeball;
+                            pokeball.UsePokemonBeginCinematicFeedback(fightManager, fightManager.enemyPokemonSpriteRenderer);
+                        gameObject.SetActive(false);
+                        fightManager.playerFighterController.fighter.chooseActionEvent?.Invoke();
                         
                         void UsePokeball()
                         {
-                            pokeball.UsePokeball(fightManager);
+                            Debug.Log("teststt");
+                            if(pokeball.UsePokeball(enemyFighter.pokemons[enemyFighter.currentPokemonIndex]) && fightManager.playerFighterController.fighter.pokemons.Count < 6)
+                            {
+                                pokeball.useEndCinematicFeedback = () =>
+                                {
+                                    Sequencer.Instance.AddCombatInteraction("Capture Success ! ", () =>
+                                    {
+                                        pokeballItems[selectedIndex].DecrementCount();
+                                        if (!pokeballItems[selectedIndex].CheckCount())
+                                        {
+                                            pokeballItems.RemoveAt(selectedIndex);
+                                        }
+                                        var pokemonCaptured = enemyFighter.pokemons[enemyFighter.currentPokemonIndex];
+                                        fightManager.playerFighterController.fighter.pokemons.Add(pokemonCaptured);
+                                        enemyFighter.pokemons.RemoveAt(enemyFighter.currentPokemonIndex);
+                                            fightManager.ChangeTurn();
+                                    });
+                                };
+                                pokeball.UsePokeballEndCinematicFeedback(fightManager, fightManager.enemyPokemonSpriteRenderer, true);
+                            }
+                            else
+                            {
+                                pokeball.useEndCinematicFeedback = () =>
+                                {
+                                    Sequencer.Instance.AddCombatInteraction("Capture Failed! ", () =>
+                                    {
+                                       
+                                        pokeballItems[selectedIndex].DecrementCount();
+                                        if (!pokeballItems[selectedIndex].CheckCount())
+                                        {
+                                            pokeballItems.RemoveAt(selectedIndex);
+                                        }
+                                        fightManager.ChangeTurn();
+                                    });
+  
+                                };
+                                pokeball.UsePokeballEndCinematicFeedback(fightManager, fightManager.enemyPokemonSpriteRenderer, false);
+                            }
+                            
+                            
                         }
                     }
 
                 }
                 gameObject.SetActive(false);
                 
-            }
-           
-
-       
-        }
+        
+                
     }
 
 

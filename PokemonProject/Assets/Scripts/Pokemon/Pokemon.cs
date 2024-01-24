@@ -14,7 +14,8 @@ public class Pokemon
     public PokemonCapacity[] capacities;
     public PokemonStatus currentStatus;
     
-    
+
+
     public Pokemon(PokemonSO pokemonSo)
     {
         so = pokemonSo;

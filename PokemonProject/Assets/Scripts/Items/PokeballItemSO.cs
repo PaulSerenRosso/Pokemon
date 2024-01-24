@@ -1,37 +1,49 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "KeyItem", menuName = "Items/Pokeball", order = 2)]
 public class PokeballItemSO : ItemSO
 {
+    public float captureFactor;
+    public Action useBeginCinematicFeedback;
+    public Action useEndCinematicFeedback;
     
-    public Action useCapacityFeedbackFinished;
-    public int numberOfItems = 1;
-    public void IncrementItemCount()
-    {
-        numberOfItems++;
+    public bool UsePokeball(Pokemon pokemon)
+    {  var ratioHP = (float)pokemon.Hp / pokemon.MaxHp;
+        var statusFactor = pokemon.currentStatus == null ? 1 : pokemon.currentStatus.captureFactor;
+        var captureRate = (1 - 2/3 * ratioHP)*statusFactor * captureFactor * pokemon.so.captureFactor;
+        if (Random.Range(0,255) <= captureRate)
+        {
+            return true;
+        }
+        return false;
     }
 
-    public void UsePokeball(Pokemon pokemon)
+    public void UsePokemonBeginCinematicFeedback(MonoBehaviour coroutineHandler, SpriteRenderer spriteRenderer)
     {
-        
+        coroutineHandler.StartCoroutine(WaitForBeginCinematicFeedback(spriteRenderer));
     }
 
-    public void UsePokeballFeedback(MonoBehaviour coroutineHandler, SpriteRenderer spriteRenderer)
-    {
-        coroutineHandler.StartCoroutine(WaitForEndFeedback(spriteRenderer));
-    }
+
     
-    IEnumerator WaitForEndFeedback(SpriteRenderer spriteRenderer)
+    IEnumerator WaitForBeginCinematicFeedback(SpriteRenderer spriteRenderer)
     {
         yield return new WaitForSeconds(1f);
-        useCapacityFeedbackFinished?.Invoke();
+        useBeginCinematicFeedback?.Invoke();
     }
 
-    public void DecrementItemCount()
+    public void UsePokeballEndCinematicFeedback(MonoBehaviour coroutineHandler, SpriteRenderer spriteRenderer, bool isSucceed)
     {
-        numberOfItems = Mathf.Max(0, numberOfItems - 1);
+        coroutineHandler.StartCoroutine(WaitForEndCinematicFeedback(spriteRenderer, isSucceed));
     }
+    IEnumerator WaitForEndCinematicFeedback(SpriteRenderer spriteRenderer, bool isSucceed)
+    {
+        yield return new WaitForSeconds(1f);
+        useEndCinematicFeedback?.Invoke();
+    }
+
+
     
 }

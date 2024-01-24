@@ -1,4 +1,5 @@
 using System;
+using SequencerNS;
 using TMPro;
 using UnityEngine;
 
@@ -52,7 +53,9 @@ public class PlayerFighterController : FighterController
 
     public void UseCapacity(int index)
     {
-        fighter.UseCapacityFeedback(index);
+    
+  
+                fighter.UseCapacityFeedback(index);
     }
 
     public void Flee()

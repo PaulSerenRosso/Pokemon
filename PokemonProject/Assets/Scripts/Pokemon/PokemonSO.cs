@@ -13,6 +13,7 @@ public class PokemonSO : ScriptableObject
     public Sprite battleSprite; 
     public Sprite teamSprite;
     public int maxXpAmount;
+    public int captureFactor;
 
     public Pokemon CreatePokemon()
     {

@@ -15,7 +15,11 @@ public class HighGrass : MonoBehaviour
         var mover = other.GetComponent<PlayerCharacter>();
         playerManager = other.GetComponent<PlayerManager>();
         playerCharacter = mover;
-        mover.endMoveEvent += TryTriggerFight;
+        if (!playerManager.playerFighter.CheckLose())
+        {
+              mover.endMoveEvent += TryTriggerFight;
+        }
+      
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -33,7 +37,10 @@ public class HighGrass : MonoBehaviour
         {
             int randomPokemonIndex = Random.Range(0, allPokemonSo.Length);
             enemyFighter.pokemons.Add(allPokemonSo[randomPokemonIndex].CreatePokemon());
-            playerManager.fightManager.InitFight(enemyFighter);
+             enemyFighter.canCapturedPokemons = true;
+             enemyFighter.pokemonAdjective = " wild";
+             playerManager.fightManager.InitFight(enemyFighter);
+           
         }
     }
 }

@@ -11,6 +11,7 @@ public abstract class PokemonStatus
     public string statusText;
     public Color statusColor;
     public bool isEndStatus;
+    public float captureFactor;
     public PokemonStatus(Pokemon pokemon)
     {
         this.pokemon = pokemon;

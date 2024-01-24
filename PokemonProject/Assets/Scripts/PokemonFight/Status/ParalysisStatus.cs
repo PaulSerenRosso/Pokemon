@@ -10,6 +10,7 @@ public class ParalysisStatus : PokemonStatus
         isTriggerAfterTurn = false;
         statusColor = new Color(1, 1, 0);
         statusText = "PAR";
+        captureFactor = 1.5f;
     }
 
     public override void TriggerStatus()

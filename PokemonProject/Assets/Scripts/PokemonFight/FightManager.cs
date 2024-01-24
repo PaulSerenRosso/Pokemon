@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class FightManager : MonoBehaviour
 {
-    [SerializeField] private PlayerFighterController playerFighterController;
-    [SerializeField] private EnemyFighterController enemyFighterController;
+    public PlayerFighterController playerFighterController;
+    public EnemyFighterController enemyFighterController;
     private bool isPlayerTurn;
     private GameObject previousSpace;
     [SerializeField] private GameObject fightSpace;
@@ -52,6 +52,7 @@ public class FightManager : MonoBehaviour
     public void ChangeTurn()
     {
      
+        
         enemyFighterController.fighter.RefreshRenderer();
         playerFighterController.fighter.RefreshRenderer();
         

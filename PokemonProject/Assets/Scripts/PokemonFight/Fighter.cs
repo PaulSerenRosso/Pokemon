@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SequencerNS;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,9 @@ public class Fighter : MonoBehaviour
     private Image statusBackground;
     private TextMeshProUGUI statusText;
     private MonoBehaviour coroutineHandler;
+    public bool canCapturedPokemons;
+    public string pokemonAdjective = "";
+    
     protected virtual void Start()
     {
       
@@ -48,9 +52,37 @@ public class Fighter : MonoBehaviour
         disableEvent?.Invoke();
     }
 
+    public void CheckPokemonIsDead()
+    {
+        if (pokemons[currentPokemonIndex].IsDied)
+        {
+            Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} + is K.O", () =>
+            {
+                if (CheckPokemonsAreAllDead())
+                {
+                   endTurnEvent?.Invoke();
+                }
+                else
+                {
+                    
+                    // sinon lancer le 
+                }
+            });
+        }
+    }
+
+    private string GetCurrentPokemonName()
+    {
+        return $"{pokemons[currentPokemonIndex].so.name}{pokemonAdjective}";
+    }
     public virtual bool CheckLose()
     {
         if (CheckPokemonsAreAllDead())
+        {
+            return true;
+        }
+
+        if (pokemons.Count == 0)
         {
             return true;
         }
@@ -75,21 +107,25 @@ public class Fighter : MonoBehaviour
 
     public void UseCapacityFeedback(int index)
     {
-        if (CheckUseCapacityStatus())
-        {
-            chooseActionEvent?.Invoke();
-            TriggerStatusFeedback();
-        }
-        else
-        {
-            pokemons[currentPokemonIndex].capacities[index].useCapacityFeedbackFinished = () => UseCapacity(index);
-            if (pokemons[currentPokemonIndex].capacities[index]
-                .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer, coroutineHandler))
+        Sequencer.Instance.AddCombatInteraction(
+            $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name} ", () =>
             {
+                if (CheckUseCapacityStatus())
+                {
+                    chooseActionEvent?.Invoke();
+                    TriggerStatusFeedback();
+                }
+                else
+                {
+                    pokemons[currentPokemonIndex].capacities[index].useCapacityFeedbackFinished = () => UseCapacity(index);
+                    if (pokemons[currentPokemonIndex].capacities[index]
+                        .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer, coroutineHandler))
+                    {
           
-                chooseActionEvent?.Invoke();
-            };
-        }
+                        chooseActionEvent?.Invoke();
+                    };
+                }
+            });
     }
     
     public void UseCapacity(int index)
@@ -108,7 +144,7 @@ public class Fighter : MonoBehaviour
             }
             else
             {
-                endTurnEvent?.Invoke();
+               CheckPokemonIsDead();
             }
         }
        
@@ -202,7 +238,7 @@ public class Fighter : MonoBehaviour
         statusText.gameObject.SetActive(true);
         statusText.text = pokemons[currentPokemonIndex].currentStatus.statusText;
         statusBackground.color = pokemons[currentPokemonIndex].currentStatus.statusColor;
-        endTurnEvent?.Invoke();
+        CheckPokemonIsDead();
     }
 
     private void TriggerStatusFeedback()
@@ -214,7 +250,7 @@ public class Fighter : MonoBehaviour
     private void TriggerStatus()
     {
         pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
-        endTurnEvent?.Invoke();
+        CheckPokemonIsDead();
     }
 
     public void RemoveStatus()

@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 [Serializable]
 public abstract class PokemonCapacity
 {
-    protected PokemonCapacitySO so;
+    public PokemonCapacitySO so;
     private int currentStamina;
     public Action useCapacityFeedbackFinished;
     public PokemonStatusType pokemonStatusType;

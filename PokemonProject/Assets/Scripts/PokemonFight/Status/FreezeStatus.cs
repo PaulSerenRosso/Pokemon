@@ -8,7 +8,8 @@ public class FreezeStatus : PokemonStatus
     {
         isTriggerAfterTurn = false;
         statusText = "FRZ";
-        statusColor = new Color(0, 1, 1);
+        statusColor = new Color(0, 1, 1);   
+        captureFactor = 2.5f;
     }
 
     public override void TriggerStatus()
