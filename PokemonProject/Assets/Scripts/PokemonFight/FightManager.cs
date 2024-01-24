@@ -22,6 +22,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] private Image enemyPokemonStatusBackground;
     [SerializeField] private TextMeshProUGUI playerPokemonStatusText;
     [SerializeField] private TextMeshProUGUI enemyPokemonStatusText;
+    [SerializeField] private Animator animator;
     public bool isInFight;
     private void Start()
     {
@@ -39,13 +40,19 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter = enemyFighter;
         enemyFighterController.fighter.chooseActionEvent =ResolveFight;
         enemyFighterController.fighter.endTurnEvent = ChangeTurn;
-        //Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.getPokemonName}");
-        playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this );
+        Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.GetCurrentPokemonName()} go !" , () =>
+        {
+            playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this );
+            ChangeTurn();
+        });
+        
+     
         enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground, this   );
+        enemyFighterController.fighter.RefreshRenderer();
         isPlayerTurn = false;
-        ChangeTurn();
+    
     }
-    void ResolveFight()
+   public  void ResolveFight()
     {
         playerFighterController.Deactivate();
         enemyFighterController.Deactivate();

@@ -24,13 +24,13 @@ public class Fighter : MonoBehaviour
     private MonoBehaviour coroutineHandler;
     public bool canCapturedPokemons;
     public string pokemonAdjective = "";
-    
+    public bool isBackSprite;
     protected virtual void Start()
     {
       
     }
     
-    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground, MonoBehaviour coroutineHandler )
+    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground, MonoBehaviour coroutineHandler, bool isBackSprite = false )
     {
         this.enemyFighter = enemyFighter;
         hasLost = false;
@@ -43,6 +43,7 @@ public class Fighter : MonoBehaviour
         this.statusBackground = statusBackground;
         this.statusText = statusText;
         this.coroutineHandler = coroutineHandler;
+          this.isBackSprite = isBackSprite; 
     }
 
   
@@ -82,8 +83,6 @@ public class Fighter : MonoBehaviour
            
         }
     }
-    
-
 
     public string GetCurrentPokemonName()
     {
@@ -154,13 +153,12 @@ public class Fighter : MonoBehaviour
         {
             CheckPokemonIsDead();
         }
-       
     }
 
     public void RefreshRenderer()
     {
         nameText.text = pokemons[currentPokemonIndex].so.name;
-        fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.battleSprite;
+        fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.battleSprite[isBackSprite ? 1:0];
         if (pokemons[currentPokemonIndex].currentStatus != null)
         {
                     statusBackground.gameObject.SetActive(true);

@@ -44,14 +44,20 @@ public class PokemonTeamManager : MonoBehaviour
     private Action<Pokemon> pokemonSelectedAction;
 
     private bool inUsingItem = false;
+    private bool currentPokemonInFightIsDead = false;
     // Start is called before the first frame update
     void Start()
     {
         //Enable Pokemon that are in the Team
         EnablePokemonDisplaysAndUpdateUI();
     }
-    
-    
+
+    void ActivateAndDeactivateCancelButton(bool state = false)
+    {
+        
+        currentPokemonInFightIsDead = state;
+        SetSwapPokeballCancelButtonActiveState(state, state);
+    }
 
     void Update()
     {
@@ -187,7 +193,15 @@ public class PokemonTeamManager : MonoBehaviour
                 }
                 else
                 {
-                    HandleCancelButton();
+                    if (currentPokemonInFightIsDead)
+                    {
+                   
+                        HandleCancelButton();
+                    }
+                    else
+                    {
+                        
+                    }
                 }
             }
 
@@ -333,8 +347,6 @@ public class PokemonTeamManager : MonoBehaviour
             Debug.LogError("Invalid indices for switching Pokemon.");
             return;
         }
-
-
         // Swap Pokemon at index1 and index2
         (PlayerManager.Instance.playerFighter.pokemons[index1], PlayerManager.Instance.playerFighter.pokemons[index2]) = (PlayerManager.Instance.playerFighter.pokemons[index2], PlayerManager.Instance.playerFighter.pokemons[index1]);
 
@@ -343,9 +355,14 @@ public class PokemonTeamManager : MonoBehaviour
         UpdateUIForPokemonAtIndex(index2);
         if (fightManager.isInFight)
         { 
-            fightManager.ChangeTurn();
+            fightManager.ResolveFight();
             pokemonOptionMenu.SetActive(false);
             gameObject.SetActive(false);
+            Sequencer.Instance.AddCombatInteraction($"{fightManager.playerFighterController.fighter.GetCurrentPokemonName()} go !",
+                () =>
+                {
+                    fightManager.ChangeTurn();
+                });
         }
     }
     

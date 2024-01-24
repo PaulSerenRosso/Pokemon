@@ -25,6 +25,10 @@ public class MenuManager : MonoBehaviour
     }
     private void OpenCloseMenu(InputAction.CallbackContext obj)
     {
+        if (fightManager.isInFight)
+        {
+            return;
+        }
         menuIsActive = !menuIsActive;
         menuHelper.SetActive(menuIsActive);
         startMenu.SetActive(menuIsActive);
