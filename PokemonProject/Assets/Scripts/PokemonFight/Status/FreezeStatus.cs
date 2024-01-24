@@ -15,7 +15,7 @@ public class FreezeStatus : PokemonStatus
 
     public override void TriggerStatus()
     {
-        
+        base.TriggerStatus();
     }
 
     public override bool CheckCanTriggerStatus()

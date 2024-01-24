@@ -628,7 +628,7 @@ public class BagMenuManager : MonoBehaviour
                                         var pokemonCaptured = enemyFighter.pokemons[enemyFighter.currentPokemonIndex];
                                         fightManager.playerFighterController.fighter.pokemons.Add(pokemonCaptured);
                                         enemyFighter.pokemons.RemoveAt(enemyFighter.currentPokemonIndex);
-                                            fightManager.ChangeTurn();
+                                        fightManager.EndFight();
                                     });
                                 };
                                 pokeball.UsePokeballEndCinematicFeedback(fightManager, fightManager.enemyPokemonSpriteRenderer, true);
@@ -645,7 +645,7 @@ public class BagMenuManager : MonoBehaviour
                                         {
                                             pokeballItems.RemoveAt(selectedIndex);
                                         }
-                                        fightManager.ChangeTurn();
+                                        fightManager.playerFighterController.fighter.EndOwnTurn();
                                     });
   
                                 };

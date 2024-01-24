@@ -14,11 +14,21 @@ public abstract class PokemonStatus
     public bool isEndStatus;
     public float captureFactor;
     public string statusText;
+    public bool alreadyTriggerThisTurn = false;
     public PokemonStatus(Pokemon pokemon)
     {
         this.pokemon = pokemon;
     }
-    public abstract void TriggerStatus();
+
+    public void RefreshTurnStateStatus()
+    {
+        alreadyTriggerThisTurn = false;
+    }
+
+    public virtual void TriggerStatus()
+    {
+        alreadyTriggerThisTurn = true;
+    }
 
     public abstract bool CheckCanTriggerStatus();
 

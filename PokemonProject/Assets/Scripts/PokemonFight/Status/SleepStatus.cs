@@ -18,6 +18,7 @@ public class SleepStatus : PokemonStatus
 
     public override void TriggerStatus()
     {
+        base.TriggerStatus();
         sleepCount--;
     }
 

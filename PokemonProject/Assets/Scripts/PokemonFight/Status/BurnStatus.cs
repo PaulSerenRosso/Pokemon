@@ -14,7 +14,7 @@ public class BurnStatus : PokemonStatus
     }
 
     public override void TriggerStatus()
-    {
+    {  base.TriggerStatus();
         pokemon.DecreaseHp(pokemon.MaxHp/8);
     }
 

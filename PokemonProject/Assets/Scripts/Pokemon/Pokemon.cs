@@ -13,6 +13,7 @@ public class Pokemon
     private bool isDied = false; 
     public PokemonCapacity[] capacities;
     public PokemonStatus currentStatus;
+
     
 
 

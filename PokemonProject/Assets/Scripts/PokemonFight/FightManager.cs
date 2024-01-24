@@ -22,7 +22,7 @@ public class FightManager : MonoBehaviour
     [SerializeField] private Image enemyPokemonStatusBackground;
     [SerializeField] private TextMeshProUGUI playerPokemonStatusText;
     [SerializeField] private TextMeshProUGUI enemyPokemonStatusText;
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator sceneFightAnimator;
     public bool isInFight;
     private void Start()
     {
@@ -42,13 +42,12 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter.endTurnEvent = ChangeTurn;
         Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.GetCurrentPokemonName()} go !" , () =>
         {
-            playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this );
+            playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this, sceneFightAnimator );
+            playerFighterController.fighter.chooseAnotherPokemonEvent = playerFighterController.ChooseAnotherPokemon;
             ChangeTurn();
         });
         
-     
-        enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground, this   );
-        enemyFighterController.fighter.RefreshRenderer();
+        enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground, this , sceneFightAnimator  );
         isPlayerTurn = false;
     
     }
@@ -60,15 +59,10 @@ public class FightManager : MonoBehaviour
 
     public void ChangeTurn()
     {
-     
-        
-        enemyFighterController.fighter.RefreshRenderer();
-        playerFighterController.fighter.RefreshRenderer();
-        
         if (enemyFighterController.fighter.CheckLose())
         {
             EndFight();
-            return;
+            return; 
         }
         if(playerFighterController.fighter.CheckLose())
         {
@@ -79,7 +73,6 @@ public class FightManager : MonoBehaviour
         if (isPlayerTurn)
         {
             playerFighterController.Activate();
-        
         }
         else
         {
@@ -95,10 +88,12 @@ public class FightManager : MonoBehaviour
         WorldManager.instance.ChangeSpace(previousSpace);
         isInFight = false;
     }
+
+ 
     
-    private void EndFight()
+   public void EndFight()
     {
-        //playerFighterController.fighter.pokemons
+     
         ExitFight();
         
     }

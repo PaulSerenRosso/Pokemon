@@ -16,7 +16,7 @@ public class ParalysisStatus : PokemonStatus
 
     public override void TriggerStatus()
     {
-        
+        base.TriggerStatus();
     }
 
     public override bool CheckCanTriggerStatus()

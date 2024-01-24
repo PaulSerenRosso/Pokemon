@@ -56,6 +56,7 @@ namespace SequencerNS
             if (!isPlayingSequence && stack.Count == 0) // Si y'a plus de sequence à jouer
             {
                 // Disable l'UI
+                Debug.Log("disable ui ");
                 dialogueManager.backgroundImage.gameObject.SetActive(false);
                 OnEndSequence?.Invoke();
                 OnEndSequence = null;
@@ -67,6 +68,7 @@ namespace SequencerNS
                 Debug.Log("Check SequenceType Interaction");
                 if (stack[0].interactionType == SequenceType.Dialogue) // Set if next if dialogue
                 {
+                    
                     StartDialogue();
                 }
                 else if (stack[0].interactionType == SequenceType.Choice) // Set if next if dialogue
@@ -107,8 +109,9 @@ namespace SequencerNS
             combatInteraction.textToDraw = new[] { textToDraw };
             stack.Add(combatInteraction);
             OnEndSequence = callback;
+            Debug.Log(isPlayingSequence);
             if (!isPlayingSequence) TryNextStack();
-            //Destroy(combatInteraction); TODO - ESSAYER SI ça FONCTIONNE
+   
         }
 
         private void DisplayNextSentence()

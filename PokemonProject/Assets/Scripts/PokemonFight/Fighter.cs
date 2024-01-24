@@ -25,12 +25,15 @@ public class Fighter : MonoBehaviour
     public bool canCapturedPokemons;
     public string pokemonAdjective = "";
     public bool isBackSprite;
+    public Action chooseAnotherPokemonEvent;
+    private PokemonStatusType currentStatusToAdd = PokemonStatusType.None;
+    private Animator animator;
     protected virtual void Start()
     {
       
     }
     
-    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground, MonoBehaviour coroutineHandler, bool isBackSprite = false )
+    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground, MonoBehaviour coroutineHandler, Animator sceneAnimator, bool isBackSprite = false )
     {
         this.enemyFighter = enemyFighter;
         hasLost = false;
@@ -44,6 +47,8 @@ public class Fighter : MonoBehaviour
         this.statusText = statusText;
         this.coroutineHandler = coroutineHandler;
           this.isBackSprite = isBackSprite; 
+          RefreshRenderer();
+          animator = sceneAnimator;
     }
 
   
@@ -53,7 +58,7 @@ public class Fighter : MonoBehaviour
         disableEvent?.Invoke();
     }
 
-    public void CheckPokemonIsDead()
+    public bool TryEndTurn()
     {
         if (pokemons[currentPokemonIndex].IsDied)
         {
@@ -61,28 +66,76 @@ public class Fighter : MonoBehaviour
             {
                 if (CheckPokemonsAreAllDead())
                 {
-                   endTurnEvent?.Invoke();
+                    if(pokemons[currentPokemonIndex].currentStatus != null)
+                    pokemons[currentPokemonIndex].currentStatus.RefreshTurnStateStatus();
+                    endTurnEvent?.Invoke();
+                    
                 }
                 else
                 {
-                    
-                    // sinon lancer le 
+                    chooseAnotherPokemonEvent?.Invoke();   
                 }
             });
+            return true;
         }
-        else
-        {
+
+        return false; 
+    }
+
+    // refresh renderer 
+    // refresh renderer
+    
+    // vérfier que je suis par mort
+    // si je suis mort 
+        // je check si je suis pas perdu 
+        // si j'ai pas perdu je selectionner un nouveau pokemon
+        // refresh
+        // et de pas appliquer l'effet de paralyser
+    // si je suis pas mort 
+    // je check paralysier 
+        // si oui je paralyser puis je end turn et tu refresh
+        // si non je end turn
+        public void EndOwnTurn()
+    {
+        Debug.Log("testssss");
+        enemyFighter.RefreshRenderer();
+        RefreshRenderer();
+        // attend
+        if (!enemyFighter.TryEndTurn())
+        {    Debug.Log("test");
             if (CheckTriggerEndTurnStatus())
-            {
+            {    Debug.Log("test");
                 TriggerStatusFeedback();
             }
             else
             {
-                 endTurnEvent?.Invoke();
+                if (pokemons[currentPokemonIndex].currentStatus != null)
+                {    Debug.Log("test");
+                    pokemons[currentPokemonIndex].currentStatus.RefreshTurnStateStatus();
+                    endTurnEvent?.Invoke();
+                }
+                else
+                {
+                    if (currentStatusToAdd != PokemonStatusType.None)
+                    {    Debug.Log("test");
+                        enemyFighter.AddStatus(currentStatusToAdd);
+                      
+                    }
+                    else
+                    {
+                        Debug.Log("test");
+                        endTurnEvent?.Invoke();
+                    }
+                }
+             
             }
-           
         }
+
     }
+
+
+
+  
 
     public string GetCurrentPokemonName()
     {
@@ -124,17 +177,18 @@ public class Fighter : MonoBehaviour
         Sequencer.Instance.AddCombatInteraction(
             $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name}", () =>
             {
+                
                 if (CheckUseCapacityStatus())
                 {
-                 
                     TriggerStatusFeedback();
                 }
                 else
                 {
                     pokemons[currentPokemonIndex].capacities[index].useCapacityFeedbackFinished = () => UseCapacity(index);
                     if (pokemons[currentPokemonIndex].capacities[index]
-                        .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer, coroutineHandler))
+                        .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer,  coroutineHandler,animator))
                     {
+                        
                         chooseActionEvent?.Invoke();
                     };
                 }
@@ -147,12 +201,11 @@ public class Fighter : MonoBehaviour
         if (pokemons[currentPokemonIndex].capacities[index].TryUseStatus() &&
             enemyFighter.pokemons[enemyFighter.currentPokemonIndex].currentStatus == null)
         {
-            enemyFighter.AddStatus(pokemons[currentPokemonIndex].capacities[index].pokemonStatusType);
+            currentStatusToAdd = pokemons[currentPokemonIndex].capacities[index].pokemonStatusType;
+           
         }
-        else
-        {
-            CheckPokemonIsDead();
-        }
+        EndOwnTurn();
+        
     }
 
     public void RefreshRenderer()
@@ -163,7 +216,7 @@ public class Fighter : MonoBehaviour
         {
                     statusBackground.gameObject.SetActive(true);
                     statusText.gameObject.SetActive(true);
-                    statusText.text = pokemons[currentPokemonIndex].currentStatus.statusText;
+                    statusText.text = pokemons[currentPokemonIndex].currentStatus.statusTextConcact;
                     statusBackground.color = pokemons[currentPokemonIndex].currentStatus.statusColor;
         }
         else
@@ -175,7 +228,7 @@ public class Fighter : MonoBehaviour
 
     public bool CheckTriggerEndTurnStatus()
     {
-        if (pokemons[currentPokemonIndex].currentStatus != null )
+        if (pokemons[currentPokemonIndex].currentStatus != null &&  !pokemons[currentPokemonIndex].currentStatus.alreadyTriggerThisTurn)
         {
             if (pokemons[currentPokemonIndex].currentStatus.isTriggerAfterTurn)
             {
@@ -206,8 +259,7 @@ public class Fighter : MonoBehaviour
         if (pokemons[currentPokemonIndex].currentStatus != null )
         {
             if (!pokemons[currentPokemonIndex].currentStatus.isTriggerAfterTurn)
-            { 
-                
+            {
                 if (CheckStatusCondition()) return true;
             }
         }
@@ -245,9 +297,8 @@ public class Fighter : MonoBehaviour
                 break;
             }
         }
-   
-        //TODO : fix le bug qui a la 
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = AddUIStatus;
+        currentStatusToAdd = PokemonStatusType.None;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
 
@@ -259,7 +310,7 @@ public class Fighter : MonoBehaviour
             statusText.gameObject.SetActive(true);
             statusText.text = pokemons[currentPokemonIndex].currentStatus.statusTextConcact;
             statusBackground.color = pokemons[currentPokemonIndex].currentStatus.statusColor;
-            CheckPokemonIsDead();
+            endTurnEvent?.Invoke();
         });
 
     }
@@ -267,6 +318,7 @@ public class Fighter : MonoBehaviour
     private void TriggerStatusFeedback()
     {
         // trigger
+        Debug.Log("testststststs");
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
@@ -276,11 +328,9 @@ public class Fighter : MonoBehaviour
         Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}", () =>
             {
                 pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
-                CheckPokemonIsDead();
+                Debug.Log("tescxfqdsfqsdft");
+                EndOwnTurn();
             });
-            
-            pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
-            CheckPokemonIsDead();
     }
 
     public void RemoveStatus()

@@ -52,7 +52,7 @@ public class PokemonTeamManager : MonoBehaviour
         EnablePokemonDisplaysAndUpdateUI();
     }
 
-    void ActivateAndDeactivateCancelButton(bool state = false)
+   public  void ActivateAndDeactivateCancelButton(bool state = false)
     {
         
         currentPokemonInFightIsDead = state;
@@ -361,7 +361,15 @@ public class PokemonTeamManager : MonoBehaviour
             Sequencer.Instance.AddCombatInteraction($"{fightManager.playerFighterController.fighter.GetCurrentPokemonName()} go !",
                 () =>
                 {
-                    fightManager.ChangeTurn();
+                    if (currentPokemonInFightIsDead)
+                    {
+                        fightManager.ChangeTurn();
+                    }
+                    else
+                    {
+                        fightManager.playerFighterController.fighter.EndOwnTurn();
+                    }
+                    
                 });
         }
     }
