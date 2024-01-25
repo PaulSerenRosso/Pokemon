@@ -28,12 +28,13 @@ public class Fighter : MonoBehaviour
     public Action chooseAnotherPokemonEvent;
     private PokemonStatusType currentStatusToAdd = PokemonStatusType.None;
     private Animator animator;
+    private TextMeshProUGUI levelCountText;
     protected virtual void Start()
     {
       
     }
     
-    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground, MonoBehaviour coroutineHandler, Animator sceneAnimator, bool isBackSprite = false )
+    public virtual void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer, Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground, MonoBehaviour coroutineHandler, Animator sceneAnimator, TextMeshProUGUI levelText, bool isBackSprite = false )
     {
         this.enemyFighter = enemyFighter;
         hasLost = false;
@@ -46,9 +47,11 @@ public class Fighter : MonoBehaviour
         this.statusBackground = statusBackground;
         this.statusText = statusText;
         this.coroutineHandler = coroutineHandler;
-          this.isBackSprite = isBackSprite; 
+        this.levelCountText = levelText;  
+        this.isBackSprite = isBackSprite; 
           RefreshRenderer();
           animator = sceneAnimator;
+          
     }
 
   
@@ -210,6 +213,7 @@ public class Fighter : MonoBehaviour
 
     public void RefreshRenderer()
     {
+        levelCountText.text = pokemons[currentPokemonIndex].Level.ToString();
         nameText.text = pokemons[currentPokemonIndex].so.name;
         fighterSpriteRenderer.sprite = pokemons[currentPokemonIndex].so.battleSprite[isBackSprite ? 1:0];
         if (pokemons[currentPokemonIndex].currentStatus != null)

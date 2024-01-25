@@ -21,9 +21,9 @@ public class PlayerFighter : Fighter
 
    public override void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer,
        Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground,
-       MonoBehaviour coroutineHandler, Animator sceneAnimator, bool isBackSprite = false)
+       MonoBehaviour coroutineHandler, Animator sceneAnimator, TextMeshProUGUI levelText, bool isBackSprite)
    {
-       base.Init(enemyFighter, fighterSpriteRenderer, enemySpriteRenderer, hpSlider, nameText, statusText, statusBackground, coroutineHandler,sceneAnimator, isBackSprite);
+       base.Init(enemyFighter, fighterSpriteRenderer, enemySpriteRenderer, hpSlider, nameText, statusText, statusBackground, coroutineHandler,sceneAnimator, levelText, isBackSprite);
       
    }
 }

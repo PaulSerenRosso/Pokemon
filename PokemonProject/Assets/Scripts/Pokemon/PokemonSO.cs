@@ -14,6 +14,9 @@ public class PokemonSO : ScriptableObject
     public Sprite teamSprite;
     public int maxXpAmount;
     public int captureFactor;
+    public int startPower;
+    public int powerAmountLevelUp = 2;
+    public int maxHpAmountLevelUp = 4;
 
     public Pokemon CreatePokemon()
     {

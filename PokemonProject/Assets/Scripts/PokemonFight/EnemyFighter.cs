@@ -8,9 +8,9 @@ public class EnemyFighter : Fighter
 {
     public override void Init(Fighter enemyFighter, SpriteRenderer fighterSpriteRenderer, SpriteRenderer enemySpriteRenderer,
         Slider hpSlider, TextMeshProUGUI nameText, TextMeshProUGUI statusText, Image statusBackground,
-        MonoBehaviour coroutineHandler, Animator sceneAnimator, bool backsprite)
+        MonoBehaviour coroutineHandler, Animator sceneAnimator, TextMeshProUGUI levelText, bool backsprite)
     {
-        base.Init(enemyFighter, fighterSpriteRenderer, enemySpriteRenderer, hpSlider, nameText, statusText, statusBackground, coroutineHandler, sceneAnimator, backsprite);
+        base.Init(enemyFighter, fighterSpriteRenderer, enemySpriteRenderer, hpSlider, nameText, statusText, statusBackground, coroutineHandler, sceneAnimator, levelText, backsprite);
         chooseAnotherPokemonEvent = endTurnEvent; 
     }
 }

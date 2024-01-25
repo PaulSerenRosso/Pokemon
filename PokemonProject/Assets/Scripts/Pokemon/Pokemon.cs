@@ -10,10 +10,11 @@ public class Pokemon
     private int level;
     private int xp;
     private int maxXp;
+    private int power;
     private bool isDied = false; 
     public PokemonCapacity[] capacities;
     public PokemonStatus currentStatus;
-
+    
     
 
 
@@ -35,9 +36,13 @@ public class Pokemon
     public int Hp => hp;
     public int MaxHp => maxHp;
     public int Level => level;
-    
-    
-    
+
+    public int Power => power;
+
+    public void IncreasePower(int amount)
+    {
+        power += amount;
+    }
     // niveau ww
     // max xp qui augmente
     // statistiques
@@ -49,15 +54,25 @@ public class Pokemon
     // or make damage
     public bool IsDied => isDied;
     
-    public void IncreaseXP(int amount)
+    public bool IncreaseXP(int amount)
     {
         xp += amount;
         if (xp > maxXp)
         {
             level++;
-            xp -= maxHp;
+            
+            xp = 0;
             maxXp += so.maxXpAmount;
+            // increase max hp 
+            // set hp to max hp 
+            // update damage
+            power += so.powerAmountLevelUp;
+            maxHp += so.maxHpAmountLevelUp;
+            SetHp(maxHp);
+            return true;
         }
+
+        return false;
     }
     
     

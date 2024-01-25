@@ -1,4 +1,6 @@
 
+using System;
+using System.Collections.Generic;
 using SequencerNS;
 using TMPro;
 using UnityEngine;
@@ -23,7 +25,14 @@ public class FightManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI playerPokemonStatusText;
     [SerializeField] private TextMeshProUGUI enemyPokemonStatusText;
     [SerializeField] private Animator sceneFightAnimator;
+    [SerializeField] private TextMeshProUGUI playerPokemonLevelText;
+    [SerializeField] private TextMeshProUGUI enemyPokemonLevelText;
+    private List<PokemonWithXpTurn> playerPokemonXpPerTurn = new List<PokemonWithXpTurn>();
+    private bool isPlayerWin;
     public bool isInFight;
+    public int xpPerTurn = 2;
+    public int xpPokemonEntryFight = 3;
+    [SerializeField] private Slider sliderXp;
     private void Start()
     {
         playerFighterController.fleeEvent= ExitFight; 
@@ -33,6 +42,8 @@ public class FightManager : MonoBehaviour
 
     public void InitFight(Fighter enemyFighter)
     {
+        playerPokemonXpPerTurn.Clear();
+        CheckPlayerPokemonXpTurn();
         isInFight = true;
         camera.gameObject.SetActive(true);
         previousSpace = WorldManager.instance.CurrentSpace;
@@ -42,12 +53,12 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter.endTurnEvent = ChangeTurn;
         Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.GetCurrentPokemonName()} go !" , () =>
         {
-            playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this, sceneFightAnimator );
+            playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this, sceneFightAnimator, playerPokemonLevelText, playerPokemonSpriteRenderer );
             playerFighterController.fighter.chooseAnotherPokemonEvent = playerFighterController.ChooseAnotherPokemon;
             ChangeTurn();
         });
         
-        enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground, this , sceneFightAnimator  );
+        enemyFighterController.fighter.Init(playerFighterController.fighter, enemyPokemonSpriteRenderer, playerPokemonSpriteRenderer, enemyPokemonSlider, enemyPokemonTextName, enemyPokemonStatusText, enemyPokemonStatusBackground, this , sceneFightAnimator , enemyPokemonLevelText );
         isPlayerTurn = false;
     
     }
@@ -59,13 +70,20 @@ public class FightManager : MonoBehaviour
 
     public void ChangeTurn()
     {
+
+        if (isPlayerTurn)
+        {
+            CheckPlayerPokemonXpTurn();
+        }
         if (enemyFighterController.fighter.CheckLose())
         {
+            isPlayerWin = true;
             EndFight();
             return; 
         }
         if(playerFighterController.fighter.CheckLose())
         {
+            isPlayerWin = false;
             EndFight();
             return;
         }
@@ -89,12 +107,94 @@ public class FightManager : MonoBehaviour
         isInFight = false;
     }
 
- 
+    private void CheckPlayerPokemonXpTurn()
+    {
+        Fighter fighter = playerFighterController.fighter;
+        bool isContained = false;
+        foreach (var pokemon in playerPokemonXpPerTurn )
+        {
+            if (pokemon.pokemon == fighter.pokemons[fighter.currentPokemonIndex])
+            {
+                isContained = true;
+                pokemon.xpTurn++;
+                break;
+            }
+        }
+
+        if (!isContained)
+        {
+            playerPokemonXpPerTurn.Add(new PokemonWithXpTurn(fighter.pokemons[fighter.currentPokemonIndex]));
+        }
+    }
     
    public void EndFight()
     {
-     
-        ExitFight();
+
+        if (isPlayerWin)
+        {
+            TryAddPlayerPokemonXP(0);
+        }
+        else
+        {
+            EndFight();
+        }
+      
         
     }
+
+   private void TryAddPlayerPokemonXP(int index)
+   {
+       var fighter = playerFighterController.fighter;
+       if (playerPokemonXpPerTurn.Count == index)
+       {
+           ExitFight();
+           return;
+       }
+       var currentPokemon = playerPokemonXpPerTurn[index].pokemon;
+       if (!currentPokemon.IsDied)
+       {
+           var xpWon = xpPokemonEntryFight + xpPerTurn * playerPokemonXpPerTurn[index].xpTurn;
+           var isLevelUp = currentPokemon.IncreaseXP(xpWon);
+          
+           Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} gains {xpWon} ",()=>
+           {
+               if (playerPokemonXpPerTurn[index].pokemon == fighter.pokemons[fighter.currentPokemonIndex])
+               {
+                   UpdateXPSlider();
+               }
+
+               if (isLevelUp)
+               {
+                   AddPlayerPokemonLevelUp(index);
+               }
+               else
+               {
+                   TryAddPlayerPokemonXP((index++));
+               }
+             
+                   
+           });
+           
+       }
+   }
+
+   private void UpdateXPSlider()
+   {
+       
+   }
+
+   private void AddPlayerPokemonLevelUp(int index)
+   {
+       var fighter = playerFighterController.fighter;
+       var currentPokemon = playerPokemonXpPerTurn[index].pokemon;
+       Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} level to {currentPokemon.Level} ", () =>
+       {
+           if (playerPokemonXpPerTurn[index].pokemon == fighter.pokemons[fighter.currentPokemonIndex])
+           {
+               fighter.RefreshRenderer();
+           }
+           TryAddPlayerPokemonXP((index++)); 
+           
+       });
+   }
 }

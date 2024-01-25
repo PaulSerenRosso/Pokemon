@@ -16,7 +16,7 @@ public class DamageCapacity : PokemonCapacity
        if (base.TryUseCapacity(pokemon, enemyPokemon))
        {
            Debug.Log("damage");
-           enemyPokemon.DecreaseHp(damageCapacitySo.damage);
+           enemyPokemon.DecreaseHp(damageCapacitySo.damage+pokemon.Power);
        }
        return false;
    }
