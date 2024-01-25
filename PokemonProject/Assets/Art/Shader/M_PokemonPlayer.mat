@@ -60,7 +60,7 @@ Material:
     m_Floats:
     - _AlphaClip: 0
     - _EffectToDisplay: 1
-    - _EffectsOpacity: 0
+    - _EffectsOpacity: 0.4
     m_Colors:
     - _SpeedXY: {r: 0, g: 2, b: 0, a: 0}
   m_BuildTextureStacks: []
