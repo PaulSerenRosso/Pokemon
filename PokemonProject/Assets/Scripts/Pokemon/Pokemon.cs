@@ -39,6 +39,10 @@ public class Pokemon
 
     public int Power => power;
 
+    public int MaxXP => maxXp;
+
+    public int Xp => xp;
+
     public void IncreasePower(int amount)
     {
         power += amount;

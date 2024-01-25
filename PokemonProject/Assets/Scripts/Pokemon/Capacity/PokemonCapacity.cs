@@ -27,6 +27,7 @@ public abstract class PokemonCapacity
         {
             return false;
         }
+        if(so.animationClip)
         animator.Play(so.animationClip.name);
         coroutineHandler.StartCoroutine(WaitForEndFeedback());
         return true;

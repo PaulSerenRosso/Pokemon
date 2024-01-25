@@ -45,6 +45,7 @@ public class FightManager : MonoBehaviour
         playerPokemonXpPerTurn.Clear();
         CheckPlayerPokemonXpTurn();
         isInFight = true;
+        playerFighterController.fighter.refreshRendererEvent = UpdateXPSlider;
         camera.gameObject.SetActive(true);
         previousSpace = WorldManager.instance.CurrentSpace;
         WorldManager.instance.ChangeSpace(fightSpace);
@@ -180,7 +181,8 @@ public class FightManager : MonoBehaviour
 
    private void UpdateXPSlider()
    {
-       
+       var fighter = playerFighterController.fighter;  
+       sliderXp.value = (float)fighter.pokemons[fighter.currentPokemonIndex].Xp/fighter.pokemons[fighter.currentPokemonIndex].MaxHp;
    }
 
    private void AddPlayerPokemonLevelUp(int index)

@@ -29,6 +29,7 @@ public class Fighter : MonoBehaviour
     private PokemonStatusType currentStatusToAdd = PokemonStatusType.None;
     private Animator animator;
     private TextMeshProUGUI levelCountText;
+    public Action refreshRendererEvent;
     protected virtual void Start()
     {
       
@@ -65,7 +66,7 @@ public class Fighter : MonoBehaviour
     {
         if (pokemons[currentPokemonIndex].IsDied)
         {
-            Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} + is K.O", () =>
+            Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is K.O", () =>
             {
                 if (CheckPokemonsAreAllDead())
                 {
@@ -228,6 +229,7 @@ public class Fighter : MonoBehaviour
             statusBackground.gameObject.SetActive(false);
         }
         hpSlider.value = (float)pokemons[currentPokemonIndex].Hp / pokemons[currentPokemonIndex].MaxHp;
+        refreshRendererEvent?.Invoke();
     }
 
     public bool CheckTriggerEndTurnStatus()

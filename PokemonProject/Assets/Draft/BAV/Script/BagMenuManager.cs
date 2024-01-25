@@ -588,7 +588,7 @@ public class BagMenuManager : MonoBehaviour
                             {
                                 gameObject.SetActive(false);
                                 pokemonTeamManager.gameObject.SetActive(false);
-                                fightManager.ChangeTurn();
+                                fightManager.playerFighterController.fighter.EndOwnTurn();
                             }
                             else
                             {
