@@ -173,7 +173,7 @@ public class FightManager : MonoBehaviour
                    TryAddPlayerPokemonXP((index++));
                }
              
-                   
+               Debug.Log("No issues");
            });
            
        }
@@ -187,6 +187,7 @@ public class FightManager : MonoBehaviour
 
    private void AddPlayerPokemonLevelUp(int index)
    {
+       Debug.Log("AddPlayerPokemonLevelUp Trigger");
        var fighter = playerFighterController.fighter;
        var currentPokemon = playerPokemonXpPerTurn[index].pokemon;
        Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} level to {currentPokemon.Level} ", () =>

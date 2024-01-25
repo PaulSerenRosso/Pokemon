@@ -181,7 +181,7 @@ public class Fighter : MonoBehaviour
         Sequencer.Instance.AddCombatInteraction(
             $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name}", () =>
             {
-                
+                Debug.Log("testssfdsfdsfsdfs");
                 if (CheckUseCapacityStatus())
                 {
                     TriggerStatusFeedback();
@@ -323,18 +323,16 @@ public class Fighter : MonoBehaviour
 
     private void TriggerStatusFeedback()
     {
-        // trigger
-        Debug.Log("testststststs");
+   
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
     
     private void TriggerStatus()
-    {
+    {       
         Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}", () =>
             {
                 pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
-                Debug.Log("tescxfqdsfqsdft");
                 EndOwnTurn();
             });
     }

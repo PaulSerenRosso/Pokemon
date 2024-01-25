@@ -55,11 +55,11 @@ namespace SequencerNS
         {
             if (!isPlayingSequence && stack.Count == 0) // Si y'a plus de sequence à jouer
             {
+                Debug.Log("je rentre ici ");
                 // Disable l'UI
-                Debug.Log("disable ui ");
                 dialogueManager.backgroundImage.gameObject.SetActive(false);
                 OnEndSequence?.Invoke();
-                OnEndSequence = null;
+                //OnEndSequence = null;E
                 return;
             }
 
@@ -68,7 +68,6 @@ namespace SequencerNS
                 Debug.Log("Check SequenceType Interaction");
                 if (stack[0].interactionType == SequenceType.Dialogue) // Set if next if dialogue
                 {
-                    
                     StartDialogue();
                 }
                 else if (stack[0].interactionType == SequenceType.Choice) // Set if next if dialogue
@@ -114,11 +113,11 @@ namespace SequencerNS
    
         }
 
-        private void DisplayNextSentence()
+        private async void DisplayNextSentence()
         {
             if (currentTextIndex < stack[0].textToDraw.Length)
             {
-                dialogueManager.ReadText(stack[0].textToDraw[currentTextIndex], stack[0].fromGender);
+                await dialogueManager.ReadText(stack[0].textToDraw[currentTextIndex], stack[0].fromGender);
             }
             else // Plus de textes -> Next interactions
             {
