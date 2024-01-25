@@ -27,15 +27,15 @@ public abstract class PokemonCapacity
         {
             return false;
         }
-        if(so.animationClip)
-        animator.Play(so.animationClip.name+animationSuffix);
+        if(so.animationName != "")
+        animator.Play(so.animationName+animationSuffix);
         coroutineHandler.StartCoroutine(WaitForEndFeedback());
         return true;
     }
 
     IEnumerator WaitForEndFeedback()
     {
-        yield return new WaitForSeconds(so.animationClip ? so.animationClip.length:1f);
+        yield return new WaitForSeconds(so.animationName != "" ? so.animationTime:1f);
         useCapacityFeedbackFinished?.Invoke();
     }
     
