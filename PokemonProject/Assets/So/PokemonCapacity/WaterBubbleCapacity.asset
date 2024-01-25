@@ -19,4 +19,4 @@ MonoBehaviour:
   probabilityOfInflictStatus: 50
   animationName: Charge_
   animationTime: 2.08
-  damage: 30
+  damage: 0

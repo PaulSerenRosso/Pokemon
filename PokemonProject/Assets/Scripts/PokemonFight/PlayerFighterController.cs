@@ -49,7 +49,7 @@ public class PlayerFighterController : FighterController
 
     public void ChooseAnotherPokemon()
     {
-        pokemonTeamManager.ActivateAndDeactivateCancelButton(true);
+        pokemonTeamManager.ActivateAndDeactivateCancelButton();
         pokemonTeamManager.gameObject.SetActive(true);
     }
     

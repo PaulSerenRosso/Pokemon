@@ -29,6 +29,7 @@ public class PokemonTeamManager : MonoBehaviour
     public List<TMP_Text> pokemonMaxsHP = new List<TMP_Text>();
     public List<Image> pokemonImages = new List<Image>();
     public List<Image> pokemonSexImages= new List<Image>();
+    public List<Image> pokemonLifeSlider= new List<Image>();
     public TMP_Text pokemonDescriptionActionText;
     public string[] pokemonDescriptionActionTexts = new []{"Choose a POKEMON", "Do what with this PKMN ?"};
     
@@ -42,6 +43,8 @@ public class PokemonTeamManager : MonoBehaviour
     [SerializeField] private FightManager fightManager;
     
     private Action<Pokemon> pokemonSelectedAction;
+    
+    [SerializeField] private GameObject pokemonCancelButton;
 
     private bool inUsingItem = false;
     private bool currentPokemonInFightIsDead = false;
@@ -54,8 +57,8 @@ public class PokemonTeamManager : MonoBehaviour
 
    public  void ActivateAndDeactivateCancelButton(bool state = false)
     {
-        
-        currentPokemonInFightIsDead = state;
+        currentPokemonInFightIsDead = !state;
+        pokemonCancelButton.SetActive(state);
         SetSwapPokeballCancelButtonActiveState(state, state);
     }
 
@@ -115,6 +118,8 @@ public class PokemonTeamManager : MonoBehaviour
         pokemonCurrentsHP[index].text =PlayerManager.Instance.playerFighter.pokemons[index].Hp.ToString();
         // MaxHP
         pokemonMaxsHP[index].text = PlayerManager.Instance.playerFighter.pokemons[index].MaxHp.ToString();
+        
+        pokemonLifeSlider[index].fillAmount = (float)PlayerManager.Instance.playerFighter.pokemons[index].Hp / PlayerManager.Instance.playerFighter.pokemons[index].MaxHp;
         // Icon Pokemon Team
         pokemonImages[index].sprite = PlayerManager.Instance.playerFighter.pokemons[index].so.teamSprite;
         //Icon Sex
@@ -138,10 +143,22 @@ public class PokemonTeamManager : MonoBehaviour
             if (!isPokemonOptionMenuActive)
             {
                 currentPokemonIndex++;
-                if(currentPokemonIndex > GetPokemonTeamCount())
+                if (currentPokemonInFightIsDead)
                 {
-                    currentPokemonIndex = 0;
-                }    
+                    if(currentPokemonIndex > GetPokemonTeamCount()-1)
+                    {
+                        currentPokemonIndex = 0;
+                    }
+                }
+                else
+                {
+                    if(currentPokemonIndex > GetPokemonTeamCount())
+                    {
+                        currentPokemonIndex = 0;
+                    }   
+                }
+             
+ 
             }
             else
             {
@@ -161,7 +178,16 @@ public class PokemonTeamManager : MonoBehaviour
                 currentPokemonIndex--;
                 if(currentPokemonIndex < 0)
                 {
-                    currentPokemonIndex = GetPokemonTeamCount();
+                    if (currentPokemonInFightIsDead)
+                    {
+                        currentPokemonIndex = GetPokemonTeamCount()-1;
+                    }
+                    else
+                    {
+                        currentPokemonIndex = GetPokemonTeamCount();
+                    }
+
+                   
                 }
             }
             else
@@ -256,6 +282,7 @@ public class PokemonTeamManager : MonoBehaviour
     
     private void UpdateSwapPokeballCancelButton()
     {
+        if(currentPokemonInFightIsDead) return;
         if (currentPokemonIndex < GetPokemonTeamCount())
         {
             SetSwapPokeballCancelButtonActiveState(true, false);
@@ -274,6 +301,7 @@ public class PokemonTeamManager : MonoBehaviour
     
     private int GetPokemonTeamCount()
     {
+
         return PlayerManager.Instance.playerFighter.pokemons.Count;
     }
     
@@ -364,6 +392,7 @@ public class PokemonTeamManager : MonoBehaviour
                     if (currentPokemonInFightIsDead)
                     {
                         fightManager.playerFighterController.fighter.RefreshRenderer();
+                        ActivateAndDeactivateCancelButton(false);
                         fightManager.ChangeTurn();
                     }
                     else

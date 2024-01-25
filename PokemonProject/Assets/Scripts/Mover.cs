@@ -161,6 +161,7 @@ public class Mover : MonoBehaviour
         yield return new WaitForEndOfFrame();
         animator.enabled = false;
         spriteRenderer.sprite = allSprites[forward];
+    
     }
 
     public void SetAnimationMovement(Vector2 forward)
