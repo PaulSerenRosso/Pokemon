@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Super Potion
   description: "La Super Potion est une potion am\xE9lior\xE9e. Elle restaure 50
     PV et co\xFBte 700 pok\xE9dollars"
-  sprite: {fileID: 1317052431, guid: 963bfa4324c1fe8469ce052fd671710e, type: 3}
+  sprite: {fileID: 21300000, guid: 084e42dd6d5f5064598f3250ba8c6915, type: 3}
   itemType: 0
   healAmount: 50

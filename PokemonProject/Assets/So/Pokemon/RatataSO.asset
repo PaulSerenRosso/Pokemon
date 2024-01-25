@@ -24,7 +24,7 @@ MonoBehaviour:
   - {fileID: 1954267155, guid: 20fd0db2a55c30c4f973d7c955775260, type: 3}
   teamSprite: {fileID: -1096159389, guid: 20fd0db2a55c30c4f973d7c955775260, type: 3}
   maxXpAmount: 217
-  captureFactor: 255
+  captureFactor: 150
   startPower: 0
   powerAmountLevelUp: 2
   maxHpAmountLevelUp: 4

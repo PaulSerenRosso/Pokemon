@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Potion
   description: "La Potion \xAB classique \xBB est la plus fr\xE9quente. Elle restaure
     20 PV et co\xFBte 300 pok\xE9dollar"
-  sprite: {fileID: 1317052431, guid: 963bfa4324c1fe8469ce052fd671710e, type: 3}
+  sprite: {fileID: 21300000, guid: 3aa600812aed97c48a45fb5beb1805ad, type: 3}
   itemType: 0
   healAmount: 20

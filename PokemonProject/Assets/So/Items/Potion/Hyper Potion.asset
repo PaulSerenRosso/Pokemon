@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Hyper Potion
   description: "L'Hyper Potion est une Potion bien plus efficace. Elle restaure 120
     PV et co\xFBte 1500 pok\xE9dollar"
-  sprite: {fileID: 1317052431, guid: 963bfa4324c1fe8469ce052fd671710e, type: 3}
+  sprite: {fileID: 21300000, guid: a3fecceb9c96568418744be54635b93f, type: 3}
   itemType: 0
   healAmount: 120
