@@ -20,6 +20,7 @@ namespace SequencerNS
         [SerializeField] private SequenceType currentSequenceType = SequenceType.None;
         public Action OnEndSequence;
         public SequenceType CurrentSequenceType => currentSequenceType;
+        public BagMenuManager bag;
         
         private int currentTextIndex;
         
@@ -59,8 +60,6 @@ namespace SequencerNS
                 // Disable l'UI
                 dialogueManager.backgroundImage.gameObject.SetActive(false);
                 OnEndSequence?.Invoke();
-                //OnEndSequence = null;E
-                return;
             }
 
             if (!isPlayingSequence && stack.Count != 0)
@@ -72,11 +71,14 @@ namespace SequencerNS
                 }
                 else if (stack[0].interactionType == SequenceType.Choice) // Set if next if dialogue
                 {
+                    OnEndSequence = null;
                     StartChoice();
                 }
                 else if (stack[0].interactionType == SequenceType.GivePotion)
                 {
-                    BagMenuManager.instance.AddPotion();
+                    OnEndSequence = null;
+                    bag.AddPotion();
+                    OnEndInteraction();
                 }
             }
         }
@@ -104,11 +106,11 @@ namespace SequencerNS
             if (!isPlayingSequence) TryNextStack();
         }
         
-        public void AddCombatInteraction(string textToDraw, Action callback)
+        public void AddCombatInteraction(string textToDraw, bool isFight, Action callback)
         {
             InteractionSO combatInteraction = ScriptableObject.CreateInstance<TextInteractionSO>();
             combatInteraction.interactionType = SequenceType.Dialogue;
-            combatInteraction.fromGender = Gender.Annoucement;
+            combatInteraction.fromGender = isFight ? Gender.Fight : Gender.Annoucement;
             combatInteraction.textToDraw = new[] { textToDraw };
             stack.Add(combatInteraction);
             OnEndSequence = callback;
@@ -191,7 +193,8 @@ public enum Gender
     Male,
     Female,
     Settings,
-    Annoucement
+    Annoucement,
+    Fight
 }
 
 public enum SequenceType

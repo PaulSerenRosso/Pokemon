@@ -33,6 +33,7 @@ namespace SequencerNS
             switch (gender)
             {
                 case Gender.Annoucement: backgroundImage.sprite = dialoguesBoxSprites[1]; break;
+                case Gender.Fight: backgroundImage.sprite = dialoguesBoxSprites[2]; break;
                 default: backgroundImage.sprite = dialoguesBoxSprites[0]; break;
             }
             
