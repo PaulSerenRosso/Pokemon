@@ -198,6 +198,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemons: []
   currentPokemonIndex: 0
+  canCapturedPokemons: 0
+  pokemonAdjective: 
+  isBackSprite: 0
 --- !u!1 &1488450021645970763
 GameObject:
   m_ObjectHideFlags: 0
@@ -1238,6 +1241,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1562251986162777925, guid: bad9fd1053a4a7741a22e297f6de5acc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2158646999850632460, guid: bad9fd1053a4a7741a22e297f6de5acc, type: 3}
+      propertyPath: interactionsOneShot.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
