@@ -9,13 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cefb96f51a513a4dabff74961121db7, type: 3}
-  m_Name: R_Close_S
+  m_Script: {fileID: 11500000, guid: 1b3798c6434dc4940ba5de3e6da21946, type: 3}
+  m_Name: PokemonPoisonType
   m_EditorClassIdentifier: 
-  interactionType: 0
-  textToDraw:
-  - Close
-  fromGender: 3
-  title: No
-  resolutionType: 0
-  pokemonToGive: {fileID: 0}
+  name: Poison

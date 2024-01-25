@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf0520e848b3f5a4c9625465e0c82038, type: 3}
   m_Name: BulbizzareSO
   m_EditorClassIdentifier: 
-  name: Salameche
-  startLevel: 0
+  name: Bulbizzare
+  startLevel: 5
   pokemonCapacitySO: []
-  maxHp: 0
-  pokemonTypeSo: {fileID: 0}
+  maxHp: 20
+  pokemonTypeSo: {fileID: 11400000, guid: 5fe89eca1ef7a8041bef0070280047dc, type: 2}
   pokemonSex: 0
-  battleSprite: []
-  teamSprite: {fileID: 0}
-  maxXpAmount: 0
+  battleSprite:
+  - {fileID: -1250580584, guid: 20fd0db2a55c30c4f973d7c955775260, type: 3}
+  - {fileID: -1005517197, guid: 20fd0db2a55c30c4f973d7c955775260, type: 3}
+  teamSprite: {fileID: 2067214685, guid: 20fd0db2a55c30c4f973d7c955775260, type: 3}
+  maxXpAmount: 250
   captureFactor: 0
   startPower: 0
   powerAmountLevelUp: 2
   maxHpAmountLevelUp: 4
+  startXPMax: 5

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: R_Close_C
   m_EditorClassIdentifier: 
   interactionType: 0
-  textToDraw: []
+  textToDraw:
+  - Close
   fromGender: 3
   title: No
   resolutionType: 0
