@@ -17,5 +17,6 @@ MonoBehaviour:
   pokemonTypeSo: {fileID: 11400000, guid: d1833769e923ca8479d84ff5d3a31930, type: 2}
   pokemonStatusType: 2
   probabilityOfInflictStatus: 100
-  animationClip: {fileID: 0}
+  animationName: Charge_
+  animationTime: 2.08
   damage: 30

@@ -9,6 +9,6 @@ public abstract class PokemonCapacitySO : ScriptableObject
     public abstract Type GetType();
     public PokemonStatusType pokemonStatusType;
     public float probabilityOfInflictStatus;
-    public AnimationClip animationClip; 
-
+    public string animationName;
+    public float animationTime;
 }
