@@ -40,7 +40,7 @@ public class Fighter : MonoBehaviour
         this.enemyFighter = enemyFighter;
         hasLost = false;
         currentPokemonIndex = 0;
-        initEvent?.Invoke();
+       
         this.fighterSpriteRenderer = fighterSpriteRenderer;
         this.enemySpriteRenderer = enemySpriteRenderer;
         this.hpSlider = hpSlider;
@@ -85,24 +85,11 @@ public class Fighter : MonoBehaviour
 
         return false; 
     }
-
-    // refresh renderer 
-    // refresh renderer
     
-    // vérfier que je suis par mort
-    // si je suis mort 
-        // je check si je suis pas perdu 
-        // si j'ai pas perdu je selectionner un nouveau pokemon
-        // refresh
-        // et de pas appliquer l'effet de paralyser
-    // si je suis pas mort 
-    // je check paralysier 
-        // si oui je paralyser puis je end turn et tu refresh
-        // si non je end turn
         public void EndOwnTurn()
     {
     
-        Debug.Log("testssss");
+    
         enemyFighter.RefreshRenderer();
         RefreshRenderer();
         
@@ -122,9 +109,9 @@ public class Fighter : MonoBehaviour
                 else
                 {
                     if (currentStatusToAdd != PokemonStatusType.None)
-                    {    Debug.Log("test");
+                    {   
                         enemyFighter.AddStatus(currentStatusToAdd);
-                      
+                        currentStatusToAdd = PokemonStatusType.None;
                     }
                     else
                     {
@@ -300,7 +287,6 @@ public class Fighter : MonoBehaviour
             }
         }
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = AddUIStatus;
-        currentStatusToAdd = PokemonStatusType.None;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
 
@@ -319,6 +305,7 @@ public class Fighter : MonoBehaviour
 
     private void TriggerStatusFeedback()
     {
+        Debug.Log("bonsoir à tous et à toutes ");
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }

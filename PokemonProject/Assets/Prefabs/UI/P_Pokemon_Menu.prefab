@@ -472,6 +472,8 @@ MonoBehaviour:
   - {fileID: 1553667982, guid: fceb3811025c4c945b04fb8353d82876, type: 3}
   currentPokemonWithPlayer: 0
   currentPokemonIndex: 0
+  fightManager: {fileID: 0}
+  pokemonCancelButton: {fileID: 8175601262433745477}
 --- !u!1 &3901785993582713396
 GameObject:
   m_ObjectHideFlags: 0

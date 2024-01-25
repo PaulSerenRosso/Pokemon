@@ -41,6 +41,8 @@ public class FightManager : MonoBehaviour
 
     public void InitFight(Fighter enemyFighter)
     {
+      
+        playerFighterController.fighter.initEvent?.Invoke();
         Sequencer.Instance.OnEndSequence = null;
         playerPokemonXpPerTurn.Clear();
         CheckPlayerPokemonXpTurn();
