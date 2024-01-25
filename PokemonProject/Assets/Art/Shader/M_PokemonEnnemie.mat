@@ -59,8 +59,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0.5
-    - _EffectToDisplay: 1
-    - _EffectsOpacity: 0
+    - _EffectToDisplay: 0.58
+    - _EffectsOpacity: 0.4
     m_Colors:
-    - _SpeedXY: {r: 0, g: 2, b: 0, a: 0}
+    - _SpeedXY: {r: 0, g: -1, b: 0, a: 0}
   m_BuildTextureStacks: []
