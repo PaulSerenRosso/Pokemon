@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections.Generic;
 using SequencerNS;
 using TMPro;
@@ -27,8 +25,9 @@ public class FightManager : MonoBehaviour
     [SerializeField] private Animator sceneFightAnimator;
     [SerializeField] private TextMeshProUGUI playerPokemonLevelText;
     [SerializeField] private TextMeshProUGUI enemyPokemonLevelText;
+    [SerializeField] private GameObject playerUIPanel;
     private List<PokemonWithXpTurn> playerPokemonXpPerTurn = new List<PokemonWithXpTurn>();
-    private bool isPlayerWin;
+    public bool isPlayerWin;
     public bool isInFight;
     public int xpPerTurn = 2;
     public int xpPokemonEntryFight = 3;
@@ -52,8 +51,12 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter = enemyFighter;
         enemyFighterController.fighter.chooseActionEvent =ResolveFight;
         enemyFighterController.fighter.endTurnEvent = ChangeTurn;
+        playerUIPanel.SetActive(false);
+        playerPokemonSpriteRenderer.enabled = false; 
         Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.GetCurrentPokemonName()} go !" , () =>
         {
+            playerUIPanel.SetActive(true);
+            playerPokemonSpriteRenderer.enabled = true; 
             playerFighterController.fighter.Init(enemyFighter, playerPokemonSpriteRenderer, enemyPokemonSpriteRenderer, playerPokemonSlider, playerPokemonTextName, playerPokemonStatusText, playerPokemonStatusBackground, this, sceneFightAnimator, playerPokemonLevelText, playerPokemonSpriteRenderer );
             playerFighterController.fighter.chooseAnotherPokemonEvent = playerFighterController.ChooseAnotherPokemon;
             ChangeTurn();
@@ -101,6 +104,7 @@ public class FightManager : MonoBehaviour
 
     void ExitFight()
     {
+        enemyFighterController.fighter.pokemons.Clear();
         camera.gameObject.SetActive(false);
         enemyFighterController.fighter.Disable();
         playerFighterController.fighter.Disable();
@@ -137,7 +141,7 @@ public class FightManager : MonoBehaviour
         }
         else
         {
-            EndFight();
+            ExitFight();
         }
       
         
@@ -146,6 +150,7 @@ public class FightManager : MonoBehaviour
    private void TryAddPlayerPokemonXP(int index)
    {
        var fighter = playerFighterController.fighter;
+       Debug.Log(index);
        if (playerPokemonXpPerTurn.Count == index)
        {
            ExitFight();
@@ -156,33 +161,34 @@ public class FightManager : MonoBehaviour
        {
            var xpWon = xpPokemonEntryFight + xpPerTurn * playerPokemonXpPerTurn[index].xpTurn;
            var isLevelUp = currentPokemon.IncreaseXP(xpWon);
-          
-           Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} gains {xpWon} ",()=>
+           if (playerPokemonXpPerTurn[index].pokemon == fighter.pokemons[fighter.currentPokemonIndex])
            {
-               if (playerPokemonXpPerTurn[index].pokemon == fighter.pokemons[fighter.currentPokemonIndex])
-               {
-                   UpdateXPSlider();
-               }
-
+               UpdateXPSlider();
+           }
+           Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} gains {xpWon} XP ! ",()=>
+           {
                if (isLevelUp)
                {
                    AddPlayerPokemonLevelUp(index);
                }
                else
                {
-                   TryAddPlayerPokemonXP((index++));
+                   index += 1;
+                   TryAddPlayerPokemonXP(index);
                }
-             
-               Debug.Log("No issues");
            });
-           
+       }
+       else
+       {
+           index += 1;
+           TryAddPlayerPokemonXP(index);
        }
    }
 
    private void UpdateXPSlider()
    {
        var fighter = playerFighterController.fighter;  
-       sliderXp.value = (float)fighter.pokemons[fighter.currentPokemonIndex].Xp/fighter.pokemons[fighter.currentPokemonIndex].MaxHp;
+       sliderXp.value = ((float)fighter.pokemons[fighter.currentPokemonIndex].Xp)/fighter.pokemons[fighter.currentPokemonIndex].MaxXP;
    }
 
    private void AddPlayerPokemonLevelUp(int index)
@@ -190,14 +196,14 @@ public class FightManager : MonoBehaviour
        Debug.Log("AddPlayerPokemonLevelUp Trigger");
        var fighter = playerFighterController.fighter;
        var currentPokemon = playerPokemonXpPerTurn[index].pokemon;
+       if (playerPokemonXpPerTurn[index].pokemon == fighter.pokemons[fighter.currentPokemonIndex])
+       {
+           fighter.RefreshRenderer();
+       }
        Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} level to {currentPokemon.Level} ", () =>
        {
-           if (playerPokemonXpPerTurn[index].pokemon == fighter.pokemons[fighter.currentPokemonIndex])
-           {
-               fighter.RefreshRenderer();
-           }
-           TryAddPlayerPokemonXP((index++)); 
-           
+           index += 1;
+           TryAddPlayerPokemonXP((index));
        });
    }
 }

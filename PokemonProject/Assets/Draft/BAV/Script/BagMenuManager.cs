@@ -613,7 +613,6 @@ public class BagMenuManager : MonoBehaviour
                         
                         void UsePokeball()
                         {
-                            Debug.Log("teststt");
                             if(pokeball.UsePokeball(enemyFighter.pokemons[enemyFighter.currentPokemonIndex]) && fightManager.playerFighterController.fighter.pokemons.Count < 6)
                             {
                                 pokeball.useEndCinematicFeedback = () =>
@@ -628,6 +627,7 @@ public class BagMenuManager : MonoBehaviour
                                         var pokemonCaptured = enemyFighter.pokemons[enemyFighter.currentPokemonIndex];
                                         fightManager.playerFighterController.fighter.pokemons.Add(pokemonCaptured);
                                         enemyFighter.pokemons.RemoveAt(enemyFighter.currentPokemonIndex);
+                                        fightManager.isPlayerWin = true;
                                         fightManager.EndFight();
                                     });
                                 };
@@ -658,9 +658,6 @@ public class BagMenuManager : MonoBehaviour
 
                 }
                 gameObject.SetActive(false);
-                
-        
-                
     }
 
 

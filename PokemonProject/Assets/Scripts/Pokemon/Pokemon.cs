@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 
 [Serializable]
@@ -15,13 +16,12 @@ public class Pokemon
     public PokemonCapacity[] capacities;
     public PokemonStatus currentStatus;
     
-    
-
-
     public Pokemon(PokemonSO pokemonSo)
     {
+        
         so = pokemonSo;
         maxHp = so.maxHp;
+        maxXp = so.startXPMax;
         level = so.startLevel;
         SetHp(maxHp);
         capacities = new PokemonCapacity[4];
@@ -47,32 +47,22 @@ public class Pokemon
     {
         power += amount;
     }
-    // niveau ww
-    // max xp qui augmente
-    // statistiques
-    // dés que tu finis un combat 
-    // si ton pokemon meurt il ne gagne pas d'exp
-    // pokemon sent in the battle provide exp
-    // pokemon win et lost
-    // defeat pokemon
-    // or make damage
     public bool IsDied => isDied;
     
     public bool IncreaseXP(int amount)
     {
         xp += amount;
-        if (xp > maxXp)
+        Debug.Log(xp +" max xp " +maxXp );
+        if (xp >= maxXp)
         {
             level++;
-            
-            xp = 0;
+            xp -= maxXp;
             maxXp += so.maxXpAmount;
-            // increase max hp 
-            // set hp to max hp 
-            // update damage
+        
             power += so.powerAmountLevelUp;
             maxHp += so.maxHpAmountLevelUp;
             SetHp(maxHp);
+            Debug.Log(xp +" max xp " +maxXp );
             return true;
         }
 

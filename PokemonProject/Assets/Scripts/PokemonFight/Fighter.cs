@@ -71,7 +71,7 @@ public class Fighter : MonoBehaviour
                 if (CheckPokemonsAreAllDead())
                 {
                     if(pokemons[currentPokemonIndex].currentStatus != null)
-                    pokemons[currentPokemonIndex].currentStatus.RefreshTurnStateStatus();
+                        pokemons[currentPokemonIndex].currentStatus.RefreshTurnStateStatus();
                     endTurnEvent?.Invoke();
                     
                 }
@@ -101,14 +101,15 @@ public class Fighter : MonoBehaviour
         // si non je end turn
         public void EndOwnTurn()
     {
+    
         Debug.Log("testssss");
         enemyFighter.RefreshRenderer();
         RefreshRenderer();
-        // attend
+        
         if (!enemyFighter.TryEndTurn())
-        {    Debug.Log("test");
+        {   
             if (CheckTriggerEndTurnStatus())
-            {    Debug.Log("test");
+            {   
                 TriggerStatusFeedback();
             }
             else
@@ -323,7 +324,6 @@ public class Fighter : MonoBehaviour
 
     private void TriggerStatusFeedback()
     {
-   
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }
