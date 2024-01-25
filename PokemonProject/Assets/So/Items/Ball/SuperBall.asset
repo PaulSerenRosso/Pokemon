@@ -10,11 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb8f5ba43c580144ca90c7d23c2c3850, type: 3}
-  m_Name: Default Pokeball
+  m_Name: SuperBall
   m_EditorClassIdentifier: 
-  itemName: MASTER BALL
-  description: It's a default Pokeball
-  sprite: {fileID: -1147378170, guid: fceb3811025c4c945b04fb8353d82876, type: 3}
+  itemName: Super Ball
+  description: It's a Super ball
+  sprite: {fileID: 21300000, guid: b06d9975b5fe0e545a00e72dd034f880, type: 3}
   itemType: 2
-  captureFactor: 1
-  numberOfItems: 999
+  captureFactor: 1.5
