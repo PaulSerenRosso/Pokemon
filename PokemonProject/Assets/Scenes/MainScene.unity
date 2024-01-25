@@ -6189,6 +6189,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4873893473495284488, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4947392721489321441, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.25
@@ -7239,7 +7243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8927809376122965359, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.97
+      value: -1.08
       objectReference: {fileID: 0}
     - target: {fileID: 9082390675900626259, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_Layer
