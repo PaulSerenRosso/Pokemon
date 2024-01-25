@@ -13952,6 +13952,14 @@ PrefabInstance:
       propertyPath: enemyFighter
       value: 
       objectReference: {fileID: 845728831}
+    - target: {fileID: 4980707482407766694, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
+      propertyPath: allPokemonSo.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980707482407766694, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
+      propertyPath: allPokemonSo.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 7c7ec0729a09dc94196f13e298505e8c, type: 2}
     - target: {fileID: 7691732329228573121, guid: 0f7cffaa213466d49b83e6e2aac7e81d, type: 3}
       propertyPath: m_TagString
       value: Slope
