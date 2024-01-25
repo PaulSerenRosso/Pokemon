@@ -138,6 +138,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6997455730631317854, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
   m_PrefabInstance: {fileID: 845728829}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &174378115 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7920583561656414834, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+  m_PrefabInstance: {fileID: 845728829}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174378114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd5369b1c7b2514b8a0b4b66d28a614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &187762924 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8038002074324117126, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
@@ -5730,6 +5741,10 @@ PrefabInstance:
       propertyPath: m_CellSize.y
       value: 85
       objectReference: {fileID: 0}
+    - target: {fileID: 1374904141808238926, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1407854201458937951, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -5776,7 +5791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1785603634302801368, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.55
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1920354716261788303, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.y
@@ -5793,6 +5808,10 @@ PrefabInstance:
     - target: {fileID: 1920354716261788303, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -283
+      objectReference: {fileID: 0}
+    - target: {fileID: 1953324961745359294, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1972175657820451704, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_HandleRect
@@ -5976,11 +5995,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3700746845972035950, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3700746845972035950, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3726416885896973831, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_Name
@@ -6184,7 +6203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4947392721489321441, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4953875231330780504, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_IsActive
@@ -6220,11 +6239,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5573778675933857624, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5573778675933857624, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5753979453018476680, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnchorMax.y
@@ -6418,6 +6437,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7059995953213089029, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: fightManager
+      value: 
+      objectReference: {fileID: 1395565288}
     - target: {fileID: 7304601948692368718, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_Value
       value: 1
@@ -6864,7 +6887,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[4].second.m_AnimationSpeed
-      value: 3.0000002
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[5].second.m_AnimationSpeed
@@ -6872,7 +6895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[6].second.m_AnimationSpeed
-      value: 3
+      value: 3.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[7].second.m_AnimationSpeed
@@ -6880,7 +6903,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[8].second.m_AnimationSpeed
-      value: 3
+      value: 3.0000002
       objectReference: {fileID: 0}
     - target: {fileID: 7791412355611826266, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: m_AnimatedTiles.Array.data[9].second.m_AnimationSpeed
@@ -6894,6 +6917,10 @@ PrefabInstance:
       propertyPath: pokemonTeamPanel
       value: 
       objectReference: {fileID: 174378114}
+    - target: {fileID: 7892571603731999425, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: pokemonTeamManager
+      value: 
+      objectReference: {fileID: 174378115}
     - target: {fileID: 7920583561656414834, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: fightManager
       value: 
@@ -13555,6 +13582,10 @@ PrefabInstance:
     - target: {fileID: 6274274326198590291, guid: ec0bc59e56d7c0c4e820a49926af2107, type: 3}
       propertyPath: m_Name
       value: FX_ThrowRugissement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6274274326198590291, guid: ec0bc59e56d7c0c4e820a49926af2107, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6320605053537469840, guid: ec0bc59e56d7c0c4e820a49926af2107, type: 3}
       propertyPath: m_LocalPosition.x

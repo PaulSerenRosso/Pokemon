@@ -193,7 +193,7 @@ public class PokemonTeamManager : MonoBehaviour
                 }
                 else
                 {
-                    if (currentPokemonInFightIsDead)
+                    if (!currentPokemonInFightIsDead)
                     {
                    
                         HandleCancelButton();
@@ -363,6 +363,7 @@ public class PokemonTeamManager : MonoBehaviour
                 {
                     if (currentPokemonInFightIsDead)
                     {
+                        fightManager.playerFighterController.fighter.RefreshRenderer();
                         fightManager.ChangeTurn();
                     }
                     else
@@ -379,7 +380,7 @@ public class PokemonTeamManager : MonoBehaviour
         if (GetPokemonTeamCount() >= 2)
         {
     
-            if(!PlayerManager.Instance.playerFighter.pokemons[currentPokemonIndex].IsDied && !PlayerManager.Instance.playerFighter.pokemons[0].IsDied) 
+            if(!PlayerManager.Instance.playerFighter.pokemons[currentPokemonIndex].IsDied) 
             {
                 if (currentPokemonIndex == 0)
                 {

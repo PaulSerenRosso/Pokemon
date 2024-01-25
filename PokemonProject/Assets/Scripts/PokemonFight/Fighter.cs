@@ -71,7 +71,7 @@ public class Fighter : MonoBehaviour
                 if (CheckPokemonsAreAllDead())
                 {
                     if(pokemons[currentPokemonIndex].currentStatus != null)
-                    pokemons[currentPokemonIndex].currentStatus.RefreshTurnStateStatus();
+                        pokemons[currentPokemonIndex].currentStatus.RefreshTurnStateStatus();
                     endTurnEvent?.Invoke();
                     
                 }
@@ -101,14 +101,15 @@ public class Fighter : MonoBehaviour
         // si non je end turn
         public void EndOwnTurn()
     {
+    
         Debug.Log("testssss");
         enemyFighter.RefreshRenderer();
         RefreshRenderer();
-        // attend
+        
         if (!enemyFighter.TryEndTurn())
-        {    Debug.Log("test");
+        {   
             if (CheckTriggerEndTurnStatus())
-            {    Debug.Log("test");
+            {   
                 TriggerStatusFeedback();
             }
             else
@@ -136,10 +137,6 @@ public class Fighter : MonoBehaviour
         }
 
     }
-
-
-
-  
 
     public string GetCurrentPokemonName()
     {
@@ -181,7 +178,6 @@ public class Fighter : MonoBehaviour
         Sequencer.Instance.AddCombatInteraction(
             $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name}", () =>
             {
-                Debug.Log("testssfdsfdsfsdfs");
                 if (CheckUseCapacityStatus())
                 {
                     TriggerStatusFeedback();
@@ -190,7 +186,7 @@ public class Fighter : MonoBehaviour
                 {
                     pokemons[currentPokemonIndex].capacities[index].useCapacityFeedbackFinished = () => UseCapacity(index);
                     if (pokemons[currentPokemonIndex].capacities[index]
-                        .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer,  coroutineHandler,animator))
+                        .TryUseCapacityFeedback(fighterSpriteRenderer, enemySpriteRenderer,  coroutineHandler,animator, isBackSprite ? "Player":"Enemy"))
                     {
                         
                         chooseActionEvent?.Invoke();
@@ -209,7 +205,6 @@ public class Fighter : MonoBehaviour
            
         }
         EndOwnTurn();
-        
     }
 
     public void RefreshRenderer()
@@ -249,6 +244,7 @@ public class Fighter : MonoBehaviour
     {
         if (pokemons[currentPokemonIndex].currentStatus.CheckCanTriggerStatus())
         {
+            Debug.Log("check status condition");
             return true;
         }
 
@@ -323,7 +319,6 @@ public class Fighter : MonoBehaviour
 
     private void TriggerStatusFeedback()
     {
-   
         pokemons[currentPokemonIndex].currentStatus.useCapacityFeedbackFinished = TriggerStatus;
         pokemons[currentPokemonIndex].currentStatus.TriggerStatusFeedback(fighterSpriteRenderer, coroutineHandler);
     }

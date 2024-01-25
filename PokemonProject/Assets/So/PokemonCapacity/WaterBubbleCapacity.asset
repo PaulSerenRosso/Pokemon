@@ -18,4 +18,4 @@ MonoBehaviour:
   pokemonStatusType: 2
   probabilityOfInflictStatus: 100
   animationClip: {fileID: 0}
-  damage: 40
+  damage: 1

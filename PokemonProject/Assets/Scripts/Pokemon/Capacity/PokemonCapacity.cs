@@ -21,14 +21,14 @@ public abstract class PokemonCapacity
     }
     
     public float Stamina => currentStamina; 
-    public virtual bool TryUseCapacityFeedback(SpriteRenderer pokemon, SpriteRenderer enemyPokemon, MonoBehaviour coroutineHandler, Animator animator)
+    public virtual bool TryUseCapacityFeedback(SpriteRenderer pokemon, SpriteRenderer enemyPokemon, MonoBehaviour coroutineHandler, Animator animator, string animationSuffix)
     {
         if (currentStamina == 0)
         {
             return false;
         }
         if(so.animationClip)
-        animator.Play(so.animationClip.name);
+        animator.Play(so.animationClip.name+animationSuffix);
         coroutineHandler.StartCoroutine(WaitForEndFeedback());
         return true;
     }
