@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using SequencerNS;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class DialogueObjects : MonoBehaviour, IInteractable
 {
@@ -30,8 +27,12 @@ public class DialogueObjects : MonoBehaviour, IInteractable
         
         if (interactionsOneShot.Count != 0)
         {
-            Sequencer.Instance.AddPopInteraction(interactionsOneShot[0]);
-            interactionsOneShot.RemoveAt(0);
+            for (int i = 0; i < interactionsOneShot.Count; i++)
+            {
+                Sequencer.Instance.AddPopInteraction(interactionsOneShot[i]);
+            }
+            
+            interactionsOneShot.Clear();
             return;
         }
         

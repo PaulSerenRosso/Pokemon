@@ -358,7 +358,7 @@ public class PokemonTeamManager : MonoBehaviour
             fightManager.ResolveFight();
             pokemonOptionMenu.SetActive(false);
             gameObject.SetActive(false);
-            Sequencer.Instance.AddCombatInteraction($"{fightManager.playerFighterController.fighter.GetCurrentPokemonName()} go !",
+            Sequencer.Instance.AddCombatInteraction($"{fightManager.playerFighterController.fighter.GetCurrentPokemonName()} go !", true,
                 () =>
                 {
                     if (currentPokemonInFightIsDead)
@@ -384,7 +384,7 @@ public class PokemonTeamManager : MonoBehaviour
             {
                 if (currentPokemonIndex == 0)
                 {
-                    Sequencer.Instance.AddCombatInteraction("Select another Pokemon than the current one activated", ()=>{});
+                    Sequencer.Instance.AddCombatInteraction("Select another Pokemon than the current one activated", false,()=>{});
                     return;
                 }
                 SwitchPokemon(currentPokemonIndex, 0);
@@ -395,12 +395,12 @@ public class PokemonTeamManager : MonoBehaviour
             }
             else
             {
-                Sequencer.Instance.AddCombatInteraction("The Pokemons need to be alive", ()=>{});
+                Sequencer.Instance.AddCombatInteraction("The Pokemons need to be alive", false, ()=>{});
             }
         }
         else
         {
-            Sequencer.Instance.AddCombatInteraction("You need more than one Pokemon", ()=>{});
+            Sequencer.Instance.AddCombatInteraction("You need more than one Pokemon", false,()=>{});
         }
     }
 
@@ -423,5 +423,15 @@ public class PokemonTeamManager : MonoBehaviour
     public void ToggleOffThePokemonTeamMenu()
     {
         gameObject.SetActive(false);
+    }
+    
+    private void OnEnable()
+    {
+        Sequencer.Instance.OnEndSequence = null;
+    }
+
+    private void OnDisable()
+    {
+        Sequencer.Instance.OnEndSequence = null;
     }
 }

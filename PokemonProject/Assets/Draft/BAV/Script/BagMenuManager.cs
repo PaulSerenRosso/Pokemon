@@ -1,9 +1,7 @@
-using System;
 using System.Collections.Generic;
 using SequencerNS;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BagMenuManager : MonoBehaviour
@@ -50,13 +48,15 @@ public class BagMenuManager : MonoBehaviour
     public static BagMenuManager instance;
 
     private void Awake()
-    {
+    { 
         if (instance == null)
         {
             instance = this;
+            Debug.Log("Non");
         }
         else
         {
+            Debug.Log("Oui");
             Destroy(this);
         }
     }
@@ -113,6 +113,7 @@ public class BagMenuManager : MonoBehaviour
             if (itemsCommons[i].so == basePotion)
             {
                 itemsCommons[i].count++;
+                Debug.Log(itemsCommons[i].count);
                 isFound = true;
                 break;
             }
@@ -616,7 +617,7 @@ public class BagMenuManager : MonoBehaviour
                             itemsCommons.RemoveAt(selectedIndex);
                         }
 
-                        Sequencer.Instance.AddCombatInteraction("Heal Pokemon", () =>
+                        Sequencer.Instance.AddCombatInteraction("Heal Pokemon", false, () =>
                         {
                             if (fightManager.isInFight)
                             {
@@ -651,7 +652,7 @@ public class BagMenuManager : MonoBehaviour
                             {
                                 pokeball.useEndCinematicFeedback = () =>
                                 {
-                                    Sequencer.Instance.AddCombatInteraction("Capture Success ! ", () =>
+                                    Sequencer.Instance.AddCombatInteraction("Capture Success ! ", true,() =>
                                     {
                                         pokeballItems[selectedIndex].DecrementCount();
                                         if (!pokeballItems[selectedIndex].CheckCount())
@@ -671,7 +672,7 @@ public class BagMenuManager : MonoBehaviour
                             {
                                 pokeball.useEndCinematicFeedback = () =>
                                 {
-                                    Sequencer.Instance.AddCombatInteraction("Capture Failed! ", () =>
+                                    Sequencer.Instance.AddCombatInteraction("Capture Failed! ", true, () =>
                                     {
                                        
                                         pokeballItems[selectedIndex].DecrementCount();
@@ -711,5 +712,15 @@ public class BagMenuManager : MonoBehaviour
     public void ToggleOffTheBagMenu()
     {
         gameObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        Sequencer.Instance.OnEndSequence = null;
+    }
+
+    private void OnDisable()
+    {
+        Sequencer.Instance.OnEndSequence = null;
     }
 }

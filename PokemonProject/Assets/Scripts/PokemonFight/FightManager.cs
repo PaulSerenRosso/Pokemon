@@ -41,6 +41,7 @@ public class FightManager : MonoBehaviour
 
     public void InitFight(Fighter enemyFighter)
     {
+        Sequencer.Instance.OnEndSequence = null;
         playerPokemonXpPerTurn.Clear();
         CheckPlayerPokemonXpTurn();
         isInFight = true;
@@ -53,7 +54,7 @@ public class FightManager : MonoBehaviour
         enemyFighterController.fighter.endTurnEvent = ChangeTurn;
         playerUIPanel.SetActive(false);
         playerPokemonSpriteRenderer.enabled = false; 
-        Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.GetCurrentPokemonName()} go !" , () =>
+        Sequencer.Instance.AddCombatInteraction($"{playerFighterController.fighter.GetCurrentPokemonName()} go !" , true,() =>
         {
             playerUIPanel.SetActive(true);
             playerPokemonSpriteRenderer.enabled = true; 
@@ -110,6 +111,7 @@ public class FightManager : MonoBehaviour
         playerFighterController.fighter.Disable();
         WorldManager.instance.ChangeSpace(previousSpace);
         isInFight = false;
+        Sequencer.Instance.OnEndSequence = null;
     }
 
     private void CheckPlayerPokemonXpTurn()
@@ -142,9 +144,8 @@ public class FightManager : MonoBehaviour
         else
         {
             ExitFight();
+            
         }
-      
-        
     }
 
    private void TryAddPlayerPokemonXP(int index)
@@ -165,7 +166,7 @@ public class FightManager : MonoBehaviour
            {
                UpdateXPSlider();
            }
-           Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} gains {xpWon} XP ! ",()=>
+           Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} gains {xpWon} XP ! ",true,()=>
            {
                if (isLevelUp)
                {
@@ -200,7 +201,7 @@ public class FightManager : MonoBehaviour
        {
            fighter.RefreshRenderer();
        }
-       Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} level to {currentPokemon.Level} ", () =>
+       Sequencer.Instance.AddCombatInteraction($"{currentPokemon.so.name} level to {currentPokemon.Level} ",true, () =>
        {
            index += 1;
            TryAddPlayerPokemonXP((index));

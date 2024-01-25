@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: T_3_PotionGiver
   m_EditorClassIdentifier: 
   interactionType: 4
-  textToDraw: []
+  textToDraw:
+  - 
   fromGender: 3

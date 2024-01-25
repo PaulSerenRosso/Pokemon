@@ -66,7 +66,7 @@ public class Fighter : MonoBehaviour
     {
         if (pokemons[currentPokemonIndex].IsDied)
         {
-            Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is K.O", () =>
+            Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is K.O", true, () =>
             {
                 if (CheckPokemonsAreAllDead())
                 {
@@ -176,7 +176,7 @@ public class Fighter : MonoBehaviour
     {  
         chooseActionEvent?.Invoke();
         Sequencer.Instance.AddCombatInteraction(
-            $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name}", () =>
+            $"{GetCurrentPokemonName()} uses {pokemons[currentPokemonIndex].capacities[index].so.name}", true, () =>
             {
                 if (CheckUseCapacityStatus())
                 {
@@ -306,7 +306,7 @@ public class Fighter : MonoBehaviour
 
     private void AddUIStatus()
     {
-        Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}",()=>
+        Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}",true, ()=>
         {
             statusBackground.gameObject.SetActive(true);
             statusText.gameObject.SetActive(true);
@@ -325,7 +325,7 @@ public class Fighter : MonoBehaviour
     
     private void TriggerStatus()
     {       
-        Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}", () =>
+        Sequencer.Instance.AddCombatInteraction($"{GetCurrentPokemonName()} is {pokemons[currentPokemonIndex].currentStatus.statusText}",true, () =>
             {
                 pokemons[currentPokemonIndex].currentStatus.TriggerStatus();
                 EndOwnTurn();
