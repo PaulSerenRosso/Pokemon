@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: PoisonCapacitySO
   m_EditorClassIdentifier: 
   name: Vampigraine
-  maxStamina: 30
+  maxStamina: 25
   pokemonTypeSo: {fileID: 11400000, guid: 218f1c42f60ddd748951ca4ce976b09c, type: 2}
   pokemonStatusType: 1
-  probabilityOfInflictStatus: 20
-  animationClip: {fileID: 0}
+  probabilityOfInflictStatus: 35
+  animationName: Charge_
+  animationTime: 2.08
   damage: 5

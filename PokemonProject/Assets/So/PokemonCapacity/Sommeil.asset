@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fa0b2b9b364ef44c8e9ce6f8a2ad424, type: 3}
-  m_Name: FreezeCapacity
+  m_Name: Sommeil
   m_EditorClassIdentifier: 
-  name: Ecume glaciale
-  maxStamina: 25
-  pokemonTypeSo: {fileID: 11400000, guid: d1833769e923ca8479d84ff5d3a31930, type: 2}
-  pokemonStatusType: 4
-  probabilityOfInflictStatus: 35
+  name: Coup assomant
+  maxStamina: 5
+  pokemonTypeSo: {fileID: 11400000, guid: 6f7256221e99fb844b2247cb86116d15, type: 2}
+  pokemonStatusType: 3
+  probabilityOfInflictStatus: 70
   animationName: Charge_
   animationTime: 2.08
-  damage: 9
+  damage: 5

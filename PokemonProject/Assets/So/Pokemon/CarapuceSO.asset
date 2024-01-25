@@ -18,6 +18,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ed733a112dadd654bbbd16e1594a51d7, type: 2}
   - {fileID: 11400000, guid: 0efdfb495cf5f8547a15d060f4654c58, type: 2}
   - {fileID: 11400000, guid: 62d9020121bd69a4ba9e8166344fd95c, type: 2}
+  - {fileID: 11400000, guid: 6b85a29a72b6aac4eaad9afcb78e224c, type: 2}
   maxHp: 20
   pokemonTypeSo: {fileID: 11400000, guid: d1833769e923ca8479d84ff5d3a31930, type: 2}
   pokemonSex: 0

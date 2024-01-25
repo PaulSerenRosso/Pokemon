@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa0b2b9b364ef44c8e9ce6f8a2ad424, type: 3}
   m_Name: Flammeche
   m_EditorClassIdentifier: 
-  name: Flameche
+  name: Flammeche
   maxStamina: 15
   pokemonTypeSo: {fileID: 11400000, guid: 6f7256221e99fb844b2247cb86116d15, type: 2}
   pokemonStatusType: 5
   probabilityOfInflictStatus: 30
-  animationClip: {fileID: 0}
+  animationName: Charge_
+  animationTime: 2.08
   damage: 10

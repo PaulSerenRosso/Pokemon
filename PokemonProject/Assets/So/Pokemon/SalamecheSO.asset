@@ -16,7 +16,8 @@ MonoBehaviour:
   startLevel: 5
   pokemonCapacitySO:
   - {fileID: 11400000, guid: ed733a112dadd654bbbd16e1594a51d7, type: 2}
-  - {fileID: 11400000, guid: 62d9020121bd69a4ba9e8166344fd95c, type: 2}
+  - {fileID: 11400000, guid: 9f86c3b9a7d3e254fb1bc038fdaf0ca6, type: 2}
+  - {fileID: 11400000, guid: 52a8359390be93943bc15b5272db8c43, type: 2}
   maxHp: 19
   pokemonTypeSo: {fileID: 11400000, guid: 0dad5e9f278edb7428df1cedde475c09, type: 2}
   pokemonSex: 0

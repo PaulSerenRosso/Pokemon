@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bulbizzare
   startLevel: 5
-  pokemonCapacitySO: []
+  pokemonCapacitySO:
+  - {fileID: 11400000, guid: ed733a112dadd654bbbd16e1594a51d7, type: 2}
+  - {fileID: 11400000, guid: 4a5d46dad88c0aa40811fb1a8941e046, type: 2}
+  - {fileID: 11400000, guid: 52a8359390be93943bc15b5272db8c43, type: 2}
   maxHp: 20
   pokemonTypeSo: {fileID: 11400000, guid: 5fe89eca1ef7a8041bef0070280047dc, type: 2}
   pokemonSex: 0

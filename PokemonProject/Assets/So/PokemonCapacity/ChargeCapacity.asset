@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ChargeCapacity
   m_EditorClassIdentifier: 
   name: Charge
-  maxStamina: 10
+  maxStamina: 20
   pokemonTypeSo: {fileID: 11400000, guid: 6f7256221e99fb844b2247cb86116d15, type: 2}
   pokemonStatusType: 0
   probabilityOfInflictStatus: 0

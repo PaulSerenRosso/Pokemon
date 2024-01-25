@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa0b2b9b364ef44c8e9ce6f8a2ad424, type: 3}
   m_Name: WaterBubbleCapacity
   m_EditorClassIdentifier: 
-  name: Bulle d'eau
+  name: Cage electrique
   maxStamina: 10
   pokemonTypeSo: {fileID: 11400000, guid: d1833769e923ca8479d84ff5d3a31930, type: 2}
   pokemonStatusType: 2
-  probabilityOfInflictStatus: 100
+  probabilityOfInflictStatus: 50
   animationName: Charge_
   animationTime: 2.08
   damage: 30
