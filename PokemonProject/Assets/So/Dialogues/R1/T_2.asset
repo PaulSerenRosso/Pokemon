@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cefb96f51a513a4dabff74961121db7, type: 3}
-  m_Name: R_Test
+  m_Script: {fileID: 11500000, guid: 743f93eb66884464287a64fccd4a0c86, type: 3}
+  m_Name: T_2
   m_EditorClassIdentifier: 
   interactionType: 0
   textToDraw:
-  - "Ce pok\xE9mon est tr\xE8s \xE9nergique!"
+  - Vous optenez une POTION
+  - Vous rangez la POTION dans la POCHE OBJETS du SAC.
   fromGender: 3
-  title: Yes
-  resolutionType: 1
-  pokemonToGive: {fileID: 11400000, guid: 8824c1d6c3daa1a41b12eb2d516228b6, type: 2}

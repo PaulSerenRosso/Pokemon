@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using SequencerNS;
 using UnityEngine;
@@ -45,6 +46,21 @@ public class BagMenuManager : MonoBehaviour
     [SerializeField] private PokemonTeamManager pokemonTeamManager;
     [SerializeField] private FightManager fightManager;
 
+
+    public static BagMenuManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     void Start()
     {
         EmptyTextList(bagItemsText);
@@ -87,7 +103,27 @@ public class BagMenuManager : MonoBehaviour
         //Handles Index Action Menu
     }
 
+    public PotionSO basePotion;
+    public void AddPotion()
+    {
+        bool isFound = false;
+        
+        for (int i = 0; i < itemsCommons.Count; i++)
+        {
+            if (itemsCommons[i].so == basePotion)
+            {
+                itemsCommons[i].count++;
+                isFound = true;
+                break;
+            }
+        }
 
+        if (!isFound)
+        {
+            itemsCommons.Add(new Item(basePotion));
+        }
+    }
+    
     private void HandleBagSectionChange()
     {
         HandleArrowInput();
@@ -200,8 +236,7 @@ public class BagMenuManager : MonoBehaviour
                 return 0;
         }
     }
-
-
+    
     private int GetArrowIndex()
     {
         switch (currentBagSectionIndex)
@@ -267,8 +302,7 @@ public class BagMenuManager : MonoBehaviour
         color.a = 1f;
         arrowImage.color = color;
     }
-
-
+    
     private void EmptyTheBoard()
     {
         EmptyTextList(bagItemsText);

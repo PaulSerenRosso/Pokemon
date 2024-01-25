@@ -9,6 +9,12 @@ public class Item
     public ItemSO so;
     public int count;
 
+    public Item(ItemSO SO)
+    {
+        so = SO;
+        count = 1;
+    }
+    
     public void IncrementCount()
     {
         count++;

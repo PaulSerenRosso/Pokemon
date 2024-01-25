@@ -16,6 +16,7 @@ public class ResolutionSO : InteractionSO
     {
         CloseBox,
         PokemonGiver,
+        Text,
         SetName,
         SetGender
     }

@@ -5531,6 +5531,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 100983815247043798, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100983815247043798, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: choiceManager
       value: 
       objectReference: {fileID: 294726018}
@@ -5538,6 +5542,10 @@ PrefabInstance:
       propertyPath: dialogueManager
       value: 
       objectReference: {fileID: 294726021}
+    - target: {fileID: 100983815247043798, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
+      propertyPath: testInteraction
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 100983815247043798, guid: 760df27d90160574abbe06d4e4af45d7, type: 3}
       propertyPath: isPlayingSequence
       value: 0

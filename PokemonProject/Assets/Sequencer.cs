@@ -74,6 +74,10 @@ namespace SequencerNS
                 {
                     StartChoice();
                 }
+                else if (stack[0].interactionType == SequenceType.GivePotion)
+                {
+                    BagMenuManager.instance.AddPotion();
+                }
             }
         }
 
@@ -110,7 +114,6 @@ namespace SequencerNS
             OnEndSequence = callback;
             Debug.Log(isPlayingSequence);
             if (!isPlayingSequence) TryNextStack();
-   
         }
 
         private async void DisplayNextSentence()
@@ -196,5 +199,6 @@ public enum SequenceType
     Dialogue,
     Choice,
     Movement,
-    None
+    None,
+    GivePotion
 }

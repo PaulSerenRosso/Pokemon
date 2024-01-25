@@ -30,8 +30,9 @@ public class ChoiceManager : MonoBehaviour
             buttons[i].GetComponentInChildren<TextMeshProUGUI>().text = choice.choices[i].title;
             
             // Add actions
-            buttons[i].onClick.AddListener(() => SetResolution(choice.choices[i]));
-            buttons[i].onClick.AddListener(() => OnEndChoiceOnInteraction());
+            var i1 = i;
+            buttons[i].onClick.AddListener(() => SetResolution(choice.choices[i1]));
+            buttons[i].onClick.AddListener(OnEndChoiceOnInteraction);
         }
         
         // Draw
@@ -48,7 +49,10 @@ public class ChoiceManager : MonoBehaviour
         switch (resolutionSo.resolutionType)
         {
             case ResolutionSO.ResolutionsInteractions.CloseBox: break;
-            case ResolutionSO.ResolutionsInteractions.PokemonGiver: Sequencer.Instance.character.GetComponent<PlayerFighter>().AddPokemon(resolutionSo.pokemonToGive); break;
+            case ResolutionSO.ResolutionsInteractions.PokemonGiver: 
+                Sequencer.Instance.character.GetComponent<PlayerFighter>().AddPokemon(resolutionSo.pokemonToGive); 
+                break;
+            //case ResolutionSO.ResolutionsInteractions.Text: Sequencer.Instance.AddCombatInteraction(resolutionSo.textToDraw[0], () => Debug.Log("resolutionSo.textToDraw[0]")); break;
             //case ResolutionSO.ResolutionsInteractions.SetName: break;
             //case ResolutionSO.ResolutionsInteractions.SetGender: break;
             default: throw new ArgumentOutOfRangeException();
